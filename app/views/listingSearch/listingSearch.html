@@ -1,0 +1,257 @@
+<!-- <body oncontextmenu="return true"> -->
+
+
+  <!-- <div id="listing-search" style="height:100%">
+    <div style="display:flex;">
+      <div style="display:flex;width:60%">
+        <div style="width:70%;">
+          <div style="display:flex;flex-wrap:wrap;justify-content:space-between">
+            <div ng-repeat="facility in facilities | limitTo:10" style="" ng-click="selectFacility(facility)">
+              <div style="width:250px; height:200px;overflow:hidden;position:relative;margin:10px"><img ng-src="http://18.236.125.242/groupHomes/photos/{{facility.id}}/{{facility.smallPhoto}}"  style="min-width:100%;min-height:100%;position:absolute;left:-1000%;right:-1000%;top:-1000%;bottom:-1000%;margin:auto;"></div>
+              <div style="font-size:10px;margin:10px;">{{facility.name}}</div>
+            </div>
+          </div>
+        </div>
+        <div ng-if="selectedFacility!==undefined" style="width:30%;padding:10px;">
+        <h3>{{selectedFacility.name}}</h3>
+        <h5>{{selectedFacility.address}}, {{selectedFacility.city}}, {{selectedFacility.state}}, {{selectedFacility.zip}}</h5>
+        <p>{{selectedFacility.specialHmFeature}}</p>
+        <p>Beds: {{selectedFacility.beds}}</p>
+      </div>
+    </div>
+      <div  style="width:40%; height:100%;position:fixed;right:0"><div id="map" ng-init="initMap()"></div></div>
+    </div>
+  </div> -->
+
+
+<!--testing cards/2col material-->
+  <!-- <div id="listing-search" style="height:100%">
+    <div class="row">
+      <div class="col-md-7" style="padding:0">
+        <md-content class="md-padding" layout-xs="column" layout="row" layout-wrap>
+          <md-card flex="30" ng-repeat="facility in facilities | limitTo:10"  ng-click="selectFacility(facility)">
+              <img ng-src="http://18.236.125.242/groupHomes/photos/{{facility.id}}/{{facility.smallPhoto}}" class="md-card-image" alt="Washed Out">
+              <md-card-title>
+                <md-card-title-text>
+                  <div class="md-body-1">Beds: {{facility.beds}}</div>
+                  <div class="md-title">{{facility.name}}</div>
+                </md-card-title-text>
+              </md-card-title>
+              <md-card-content layout="row" layout-align="space-between center" style="width:350px">
+              <div class="md-caption">
+                  Level 1: ${{facility.level1Price}}
+                </div>
+                <div class="md-caption">
+                  Level 2: ${{facility.level2Price}}
+                  </div>
+              </md-card-content>
+            </md-card>
+        </md-content>
+        </div>
+      <div class="col-md-5" style="padding:0">
+        <div id="map" style="height:100vh"></div>
+      </div>
+    </div>
+  </div> -->
+
+<!--testing-cards 3 col/responsive-->
+  <!-- <div id="listing-search" style="height:100%">
+    <div class="row">
+      <div class="col-md-5">
+        <div style="display:flex;flex-wrap:wrap;justify-content:space-between">
+          <div ng-repeat="facility in facilities | limitTo:10"  ng-click="selectFacility(facility)" style="margin:10px">
+            <div class="card" style="width:250px">
+                <div style="width:250px; height:200px;overflow:hidden;position:relative;"><img ng-src="http://18.236.125.242/groupHomes/photos/{{facility.id}}/{{facility.smallPhoto}}"  style="min-width:100%;min-height:100%;position:absolute;left:-1000%;right:-1000%;top:-1000%;bottom:-1000%;margin:auto;"></div>
+                <div>
+
+                <div style="font-size:14px;margin:10px 10px 0 10px;color:grey">Total Beds: {{facility.beds}}</div>
+                <div style="font-size:14px;margin:10px 10px 0 10px;font-weight:bold">{{facility.name}}</div>
+                <div style="font-size:12px;margin:0 10px 10px 10px;">{{facility.address}},<br> {{facility.city}}, {{facility.state}}, {{facility.zip}}</div>
+                <div style="font-size:12px;margin:0 10px 10px 10px"><span style="font-weight:bold">Level 1 Price:</span> ${{facility.level1Price}},<br> <span style="font-weight:bold">Level 2 Price:</span> ${{facility.level2Price}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+          <div ng-if="selectedFacility!==undefined" style="padding:10px;">
+            <h3>{{selectedFacility.name}}</h3>
+            <h5>{{selectedFacility.address}}, {{selectedFacility.city}}, {{selectedFacility.state}}, {{selectedFacility.zip}}</h5>
+            <p>{{selectedFacility.specialHmFeature}}</p>
+            <p>Beds: {{selectedFacility.beds}}</p>
+          </div>
+      </div>
+      <div class="col-md-4">
+        <div id="map" style="height:100vh"></div>
+      </div>
+    </div>
+  </div> -->
+
+
+
+<!--2 col boostrap cards-->
+  <div id="listing-search" style="margin-top:65px;padding:15px 15px 0 15px">
+    <div class="row" style="height:100%;background-color:#FFF">
+      <div class=""style="width:60%">
+        <!-- <div class="row">
+          <input ng-model="searchText"type="text" placeholder="Search" style="width: 70%; padding:10px 20px;margin:20px">
+          <md-button class="md-raised md-cornered" ng-click="submit(searchText)" style="width:10%;float:right">Submit</md-button>
+          <md-button class="md-raised md-cornered" ng-click="compare()" style="width:10%;float:right">Compare</md-button>
+        </div> -->
+        <div style="padding:30px">
+          <div class="input-group">
+            <input type="text" ng-model="searchText" class="form-control" placeholder="Search address..." style="line-height:50px;">
+            <span class="input-group-btn">
+              <button class="btn btn-default" style="border-radius: 0 .25em .25em 0;line-height:50px;border: 1px solid #ced4da" type="button" ng-click="submit(searchText)">Search!</button>
+            </span>
+          </div><!-- /input-group -->
+          <button class="btn btn-default" style="border-radius: 0 .25em .25em 0;line-height:50px;border: 1px solid #ced4da" type="button">Compare</button>
+          <div ng-show="noResults" style="color:red">No Results Found. Please try again.</div>
+        </div>
+
+        <div style="display:flex;flex-wrap:wrap;justify-content:space-between; padding:20px">
+          <div ng-repeat="facility in facilities track by $index" on-finish-render="ngRepeatFinished" style="margin: 10px">
+            <!--facility card-->
+            <div id="{{ 'card-' + $index }}" class="card" style="width:300px;height:345px" ng-mouseenter="showInfo(facility, $index);" ng-mouseleave="hideInfo(facility,$index);">
+              <!--image-->
+              <div style="width:300px; height:200px;overflow:hidden;position:relative;">
+                <img ng-click="selectFacility(facility)" ng-src="http://18.236.125.242/groupHomes/photos/{{facility.id}}/{{facility.smallPhoto}}"  style="min-width:100%;min-height:100%;position:absolute;left:-1000%;right:-1000%;top:-1000%;bottom:-1000%;margin:auto;">
+              </div>
+              <!--compare heart-->
+              <div style="margin:10px;color:red">
+                <i class="far fa-heart" ng-hide="compare[$index]" ng-click="addToCompare(facility, $index)"></i>
+                <i class="fas fa-heart" ng-show="compare[$index]" ng-click="removeFromCompare(facility, $index)"></i>
+              </div>
+              <div>
+                <div style="font-size:14px;margin:10px;color:grey">Total Beds: {{facility.beds}}</div>
+                <div style="font-size:14px;margin:10px;font-weight:bold">{{facility.name}}</div>
+                <!-- <div style="font-size:12px;margin:0 10px 10px 10px;">{{facility.address}},<br> {{facility.city}}, {{facility.state}}, {{facility.zip}}</div> -->
+                <!-- <div style="font-size:12px;margin:0 10px 10px 10px"><span style="font-weight:bold">Level 1 Price:</span> ${{facility.level1Price}},<br> <span style="font-weight:bold">Level 2 Price:</span> ${{facility.level2Price}}</div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="col-md-3">
+          <div ng-if="selectedFacility!==undefined" style="padding:10px;">
+            <h3>{{selectedFacility.name}}</h3>
+            <h5>{{selectedFacility.address}}, {{selectedFacility.city}}, {{selectedFacility.state}}, {{selectedFacility.zip}}</h5>
+            <p>{{selectedFacility.specialHmFeature}}</p>
+            <p>Beds: {{selectedFacility.beds}}</p>
+          </div>
+      </div> -->
+      <div class="" style="width:40%;padding:30px;position:fixed;right:0;bottom: 0">
+        <!-- <div style="position:fixed;top:0;left:0;width:auto"> -->
+          <!-- <div style="width:100%;height:100%"> -->
+          <div id="map" style=""></div>
+        <!-- </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <!-- Popup Dialog for Search -->
+    <!-- <div id="dialogSearch" title="Search" >
+        <div id="tabs">
+            <ul>
+                <li><a href="#tabs-1">Facility Search</a></li>
+                <li><a href="#tabs-2">Address Search</a></li>
+            </ul>
+            <div id="tabs-1">
+                <input type="text" id="txtFacilityName" placeholder="Enter Facility Name" class="input-sm" style="width: 280px;">
+                <button type="button" class="btn btn-default" id="btnFacilitySearch">
+                    Search Facility
+                </button>
+            </div>
+            <div id="tabs-2">
+                <input id="address" type="text" class="input-sm" style="width: 280px;">
+                <div class="checkbox-inline">
+                    <label><input type="checkbox" value="1" name="chkEndorsement">Alzheimer</label>
+                </div>
+                <div class="checkbox-inline">
+                    <label><input type="checkbox" value="2" name="chkEndorsement">Chronic Illness</label>
+                </div>
+                <div class="checkbox-inline">
+                    <label><input type="checkbox" value="3" name="chkEndorsement">Mental Illness</label>
+                </div>
+                <button type="button" class="btn btn-default" id="btnAddressSearch">
+                    Search Address
+                </button>
+                <div id="divResult" style="display: none; width: 280px; height: auto; max-height: 250px; z-index: 1000;">
+                    <div class="form-group form-inline" style="margin-top: 5px; right: 2px;">
+
+                        <div style="background-color: white;">
+                            <label id="lblResults"></label>
+                            <ul class="list-group" style="overflow-y: auto; max-height: 250px; min-height: 0px; font-size: 11px !important;" id="ulResults"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+    <!-- Popup Dialog for Radius and Layers -->
+    <!-- <div id="dialogSetting" title="Settings" >
+        <div class="form-group form-inline">
+            <label for="txtCircleDistance">Circle Radius in Miles:</label>
+            <input type="text" class="form-control" id="txtCircleDistance" value="1" style="width: 70px;">
+        </div>
+        <div>
+            <table class="table">
+                <tr>
+                    <th colspan="2">Layer List</th>
+                </tr>
+                <tr>
+                    <td><div class="Layer1"></div></td>
+                    <td><label class="checkbox-inline LayerLabels" title="AGC, HIC, IMR"><input type="checkbox" value="layerResidential" name="chklayers" checked="checked" id="chkResidential">Residential/Intermidiate Care</label></td>
+                </tr>
+                <tr>
+                    <td><div class="Layer2"></div></td>
+                    <td><label class="checkbox-inline LayerLabels" title="HFS, HHA, HPC, PCS"><input type="checkbox" value="layerPersonal" name="chklayers" checked="checked" id="chkPersonal">Personal Care/Hospice</label></td>
+                </tr>
+                <tr>
+                    <td>
+                        <img src="images/Hospital.JPG" class="imgLegend" />
+                    </td>
+                    <td><label class="checkbox-inline LayerLabels" title="ASC, CTC, HOS, ICE, ICF, RUH"><input type="checkbox" value="layerHospital" name="chklayers" checked="checked" id="chkHospital">Hospitals/Medical Facilities</label></td>
+                </tr>
+                <tr>
+                    <td><div class="Layer4"></div></td>
+                    <td><label class="checkbox-inline LayerLabels" title="ADC"><input type="checkbox" value="layerADC" name="chklayers" checked="checked" id="chkADC">Adult Day Care</label></td>
+                </tr>
+                <tr>
+                    <td>
+                        <img src="images/Drug.JPG" class="imgLegend" />
+                    </td>
+                    <td><label class="checkbox-inline LayerLabels" title="ADA, HWH, MDX, NTC"><input type="checkbox" value="layerDrugAlcohol" name="chklayers" checked="checked" id="chkADA">Alcohol or Drug Treatment Facilities</label></td>
+                </tr>
+                <tr>
+                    <td><div class="Layer6"></div></td>
+                    <td><label class="checkbox-inline LayerLabels" title="DVP, ISO, MBU, MED, NSP"><input type="checkbox" value="layerDVPNSP" name="chklayers" id="chkDVP">DVP / NSP</label></td>
+                </tr>
+                <tr>
+                    <td><div class="Layer7"></div></td>
+                    <td><label class="checkbox-inline LayerLabels" title="ESRD"><input type="checkbox" value="layerDialysis" name="chklayers" id="chkDialysis">Dialysis</label></td>
+                </tr>
+                <tr>
+                    <td><img src="images/other.JPG" class="imgLegend" /></td>
+                    <td><label class="checkbox-inline LayerLabels" title="RHC, TLF, BPR, SNF"><input type="checkbox" value="layerOthers" name="chklayers" id="chkOthers">Others</label></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td style="text-align: center;">
+                        <button type="button" class="btn btn-default" id="btnLayers">
+                            <span class="glyphicon glyphicon-list-alt"></span> Show Layers
+                        </button>
+                    </td>
+                </tr>
+            </table>
+
+
+        </div>
+    </div> -->
+
+
+
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDsWy4Qwn4FJ4iQ8Ufr-GM1FQssMxG1msY&libraries=places&callback=initMap" async defer></script> -->
+    <!-- <script type="text/javascript" src="https://maps.google.com/maps/api/js?key=AIzaSyDsWy4Qwn4FJ4iQ8Ufr-GM1FQssMxG1msY&libraries=places&callback=initMap"> </script> -->

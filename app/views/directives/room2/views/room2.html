@@ -1,0 +1,148 @@
+<md-card id="room2" style="padding:30px;margin-top:30px" >
+  <h1 class="headline" style="">Room 2 Configuration</h1>
+  <!--gender of room-->
+  <div layout="row" layout-align="space-between center" style="margin-bottom:30px;margin-top:10px">
+    <h4 class="md-title" style="margin:0;">Select gender of room</h4>
+    <div style="display:inline-flex">
+      <div style="width:100px">
+        <md-radio-group ng-model="GENDER2" layout="row" >
+          <md-radio-button value="FEMALE2">Female</md-radio-button>
+        </md-radio-group>
+      </div>
+      <div style="width:100px">
+        <md-radio-group ng-model="GENDER2" layout="row" >
+          <md-radio-button value="MALE2">Male</md-radio-button>
+        </md-radio-group>
+      </div>
+    </div>
+  </div>
+  <!--type of room-->
+  <div layout="row" layout-align="space-between center" style="margin-bottom:20px">
+    <h4 class="md-title" style="margin:0; ">Select type of room</h4>
+    <div style="display:inline-flex">
+      <div style="width:100px">
+        <md-radio-group ng-model="roomType1" layout="row" >
+          <md-radio-button value="Shared1">Shared</md-radio-button>
+        </md-radio-group>
+      </div>
+      <div style="width:100px">
+        <md-radio-group ng-model="roomType1" layout="row" >
+          <md-radio-button value="Private1" class="md-primary">Private</md-radio-button>
+        </md-radio-group>
+      </div>
+    </div>
+  </div>
+  <!--if private room-->
+  <div style="border-top: 1px solid lightgrey;padding-top:15px;border-bottom: 1px solid lightgrey" ng-show="roomType1==='Private1'">
+    <div layout="row" layout-align="space-between center">
+      <h5 class="md-title">Private Room Details</h5>
+      <md-input-container>
+        <div style="display:inline-flex;margin-bottom:20px;margin-top:10px">
+          <div style="width:100px">
+            <md-radio-group ng-model="room1bed1availibility" layout="row" >
+              <md-radio-button value="vacant">Vacant</md-radio-button>
+            </md-radio-group>
+          </div>
+          <div style="width:100px">
+            <md-radio-group ng-model="room1bed1availibility" layout="row" >
+              <md-radio-button value="occupied" class="md-primary">Occupied</md-radio-button>
+            </md-radio-group>
+          </div>
+        </div>
+      </md-input-container>
+    </div>
+    <div layout="row" layout-align="space-between center">
+      <md-input-container >
+        <label>Price/Bed</label><input ng-model="room1bed1price">
+      </md-input-container>
+      <md-input-container style="margin-left:-18px;margin-top:10px">
+        <label>Enter date</label>
+        <md-datepicker ng-model="room1bed1date"></md-datepicker>
+      </md-input-container>
+    </div>
+  </div>
+  <!--shared room-->
+  <div layout="row" layout-align="space-between center" ng-show="roomType1==='Shared1'" style="margin-bottom:20px">
+    <h5 class="md-title" style="margin:0;margin-left:20px">How many beds are there in the room?</h5>
+    <md-select ng-model="numOfBedRoom1" placeholder="# of beds" class="md-no-underline">
+      <md-option value="1">1</md-option>
+      <md-option value="2">2</md-option>
+      <md-option value="3">3</md-option>
+      <md-option value="4">4</md-option>
+      <md-option value="5">5</md-option>
+      <md-option value="6">6</md-option>
+      <md-option value="7">7</md-option>
+      <md-option value="8">8</md-option>
+      <md-option value="9">9</md-option>
+      <md-option value="10">10</md-option>
+    </md-select>
+  </div>
+  <div style="border-top: 1px solid lightgrey;padding-top:15px" ng-show="(numOfBedRoom1==='2') && (roomType1==='Shared1')">
+    <div layout="row" layout-align="space-between center">
+      <h5 class="md-title">Bed #1</h5>
+      <md-input-container>
+        <div style="display:inline-flex;margin-bottom:20px;margin-top:10px">
+          <div style="width:100px">
+            <md-radio-group ng-model="room1bed1availibility" layout="row" >
+              <md-radio-button value="vacant">Vacant</md-radio-button>
+            </md-radio-group>
+          </div>
+          <div style="width:100px">
+            <md-radio-group ng-model="room1bed1availibility" layout="row" >
+              <md-radio-button value="occupied" class="md-primary">Occupied</md-radio-button>
+            </md-radio-group>
+          </div>
+        </div>
+      </md-input-container>
+    </div>
+    <div layout="row" layout-align="space-between center">
+      <md-input-container >
+        <label>Price/Bed</label><input ng-model="room1bed1price">
+      </md-input-container>
+      <md-input-container style="margin-left:-18px;margin-top:10px">
+        <label>Enter date</label>
+        <md-datepicker ng-model="room1bed1date"></md-datepicker>
+      </md-input-container>
+    </div>
+  </div>
+  <div style="border-top: 1px solid lightgrey;padding-top:15px;border-bottom: 1px solid lightgrey" ng-show="(numOfBedRoom1==='2') && (roomType1==='Shared1')">
+    <div layout="row" layout-align="space-between center">
+      <h5 class="md-title">Bed #2</h5>
+      <md-input-container>
+        <div style="display:inline-flex;margin-bottom:20px;margin-top:10px">
+          <div style="width:100px">
+            <md-radio-group ng-model="room1bed2availibility" layout="row" >
+              <md-radio-button value="vacant">Vacant</md-radio-button>
+            </md-radio-group>
+          </div>
+          <div style="width:100px">
+            <md-radio-group ng-model="room1bed2availibility" layout="row" >
+              <md-radio-button value="occupied" class="md-primary">Occupied</md-radio-button>
+            </md-radio-group>
+          </div>
+        </div>
+      </md-input-container>
+    </div>
+    <div layout="row" layout-align="space-between center">
+      <md-input-container >
+        <label>Price/Bed</label><input ng-model="room1bed2price">
+      </md-input-container>
+      <md-input-container style="margin-left:-18px;margin-top:10px">
+        <label>Enter date</label>
+        <md-datepicker ng-model="room1bed2date"></md-datepicker>
+      </md-input-container>
+    </div>
+  </div>
+  <!--photo upload-->
+  <div layout="row" layout-align="space-between center" style="margin-top:20px">
+    <h5 class="md-title" style="margin:0">Select Photos to Upload</h5>
+    <md-button style="margin-left: 0px" class="md-raised md-cornered" ngf-multiple="true" ngf-select=selectFiles(files) ng-model="files" name="files" ngf-pattern="'image/*'"
+    ngf-accept="'image/*'">Select Photos</md-button>
+   </div>
+  <div style="display:flex; flex-wrap:wrap">
+    <div class="thumb" ng-repeat="file in thumbnailArr" style="margin-right:10px; margin-bottom:10px">
+      <img ng-src="{{file}}" style="max-height:50px;width:auto;">
+      <div class="thumb-text"><i class="fa fa-trash fa-2x" style="color:red;line-height:58px" ng-click="remove($index)"></i></div>
+    </div>
+  </div>
+</md-card>

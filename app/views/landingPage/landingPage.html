@@ -1,0 +1,59 @@
+<div id="landingPage">
+
+  <div id="nav" style="background-color:transparent;border:none;">
+    <div style="display:flex;justify-content:space-between;padding-right:20px">
+      <a class="logo" href="#" style="font-size:20px; color:#FFF">Nursing Homes</a>
+      <div>
+        <!-- <a ng-click=selectFacility() style="margin: 0 50px 0 0" ng-if="selectedUser !== undefined"><div class="nav-item">View Listing</div></a> -->
+        <!-- <a ui-sref="listingCreate" style="margin: 0 50px 0 0" ng-if="user.role==='client'"><div class="nav-item">Add Listing</div></a> -->
+        <!-- <a ui-sref="listingView" style="margin: 0 50px 0 0" ng-if="user.role === 'client'"><div class="nav-item">Preview Listing</div></a> -->
+        <!-- <a ui-sref="landingPage" style="margin: 0 50px 0 0" ng-if="user === undefined"><div class="nav-item">Login</div></a> -->
+        <!-- <a ui-sref="listingSearch" style="margin: 0 50px 0 0"  ng-if="user.role==='admin'"><div class="nav-item">Search</div></a> -->
+        <!-- <a ui-sref="landingPage" ng-if="(user.role === 'client') || (user.role === 'admin')"><div class="nav-item">Logout</div></a> -->
+        <a ui-sref="login"  ng-if="user === undefined" style="margin: 0 50px 0 0;color: #FFF;font-weight:bold"><div class="nav-item">Login</div></a>
+        <!-- <a ui-sref="listingSearch" style="margin: 0 50px 0 0"><div class="nav-item">Search</div></a> -->
+        <a ui-sref="landingPage" ng-if="user !== undefined" style="color: #FFF;font-weight:bold"><div class="nav-item">Logout</div></a>
+        <a ng-if="user === undefined" style="color: #FFF;font-weight:bold"><div class="nav-item">Sign Up</div></a>
+      </div>
+    </div>
+
+  </div>
+  <!-- <div id="login" layout="row"> -->
+    <div id="image"></div>
+    <div style="width:500px;position:fixed;top:30%;left:50%;margin-left:-250px;color:#FFF;text-align:center;">
+      <h1 style="font-weight:bold">Find your nursing home</h1>
+      <div class="input-group">
+        <input type="text" ng-model="searchText" class="form-control" placeholder="Search address..." style="line-height:50px;">
+        <span class="input-group-btn">
+          <button class="btn btn-default" style="border-radius: 0 .25em .25em 0;line-height:50px;border: 1px solid #ced4da" type="button" ng-click="submit(searchText)">Search!</button>
+        </span>
+      </div><!-- /input-group -->
+      <!-- <md-button ng-click="submit(search)"style="float:right">Search</md-button> -->
+      <div ng-show="noResults" ng-init="noResults=false" style="color:red">No Results Found. Please try again</div>
+    </div>
+    <!-- <div id="login-box" style="flex:30;position:relative">
+      <div style="position:absolute; top:50%; transform:translateY(-50%)">
+      <md-content style="background-color:white;margin:0 30px">
+        <h1 class="md-display-2" style-"color:blue">Login</h1>
+        <p class="md-body-1">Please enter username and password to login. If you do not have an account, please sign up.</p>
+      </md-content>
+      <md-content style="background-color:white;margin:0 30px">
+        <div>
+          <form name="userForm">
+            <md-input-container class="md-block" style="width:100%">
+              <label>Email</label>
+              <input ng-model="email">
+            </md-input-container>
+            <md-input-container class="md-block" style="width:100%">
+              <label>Password</label>
+              <input ng-model="password">
+            </md-input-container>
+          </form>
+        </div>
+        <md-button class="md-raised md-cornered" ng-click="login()" style="float:right">LOGIN</md-button>
+        <md-button style="float:right">SIGN UP</md-button>
+      </md-content>
+    </div>
+
+    </div> -->
+</div>

@@ -1,0 +1,54 @@
+#listing-create {
+  margin-top: 66px;
+  .thumb {
+    position: relative;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 4px;
+    // text-align: center;
+
+    .thumb-text {
+      position: absolute;
+      opacity: 0;
+      line-height: 50px;
+      top: 0;
+      left:0;
+      text-align: center;
+      width: 100%;
+    }
+    &:hover {
+      cursor: pointer;
+      img {
+        opacity: 0.3;
+      }
+      .thumb-text {
+        opacity: 1
+      }
+    }
+  }
+  // img {
+  //   width: 200px;
+  //   height: 200px;
+  // }
+
+  /*uploadcare preview */
+  .image-preview-multiple ._list {
+    padding-top: 20px;
+  }
+  .image-preview-multiple ._item {
+    padding: 0 0 10px;
+    display: inline-block;
+    text-align: center;
+    vertical-align: top;
+    width: 100px;
+    word-break: break-word;
+    font-size: 12px;
+    line-height: normal;
+  }
+  .image-preview-multiple ._item img {
+    display: block;
+    width: 80px;
+    height: 80px;
+    padding: 0 10px 6px;
+  }
+}

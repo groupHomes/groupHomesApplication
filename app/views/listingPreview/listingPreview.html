@@ -1,0 +1,39 @@
+<div id="listing-preview" style="margin-top:66px;background-color:white">
+  <div style="background-color:lightgrey;height:40px;line-height:40px;color:white;text-align:center;position:fixed;width:100%;z-index:80">
+    <div>You Are In Preview Mode <i class="fa fa-times-circle-o fa-lg" ng-click="closePreview()"></i></div>
+  </div>
+
+  <header layout=row ng-style="{'background-image': 'url(http://18.236.125.242/groupHomes/photos/' + facility.id + '/' + facility.primaryPhoto + ')'}">
+    <md-button class="md-raised md-cornered" ng-click="showAdvanced($event)" style="position:absolute;right:0;height:0">View Photos</md-button>
+  </header>
+    <!-- <div style="padding-top:20px;background-color:white" layout="row"> -->
+    <md-content style="background-color:White;margin:30px auto;width:50%">
+      <h3 class="headline" style="">{{facility.name}}</h3>
+    </md-content>
+      <md-content style="background-color:White;margin:30px auto;width:50%">
+        <h3 class="headline" style="">Address</h3>
+        {{facility.address}}, {{facility.city}}, {{facility.state}}, {{facility.zip}}
+      </md-content>
+      <md-content style="background-color:White;margin:30px auto;width:50%">
+        <h3 class="headline" style="">Description</h3>
+        {{facility.specialHmFeature}}
+      </md-content>
+      <md-content style="background-color:White;margin:30px auto;width:50%">
+        <h3 class="headline" style="">Room Configuration</h3>
+        Beds: {{facility.beds}}
+
+      </md-content>
+
+      <!-- <md-button class="md-primary md-raised" ng-click="showAdvanced($event)">
+         Custom Dialog
+       </md-button> -->
+<!-- </div> -->
+
+  <!-- <div ng-repeat="file in files">
+    <img ng-src="{{file.LINK}}">
+  </div> -->
+
+  <!-- <img ng-src="{{files[0].LINK}}"> -->
+
+
+</div>

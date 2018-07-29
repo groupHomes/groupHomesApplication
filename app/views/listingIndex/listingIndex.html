@@ -1,0 +1,46 @@
+<div id="listing-index" style="margin-top:66px;background-color:white">
+
+  <md-content style="background-color:White;margin:auto;width:90%">
+    <h3 class="headline" style="text-align:center;margin:20px 0">View All Listings</h3>
+
+     <div style="display:flex; flex-wrap:wrap;justify-content:center;">
+      <md-card style="width:25%" ng-repeat="file in files">
+        <div style="width:auto;height:200px;overflow:hidden;display:flex;align-items:center;justify-content:center;">
+        <img ng-src="{{file}}" style="min-width:100%;min-height:100%;" class="md-card-image" alt="Washed Out">
+      </div>
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">Icon action buttons</span>
+          </md-card-title-text>
+        </md-card-title>
+        <md-card-content>
+          <p>
+            The titles of Washed Out's breakthrough song and the first single from Paracosm share the
+            two most important words in Ernest Greene's mus
+        </md-card-content>
+        <md-card-actions layout="row" layout-align="end center">
+          <md-button ng-click="">Delete</md-button>
+          <md-button ng-click="">Edit</md-button>
+        </md-card-actions>
+      </md-card>
+      <!-- <md-card>
+        <img ng-src="{{imagePath}}" class="md-card-image" alt="Washed Out">
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">Icon action buttons</span>
+          </md-card-title-text>
+        </md-card-title>
+        <md-card-content>
+          <p>
+            The titles of Washed Out's breakthrough song and the first single from Paracosm share the
+            two most important words in Ernest Greene's musical language: feel it. It's a simple request, as well...
+          </p>
+        </md-card-content>
+        <md-card-actions layout="row" layout-align="end center">
+          <md-button class="md-raised md-cornered" ng-click="">Delete</md-button>
+          <md-button class="" ng-click="">Edit</md-button>
+        </md-card-actions>
+      </md-card> -->
+    </div>
+  </md-content>
+</div>

@@ -1,0 +1,51 @@
+html,body { height:100%; }
+
+.text-heading {
+  font-size: 25px;
+}
+
+
+// button {
+//   &.btn-primary.purple {
+//     background: #6D559B;
+//     border-color: #6D559B;
+//   }
+// }
+.col-no-pad {
+  padding: 0;
+}
+
+@media (min-width: 1200px){
+  .container {
+      width: 1350px;
+      &.small {
+        width: 100%;
+      }
+  }
+}
+$extra-small-screen: 480px;
+$small-screen: 768px;
+$medium-screen: 992px;
+$large-screen: 1200px;
+
+/********** MIXINS FOR MEDIA QUERIES **********/
+@mixin mq-xs {
+  @media (min-width: #{$extra-small-screen}) {
+    @content;
+  }
+}
+@mixin mq-sm {
+  @media (min-width: #{$small-screen}) {
+    @content;
+  }
+}
+@mixin mq-md {
+  @media (min-width: #{$medium-screen}) {
+    @content;
+  }
+}
+@mixin mq-lg {
+  @media (min-width: #{$large-screen}) {
+    @content;
+  }
+}

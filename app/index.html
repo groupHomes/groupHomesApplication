@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Nursing Home</title>
+
+    <!--gets rid of favicon error-->
+    <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+    <!-- STYLESSHEETS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <link rel="stylesheet" href="../bower_components/angular-material/angular-material.css" type="text/css">
+    <link rel="stylesheet" href="/app/assets/css/app.css">
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script type="text/javascript" src="https://maps.google.com/maps/api/js?key=AIzaSyDsWy4Qwn4FJ4iQ8Ufr-GM1FQssMxG1msY&libraries=places"> </script>
+
+    <base href="/app/">
+  </head>
+  <body>
+    <div ui-view="headerNav"></div>
+    <div ui-view="pageContent" style="height:100%;"></div>
+
+    <!-- APPLICATION SCRIPTS -->
+    <!--inject bower components-->
+    <script src="../bower_components/angular/angular.js"></script>
+    <script src="../bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="../bower_components/angular-aria/angular-aria.js" type="text/javascript"></script>
+    <script src="../bower_components/angular-animate/angular-animate.js" type="text/javascript"></script>
+    <script src="../bower_components/angular-material/angular-material.js" type="text/javascript"></script>
+    <script src="../bower_components/angular-messages/angular-messages.js" type="text/javascript"></script>
+    <script src="../bower_components/ng-file-upload/ng-file-upload.js" type="text/javascript"></script>
+    <script src="../bower_components/ng-file-upload-shim/ng-file-upload-shim.js" type="text/javascript"></script>
+
+
+    <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script> -->
+<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
+    <!-- uploadcare Wiget -->
+    <!-- <script>
+      UPLOADCARE_LOCALE = "en";
+      UPLOADCARE_TABS = "file";
+      UPLOADCARE_PUBLIC_KEY = "cabfd92af255c2a15866";
+    </script> -->
+    <!-- <script charset="utf-8" src="//ucarecdn.com/libs/widget/3.2.3/uploadcare.full.min.js"></script> -->
+        <!-- <script src="../bower_components/angular-uploadcare/angular-uploadcare.js"></script> -->
+    <!-- <script>UPLOADCARE_PUBLIC_KEY = 'demopublickey'</script> -->
+
+    <!-- <script src="../bower_components/angular/angular.js"></script> -->
+   <!-- <script src="../bower_components/jquery/dist/jquery.min.js"></script> -->
+   <!-- <script src="https://cdn.rawgit.com/niklasvh/html2canvas/0.5.0-alpha2/dist/html2canvas.min.js"></script> -->
+   <!-- <script src="../bower_components/jsPDF/dist/jspdf.debug.js"></script> -->
+   <!-- <script src="../bower_components/angular-save-html-to-pdf/dist/saveHtmlToPdf.min.js"></script> -->
+   <!-- <script src="https://kendo.cdn.telerik.com/2016.3.914/js/kendo.all.min.js"></script> -->
+   <!-- <script src="../bower_components/html2canvas/build/html2canvas.min.js"></script> -->
+   <!-- <script src="../bower_components/pdfmake/build/pdfmake.min.js"></script> -->
+   <script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+
+    <!--inject js-->
+    <script src="/app/index.js"></script>
+    <!--services-->
+    <script src="/app/services/api.service.js"></script>
+    <script src="/app/services/fileReader.service.js"></script>
+    <script src="/app/services/facility.service.js"></script>
+    <script src="/app/services/search.service.js"></script>
+    <script src="/app/services/user.service.js"></script>
+
+    <!--directives-->
+    <script src="views/directives/onFinishRender.js"></script>
+    <!--views-->
+    <!-- <script src="views/directives/room1/room1.js"></script> -->
+    <!-- <script src="views/directives/room2/room2.js"></script> -->
+    <script src="views/landingPage/landingPage.controller.js"></script>
+    <script src="views/landingPage/landingPage.route.js"></script>
+    <script src="views/login/login.controller.js"></script>
+    <script src="views/login/login.route.js"></script>
+    <script src="views/listingCreate/listingCreate.controller.js"></script>
+    <script src="views/listingCreate/listingCreate.route.js"></script>
+    <script src="views/listingEdit/listingEdit.controller.js"></script>
+    <script src="views/listingEdit/listingEdit.route.js"></script>
+    <script src="views/listingIndex/listingIndex.controller.js"></script>
+    <script src="views/listingIndex/listingIndex.route.js"></script>
+    <script src="views/listingPreview/listingPreview.controller.js"></script>
+    <script src="views/listingPreview/listingPreview.route.js"></script>
+    <script src="views/listingView/listingView.controller.js"></script>
+    <script src="views/listingView/listingView.route.js"></script>
+    <script src="views/listingSearch/listingSearch.controller.js"></script>
+    <script src="views/listingSearch/listingSearch.route.js"></script>
+    <script src="views/headerNav/headerNav.controller.js"></script>
+    <script src="views/modals/listingViewImages/listingViewImages.controller.js"></script>
+    <script src="/app/data/constants.js"></script>
+  </body>
+</html>
