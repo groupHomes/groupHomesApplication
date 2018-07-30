@@ -4,6 +4,8 @@ app.controller('SignUpController', function($scope, $rootScope, $state, dataServ
     $state.go('login');
   };
 
+  $scope.role = 'user'
+
   $scope.signup=function () {
     var signinfo = {
       userid: $scope.email,

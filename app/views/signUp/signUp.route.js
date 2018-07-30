@@ -1,6 +1,6 @@
 app.config(function($stateProvider, $locationProvider) {
-  $stateProvider.state('signUp', {
-    url: '/signUp',
+  $stateProvider.state('signup', {
+    url: '/signup',
     views: {
       // 'headerNav': {
       //   templateUrl: 'views/headerNav/headerNav.html',

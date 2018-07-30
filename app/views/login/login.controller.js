@@ -2,7 +2,7 @@ app.controller('LoginController', function($scope, $state, dataService, userServ
 
   console.log('hello world');
   $scope.signup=function () {
-    $state.go('signUp')
+    $state.go('signup')
   }
 
   $scope.login=function () {
@@ -16,7 +16,7 @@ app.controller('LoginController', function($scope, $state, dataService, userServ
       console.log(response);
       if (response.data.length < 1) {
         alert("Error: Password or Email incorrect");
-      } else if (response.data[0].role === 'customer') {
+      } else if ( response.data[0].role === 'user') {
         userService.set(response.data[0]);
         $state.go('listingSearch');
       } else if (response.data[0].role === 'client') {

@@ -13,8 +13,9 @@
               <button class="btn btn-default" style="border-radius: 0 .25em .25em 0;line-height:50px;border: 1px solid #ced4da" type="button" ng-click="submit(searchText)">Search!</button>
             </span>
           </div><!-- /input-group -->
-          <button class="btn btn-default" style="border-radius: .25em;line-height:50px;border: 1px solid #ced4da; margin-left:20px;" type="button" ng-disabled="compareArr.length===0">Compare</button>
+          <button class="btn btn-default" style="border-radius: .25em;line-height:50px;border: 1px solid #ced4da; margin-left:20px;" type="button" ng-disabled="compareArr.length===0" ng-click="compareFacilities()">Compare</button>
         </div>
+        <div ng-if="user.role==='user'" ng-click="getPreferredList()">Saved List</div>
         <div ng-show="noResults" style="color:red; padding-left:30px">No Results Found. Please try again.</div>
 
 

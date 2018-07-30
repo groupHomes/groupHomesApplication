@@ -33,8 +33,10 @@ app.constant('CONSTANTS', {
       patientUploadFile: {
         get: 'getPatientUploadFile'
       },
-      // loginUser: {
-      // },
+      preferredFacilities: {
+        get: 'getAllPreferredFacilities',
+        add: 'addPreferredFacility'
+      },
       user: {
         get: 'loginUser',
         add: 'addUser'
