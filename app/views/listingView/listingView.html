@@ -1,43 +1,27 @@
-<div id="listing-view" style="margin-top:66px;background-color:white">
-
-  <!-- <header layout=row ng-style="{'background-image': 'url(' + files[29].LINK + ')'}"> -->
+<div id="listing-view" style="margin-top:66px;background-color:white;padding-bottom:30px">
   <header layout=row ng-style="{'background-image': 'url(http://18.236.125.242/groupHomes/photos/' + facility.id + '/' + facility.largePhoto + ')'}">
-
-      <!-- <div style="align-self:center;"> -->
-        <!-- <img ng-src="{{files[0]}}" style="width:100%"> -->
-        <!-- <h1 id="name" style="font-size:60px; margin:0;transition:all .55s">Christine Lam</h1> -->
-        <!-- <p id="tagline" style="font-size:30px;margin:15px 0 40px 0;transition:all .55s; padding:0 100px">I'm a San Francisco based Front End Developer who has a passion for bringing beautiful web designs to life. Let's build great things together!</p> -->
-        <md-button class="md-raised md-cornered" ng-click="showAdvanced($event)" style="position:absolute;right:0;height:0">View Photos</md-button>
-      <!-- </div> -->
-    </header>
-    <!-- <div style="padding-top:20px;background-color:white" layout="row"> -->
-    <md-content style="background-color:White;margin:30px auto;width:50%">
-      <h3 class="headline" style="">{{facility.name}}</h3>
-    </md-content>
-      <md-content style="background-color:White;margin:30px auto;width:50%">
-        <h3 class="headline" style="">Address</h3>
-        {{facility.address}}, {{facility.city}}, {{facility.state}}, {{facility.zip}}
-      </md-content>
-      <md-content style="background-color:White;margin:30px auto;width:50%">
-        <h3 class="headline" style="">Description</h3>
-        {{facility.specialHmFeature}}
-      </md-content>
-      <md-content style="background-color:White;margin:30px auto;width:50%">
-        <h3 class="headline" style="">Room Configuration</h3>
-        Beds: {{facility.beds}}
-
-      </md-content>
-
-      <!-- <md-button class="md-primary md-raised" ng-click="showAdvanced($event)">
-         Custom Dialog
-       </md-button> -->
-<!-- </div> -->
-
-  <!-- <div ng-repeat="file in files">
-    <img ng-src="{{file.LINK}}">
-  </div> -->
-
-  <!-- <img ng-src="{{files[0].LINK}}"> -->
-
-
+    <md-button class="md-raised md-cornered" ng-click="showAdvanced($event)" style="position:absolute;right:0;height:0">View Photos</md-button>
+  </header>
+  <md-content style="background-color:White;margin:30px auto;width:50%">
+    <h3 class="headline" style="">{{facility.name}}</h3>
+  </md-content>
+  <md-content style="background-color:White;margin:30px auto;width:50%">
+    <h3 class="headline" style="">Address</h3>
+    {{facility.address}}, {{facility.city}}, {{facility.state}}, {{facility.zip}}
+  </md-content>
+  <md-content style="background-color:White;margin:30px auto;width:50%">
+    <h3 class="headline" style="">Description</h3>
+    {{facility.specialHmFeature}}
+  </md-content>
+  <md-content style="background-color:White;margin:30px auto;width:50%">
+    <h3 class="headline" style="">Room Configuration</h3>
+    Beds: {{facility.beds}}
+  </md-content>
+  <md-content style="background-color:White;margin:30px auto;width:50%">
+    <h3 class="headline" style="">Pricing</h3>
+    Category 1 Private: {{facility.category1PrivateRange}} <br>
+    Category 1 Shared: {{facility.category1SharedRange}} <br>
+    Category 2 Private: {{facility.category2PrivateRange}} <br>
+    Category 2 Shared: {{facility.category2SharedRange}} <br>
+  </md-content>
 </div>
