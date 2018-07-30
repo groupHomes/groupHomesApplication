@@ -33,10 +33,13 @@ app.constant('CONSTANTS', {
       patientUploadFile: {
         get: 'getPatientUploadFile'
       },
-      loginUser: {
-        loginUser: 'loginUser'
-      },
-  
+      // loginUser: {
+      // },
+      user: {
+        get: 'loginUser',
+        add: 'addUser'
+      }
+
 
     // http://52.37.19.44/examApp.api/php?x=getPatientUpload
       // student: {

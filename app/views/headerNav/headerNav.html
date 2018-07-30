@@ -6,7 +6,7 @@
       <!-- <a ui-sref="listingCreate" style="margin: 0 50px 0 0" ng-if="user.role==='client'"><div class="nav-item">Add Listing</div></a> -->
       <!-- <a ui-sref="listingView" style="margin: 0 50px 0 0" ng-if="user.role === 'client'"><div class="nav-item">Preview Listing</div></a> -->
       <!-- <a ui-sref="landingPage" style="margin: 0 50px 0 0" ng-if="user === undefined"><div class="nav-item">Login</div></a> -->
-      <a ui-sref="listingEdit" style="margin: 0 50px 0 0"  ng-if="(currentPage !== '/listingEdit') && (user !== undefined)"><div class="nav-item">Edit Listing</div></a>
+      <a ui-sref="listingEdit" style="margin: 0 50px 0 0"  ng-if="(currentPage !== '/listingEdit') && (user.role === 'client')"><div class="nav-item">Edit Listing</div></a>
       <!-- <a ui-sref="landingPage" ng-if="(user.role === 'client') || (user.role === 'admin')"><div class="nav-item">Logout</div></a> -->
       <a ui-sref="login" style="margin: 0 50px 0 0" ng-if="user === undefined"><div class="nav-item">Login</div></a>
       <a style="margin: 0 50px 0 0" ng-if="user === undefined"><div class="nav-item">Sign Up</div></a>

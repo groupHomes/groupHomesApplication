@@ -1,6 +1,9 @@
 app.controller('LoginController', function($scope, $state, dataService, userService, facilityService) {
 
-console.log('hello world');
+  console.log('hello world');
+  $scope.signup=function () {
+    $state.go('signUp')
+  }
 
   $scope.login=function () {
     var loginInfo = {
@@ -8,13 +11,14 @@ console.log('hello world');
       password: $scope.password
     };
 
-    dataService.loginUser('loginUser', loginInfo).then(function (response) {
+
+    dataService.get('user', loginInfo).then(function (response) {
       console.log(response);
       if (response.data.length < 1) {
         alert("Error: Password or Email incorrect");
-      } else if (response.data[0].role === 'admin') {
+      } else if (response.data[0].role === 'customer') {
         userService.set(response.data[0]);
-        $state.go('listingSearch')
+        $state.go('listingSearch');
       } else if (response.data[0].role === 'client') {
         $scope.user = response.data[0];
         userService.set($scope.user);

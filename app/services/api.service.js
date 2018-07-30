@@ -59,16 +59,16 @@ app.service('dataService', function($http, $q, CONSTANTS, $httpParamSerializerJQ
     // return deferred.promise;
   };
 
-  service.loginUser = function(dataType, dataObj) {
-    var action = CONSTANTS.api.actions[dataType].loginUser;
-    // var deferred = $q.defer();
-    return $http({
-      url: base + path + query + action,
-      method: 'GET',
-      params: dataObj,
-      paramSerializer: '$httpParamSerializerJQLike'
-    });
-  };
+  // service.user = function(dataType, dataObj) {
+  //   var action = CONSTANTS.api.actions[dataType].loginUser;
+  //   // var deferred = $q.defer();
+  //   return $http({
+  //     url: base + path + query + action,
+  //     method: 'GET',
+  //     params: dataObj,
+  //     paramSerializer: '$httpParamSerializerJQLike'
+  //   });
+  // };
 
   service.search = function(dataType, dataObj) {
     var action = CONSTANTS.api.actions[dataType].search;
