@@ -1,93 +1,9 @@
-app.controller('ListingSearchController', function($scope, dataService, CONSTANTS, $window, $compile, $state, facilityService, userService, searchService) {
-
-  //set user to scope
-  $scope.user = userService.get();
-
-  //set search result
-  $scope.search = searchService.get();
-  $scope.facilities = $scope.search.searchResult;
-  $scope.searchText = $scope.search.searchText;
-
-
-  //get all listingView
-  // dataService.getAll('facility').then(function (response) {
-  //   console.log(response);
-  //   $scope.facilities=response.data;
-  //   //testing search
-  //   // var address = $scope.facilities[0].address + $scope.facilities[0].city + $scope.facilities[0].state + $scope.facilities[0].zip;
-  //   // dataService.search('facility', address).then(function (response) {
-  //   //   console.log(response)
-  //   // })
-  // });
-
-  //search for facility
-  $scope.submit = function (search) {
-    dataService.search('facility', {address:search}).then(function (response) {
-      if (response.data.length === 0){ //no results found
-        $scope.noResults = true;
-        $scope.facilities = [];
-      } else {
-        $scope.noResults = false;
-        $scope.facilities = response.data;
-      }
-    });
-  };
-
-  //create array of selected facilities to be compared
-  $scope.compareArr = [];
-
-  //add facility to be compared
-  $scope.addToCompare = function (facility, index) {
-    console.log('add facility to compare', facility);
-    $scope.compare[index] = true;
-    //if nothing in compare array, then add facility
-    if ($scope.compareArr.length === 0) {
-      $scope.compareArr.push(facility);
-    } else { //else add to compare array
-      $scope.compareArr.push(facility);
-    }
-  };
-
-  //remove facility from compare array
-  $scope.removeFromCompare = function (facility, index) {
-    console.log('remove facility from compare', facility);
-    $scope.compare[index] = false;
-    for (var i = 0; i < $scope.compareArr.length; i++) {
-      if ($scope.compareArr[i] === facility) { //find facility to removed
-        $scope.compareArr.splice(i,1); //remove from array
-        break; //can stop looping if facility added
-      }
-    }
-  };
-
-  //send array of facilities to be compared
-  $scope.compare = function () {
-    console.log($scope.compareArr);
-    if ($scope.user === undefined) { //if user not logged in
-      $state.go('login'); //route to login page
-    } else {
-      //NEED API TO SEND COMPARE ARRAY
-    }
-  };
-
-  //route to list view of selected facility
-  $scope.selectFacility = function (facility) {
-    facilityService.set(facility);
-    $state.go('listingView');
-  };
-
-
-  //route to listing view page; set selected facility
-  $scope.viewFacility=function (i) {
-    console.log('view facility', $scope.facilities[i]);
-    facilityService.set($scope.facilities[i]);
-    $state.go('listingView');
-  };
-
+app.controller('ListingSearchController', function($scope, $rootScope, $location, dataService, CONSTANTS, $window, $compile, $state, facilityService, userService, searchService) {
 
   ////////////////////GOOGLE MAPS///////////////////////////////
   var map;
   var marker;
+  $scope.markerArr = [];
   var layerHospital;
   var layerResidential;
   var layerPersonal;
@@ -112,17 +28,134 @@ app.controller('ListingSearchController', function($scope, dataService, CONSTANT
   var Layer7 = "1Luc7yAyvhmIKn8PLodIThRauY-13Exls4g7xaBho";
   var Layer8 = "1Fvpw0RKetEveZzOputgL_L-NJBrbADHNS6hSll30";
   var AutoComplete;
+  var infowindow = new google.maps.InfoWindow();
+//////////GOOGLE MAPS END///////////////////
+
+  //set user to scope
+  $scope.user = userService.get();
+
+
+  //check for previous route
+  $rootScope.$on('$locationChangeStart', function (event, current, previous) {
+    console.log("Previous URL: " + previous);
+    if(previous === 'http://localhost:3000/app/#/'){ //if previous route is home search page, get search text and results
+      $scope.search = searchService.get();
+      $scope.facilities = $scope.search.searchResult;
+      $scope.searchText = $scope.search.searchText;
+      $scope.initMap();
+    } else { //if previous not home search page, then start with empty map
+      $scope.facilities=[];
+      $scope.initMap();
+    }
+  });
+
+  // $scope.isSearchText = function () {
+  //   console.log($scope.search)
+  //   if ($scope.search !== undefined) {
+  //     //set search result
+  //
+  //     console.log('facilities', $scope.facilities)
+  //     $scope.initMap();
+  //   } else {
+  //     $scope.initMap();
+  //   }
+  // }
+
+  //get all listingView
+  // dataService.getAll('facility').then(function (response) {
+  //   console.log(response);
+  //   $scope.facilities=response.data;
+  //   //testing search
+  //   // var address = $scope.facilities[0].address + $scope.facilities[0].city + $scope.facilities[0].state + $scope.facilities[0].zip;
+  //   // dataService.search('facility', address).then(function (response) {
+  //   //   console.log(response)
+  //   // })
+  // });
+
+  //search for facility
+  $scope.submit = function (search) {
+    // clear old markers and facilities
+    $scope.facilities = [];
+     for (var i = 0; i < $scope.markerArr.length; i++) {
+      $scope.markerArr[i].setMap(null);
+    }
+    $scope.markerArr.length=0;
+
+    //get new search results
+    dataService.search('facility', {address:search}).then(function (response) {
+      if (response.data.length === 0){ //no results found
+        $scope.noResults = true;
+      } else { //if results found, set facilities and build markers
+        $scope.noResults = false;
+        $scope.facilities = response.data;
+        buildMarkers();
+      }
+    });
+  };
+
+  //create array of selected facilities to be compared
+  $scope.compareArr = [];
+
+  //add facility to be compared
+  $scope.addToCompare = function (facility, index) {
+    console.log('add facility to compare', facility);
+    if ($scope.user === undefined) { //if user not logged in
+      $state.go('login'); //route to login page
+    } else {
+      $scope.compare[index] = true;
+      //if nothing in compare array, then add facility
+      if ($scope.compareArr.length === 0) {
+        $scope.compareArr.push(facility);
+      } else { //else add to compare array
+        $scope.compareArr.push(facility);
+      }
+    }
+  };
+
+  //remove facility from compare array
+  $scope.removeFromCompare = function (facility, index) {
+    console.log('remove facility from compare', facility);
+    $scope.compare[index] = false;
+    for (var i = 0; i < $scope.compareArr.length; i++) {
+      if ($scope.compareArr[i] === facility) { //find facility to removed
+        $scope.compareArr.splice(i,1); //remove from array
+        break; //can stop looping if facility added
+      }
+    }
+  };
+
+  //send array of facilities to be compared
+  $scope.compare = function () {
+    console.log($scope.compareArr);
+
+  };
+
+  //route to list view of selected facility
+  $scope.selectFacility = function (facility) {
+    facilityService.set(facility);
+    $state.go('listingView');
+  };
+
+
+  //route to listing view page; set selected facility
+  $scope.viewFacility=function (i) {
+    console.log('view facility', $scope.facilities[i]);
+    facilityService.set($scope.facilities[i]);
+    $state.go('listingView');
+  };
+
+
 
   $scope.initMap = function () {
-    console.log('loading map');
-
-    var infowindow = new google.maps.InfoWindow();
-
     map = new google.maps.Map(document.getElementById('map'), {
         center: { lat: initLat, lng: initLng },
         zoom: 11
     });
+    buildInfowindow();
+    buildMarkers();
+  };
 
+  function buildInfowindow() {
     //custom info box
     google.maps.event.addListener(infowindow, 'domready', function() {
       // Reference to the DIV that wraps the bottom of infowindow
@@ -143,7 +176,7 @@ app.controller('ListingSearchController', function($scope, dataService, CONSTANT
       // Removes max width of title, set title to be 100% of infowindow
       iwOuter.children(':nth-child(1)').css({'max-height' : 'none', 'max-width':'0', 'width' : '100%'});
 
-      // Removes the close button image    
+      // Removes the close button image
       iwOuter.next().css({'display' : 'none'});
 
       // Moves the infowindow 115px to the right.
@@ -168,9 +201,9 @@ app.controller('ListingSearchController', function($scope, dataService, CONSTANT
       //   $('.iw-bottom-gradient').css({display: 'none'});
       // }
     });
+  }
 
-    $scope.markerArr = [];
-
+  function buildMarkers() {
     //hover over markers on map to open infowindow
     for (i = 0; i < $scope.facilities.length; i++) {
       //create a marker for each facaility
@@ -199,16 +232,16 @@ app.controller('ListingSearchController', function($scope, dataService, CONSTANT
       })(marker, i));
 
       //close infobox on mouseout
-      // google.maps.event.addListener(marker, 'mouseout', (function (marker, i) {
-      //   return function() {
-      //     infowindow.close();
-      //   };
-      // })(marker, i));
+      google.maps.event.addListener(marker, 'mouseout', (function (marker, i) {
+        return function() {
+          infowindow.close();
+        };
+      })(marker, i));
 
       //route to facility on click on marker
       google.maps.event.addListener(marker, 'click', (function (marker, i) {
         return function() {
-          $scope.viewFacility(i)
+          $scope.viewFacility(i);
         };
       })(marker, i));
     }
@@ -222,14 +255,10 @@ app.controller('ListingSearchController', function($scope, dataService, CONSTANT
     $scope.hideInfo = function (facility, index) {
       google.maps.event.trigger($scope.markerArr[index], 'mouseout');
     };
-  };
-
+  }
 
   //set content of infowindow
   function getInfoContent(i) {
-    // console.log(i)
-    // console.log($scope.test)
-    // console.log($scope.facilities[i])
     var facility = $scope.facilities[i];
     var content = '<div id="iw-container" ng-click="viewFacility(' + i + ')">' +
              '<div class="iw-title">'+facility.name+'</div>' +
@@ -247,6 +276,4 @@ app.controller('ListingSearchController', function($scope, dataService, CONSTANT
     var compiled = $compile(content)($scope);
     return compiled;
   }
-
-  $scope.initMap();
 });

@@ -4,21 +4,34 @@ app.controller('ListingPreviewController', function($scope, dataService, CONSTAN
   $scope.user=userService.get();
   console.log($scope.user);
 
-  $scope.facility=facilityService.get();
-  console.log($scope.facility);
+  $scope.userFacilityId=userService.get().facilityId;
 
-  //get facility primary photo
-  dataService.get('photo',{id: $scope.facility.id}).then(function (response) {
-    $scope.facilityPhotosArry = response.data;
-    $scope.facilityPhotosArry.forEach(function (photo) {
-      if (photo.primaryPhoto === 'Y') {
-        $scope.facility.primaryPhoto = photo.largePhoto;
-      }
-    });
+
+  //get user facility info
+  dataService.get('facility', {id: $scope.userFacilityId}).then(function (response) {
+    console.log('facility', response.data[0]);
+    $scope.facility=response.data[0];
   });
 
+  //get facility rooms info
+  dataService.get('facilityRooms', {id: $scope.userFacilityId}).then(function (response) {
+    console.log(response.data);
+    $scope.rooms = response.data;
+  });
+
+  //get facility primary photo
+  // dataService.get('photo',{id: $scope.userFacilityId}).then(function (response) {
+  //   console.log(response.data)
+  //   $scope.facilityPhotosArry = response.data;
+  //   $scope.facilityPhotosArry.forEach(function (photo) {
+  //     if (photo.primaryPhoto === 'Y') {
+  //       $scope.facility.primaryPhoto = photo.largePhoto;
+  //     }
+  //   });
+  // });
+
   //get all facility photos
-  dataService.get('photo', {id: $scope.facility.id}).then(function (response) {
+  dataService.get('photo', {id: $scope.userFacilityId}).then(function (response) {
     console.log(response.data);
     $scope.facilityPhotos=response.data;
   });

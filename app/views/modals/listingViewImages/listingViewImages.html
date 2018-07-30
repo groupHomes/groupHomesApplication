@@ -1,8 +1,8 @@
 <div id="listing-view-images" style="padding:30px">
   <div style="display:flex; flex-wrap:wrap">
-    <div class="thumb" ng-repeat="photo in facilityPhotos" style="margin-right:10px; margin-bottom:10px">
+    <div class="thumb" ng-repeat="photo in facilityPhotos" style="margin:10px;width:100%">
       <!-- <img ng-src="{{file.LINK}}" style="height:200px;width:auto;"> -->
-      <img ng-src="http://18.236.125.242/groupHomes/photos/{{facility.id}}/{{photo.largePhoto}}" style="height:200px;width:auto;">
+      <img ng-src="http://18.236.125.242/groupHomes/photos/{{facility.id}}/{{photo.largePhoto}}" style="width:100%">
     </div>
   </div>
   <md-button class="md-raised md-cornered" ng-click="cancel()" style="float:right">CLOSE</md-button>

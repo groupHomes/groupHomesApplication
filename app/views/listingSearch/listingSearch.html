@@ -1,95 +1,3 @@
-<!-- <body oncontextmenu="return true"> -->
-
-
-  <!-- <div id="listing-search" style="height:100%">
-    <div style="display:flex;">
-      <div style="display:flex;width:60%">
-        <div style="width:70%;">
-          <div style="display:flex;flex-wrap:wrap;justify-content:space-between">
-            <div ng-repeat="facility in facilities | limitTo:10" style="" ng-click="selectFacility(facility)">
-              <div style="width:250px; height:200px;overflow:hidden;position:relative;margin:10px"><img ng-src="http://18.236.125.242/groupHomes/photos/{{facility.id}}/{{facility.smallPhoto}}"  style="min-width:100%;min-height:100%;position:absolute;left:-1000%;right:-1000%;top:-1000%;bottom:-1000%;margin:auto;"></div>
-              <div style="font-size:10px;margin:10px;">{{facility.name}}</div>
-            </div>
-          </div>
-        </div>
-        <div ng-if="selectedFacility!==undefined" style="width:30%;padding:10px;">
-        <h3>{{selectedFacility.name}}</h3>
-        <h5>{{selectedFacility.address}}, {{selectedFacility.city}}, {{selectedFacility.state}}, {{selectedFacility.zip}}</h5>
-        <p>{{selectedFacility.specialHmFeature}}</p>
-        <p>Beds: {{selectedFacility.beds}}</p>
-      </div>
-    </div>
-      <div  style="width:40%; height:100%;position:fixed;right:0"><div id="map" ng-init="initMap()"></div></div>
-    </div>
-  </div> -->
-
-
-<!--testing cards/2col material-->
-  <!-- <div id="listing-search" style="height:100%">
-    <div class="row">
-      <div class="col-md-7" style="padding:0">
-        <md-content class="md-padding" layout-xs="column" layout="row" layout-wrap>
-          <md-card flex="30" ng-repeat="facility in facilities | limitTo:10"  ng-click="selectFacility(facility)">
-              <img ng-src="http://18.236.125.242/groupHomes/photos/{{facility.id}}/{{facility.smallPhoto}}" class="md-card-image" alt="Washed Out">
-              <md-card-title>
-                <md-card-title-text>
-                  <div class="md-body-1">Beds: {{facility.beds}}</div>
-                  <div class="md-title">{{facility.name}}</div>
-                </md-card-title-text>
-              </md-card-title>
-              <md-card-content layout="row" layout-align="space-between center" style="width:350px">
-              <div class="md-caption">
-                  Level 1: ${{facility.level1Price}}
-                </div>
-                <div class="md-caption">
-                  Level 2: ${{facility.level2Price}}
-                  </div>
-              </md-card-content>
-            </md-card>
-        </md-content>
-        </div>
-      <div class="col-md-5" style="padding:0">
-        <div id="map" style="height:100vh"></div>
-      </div>
-    </div>
-  </div> -->
-
-<!--testing-cards 3 col/responsive-->
-  <!-- <div id="listing-search" style="height:100%">
-    <div class="row">
-      <div class="col-md-5">
-        <div style="display:flex;flex-wrap:wrap;justify-content:space-between">
-          <div ng-repeat="facility in facilities | limitTo:10"  ng-click="selectFacility(facility)" style="margin:10px">
-            <div class="card" style="width:250px">
-                <div style="width:250px; height:200px;overflow:hidden;position:relative;"><img ng-src="http://18.236.125.242/groupHomes/photos/{{facility.id}}/{{facility.smallPhoto}}"  style="min-width:100%;min-height:100%;position:absolute;left:-1000%;right:-1000%;top:-1000%;bottom:-1000%;margin:auto;"></div>
-                <div>
-
-                <div style="font-size:14px;margin:10px 10px 0 10px;color:grey">Total Beds: {{facility.beds}}</div>
-                <div style="font-size:14px;margin:10px 10px 0 10px;font-weight:bold">{{facility.name}}</div>
-                <div style="font-size:12px;margin:0 10px 10px 10px;">{{facility.address}},<br> {{facility.city}}, {{facility.state}}, {{facility.zip}}</div>
-                <div style="font-size:12px;margin:0 10px 10px 10px"><span style="font-weight:bold">Level 1 Price:</span> ${{facility.level1Price}},<br> <span style="font-weight:bold">Level 2 Price:</span> ${{facility.level2Price}}</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3">
-          <div ng-if="selectedFacility!==undefined" style="padding:10px;">
-            <h3>{{selectedFacility.name}}</h3>
-            <h5>{{selectedFacility.address}}, {{selectedFacility.city}}, {{selectedFacility.state}}, {{selectedFacility.zip}}</h5>
-            <p>{{selectedFacility.specialHmFeature}}</p>
-            <p>Beds: {{selectedFacility.beds}}</p>
-          </div>
-      </div>
-      <div class="col-md-4">
-        <div id="map" style="height:100vh"></div>
-      </div>
-    </div>
-  </div> -->
-
-
-
-<!--2 col boostrap cards-->
   <div id="listing-search" style="margin-top:65px;padding:15px 15px 0 15px">
     <div class="row" style="height:100%;background-color:#FFF">
       <div class=""style="width:60%">
@@ -98,16 +6,17 @@
           <md-button class="md-raised md-cornered" ng-click="submit(searchText)" style="width:10%;float:right">Submit</md-button>
           <md-button class="md-raised md-cornered" ng-click="compare()" style="width:10%;float:right">Compare</md-button>
         </div> -->
-        <div style="padding:30px">
+        <div style="padding:30px;display:flex">
           <div class="input-group">
             <input type="text" ng-model="searchText" class="form-control" placeholder="Search address..." style="line-height:50px;">
             <span class="input-group-btn">
               <button class="btn btn-default" style="border-radius: 0 .25em .25em 0;line-height:50px;border: 1px solid #ced4da" type="button" ng-click="submit(searchText)">Search!</button>
             </span>
           </div><!-- /input-group -->
-          <button class="btn btn-default" style="border-radius: 0 .25em .25em 0;line-height:50px;border: 1px solid #ced4da" type="button">Compare</button>
-          <div ng-show="noResults" style="color:red">No Results Found. Please try again.</div>
+          <button class="btn btn-default" style="border-radius: .25em;line-height:50px;border: 1px solid #ced4da; margin-left:20px;" type="button" ng-disabled="compareArr.length===0">Compare</button>
         </div>
+        <div ng-show="noResults" style="color:red; padding-left:30px">No Results Found. Please try again.</div>
+
 
         <div style="display:flex;flex-wrap:wrap;justify-content:space-between; padding:20px">
           <div ng-repeat="facility in facilities track by $index" on-finish-render="ngRepeatFinished" style="margin: 10px">

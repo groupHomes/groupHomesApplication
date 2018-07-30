@@ -1,12 +1,12 @@
-app.controller('ListingEditController', function($scope, $http, $state, dataService, fileReader, CONSTANTS, userService) {
+app.controller('ListingEditController', function($scope, $location, $http, $state, dataService, fileReader, CONSTANTS, userService) {
   console.log('listingEdit');
 
-  // $scope.userFacilityId=userService.get().facilityId;
-  $scope.userFacilityId=4783
+  $scope.userFacilityId=userService.get().facilityId;
+  // $scope.userFacilityId=4783
 
   console.log($scope.userFacilityId)
 
-
+  console.log($location.path())
   $scope.thumbnailArr=[];
   $scope.selectedFilesArr=[];
 
@@ -14,7 +14,7 @@ app.controller('ListingEditController', function($scope, $http, $state, dataServ
   dataService.get('facility', {id: $scope.userFacilityId}).then(function (response) {
     console.log('facility', response.data[0]);
     $scope.userFacility=response.data[0];
-    //get facility photos //// FIXME: 
+    //get facility photos //// FIXME:
     // dataService.get('photo',{id: $scope.userFacilityId}).then(function (response) {
     //   console.log(response.data);
     //   $scope.userFacilityPhotos=response.data;
@@ -68,6 +68,8 @@ app.controller('ListingEditController', function($scope, $http, $state, dataServ
   $scope.preview=function () {
     //got to view
     $state.go('listingPreview');
+    // $state.go('listingView');
+
 
   }
 

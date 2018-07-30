@@ -1,39 +1,75 @@
 <div id="listing-preview" style="margin-top:66px;background-color:white">
-  <div style="background-color:lightgrey;height:40px;line-height:40px;color:white;text-align:center;position:fixed;width:100%;z-index:80">
+  <!-- <div style="background-color:lightgrey;height:40px;line-height:40px;color:white;text-align:center;position:fixed;width:100%;z-index:80">
     <div>You Are In Preview Mode <i class="fa fa-times-circle-o fa-lg" ng-click="closePreview()"></i></div>
-  </div>
-
-  <header layout=row ng-style="{'background-image': 'url(http://18.236.125.242/groupHomes/photos/' + facility.id + '/' + facility.primaryPhoto + ')'}">
-    <md-button class="md-raised md-cornered" ng-click="showAdvanced($event)" style="position:absolute;right:0;height:0">View Photos</md-button>
-  </header>
-    <!-- <div style="padding-top:20px;background-color:white" layout="row"> -->
-    <md-content style="background-color:White;margin:30px auto;width:50%">
-      <h3 class="headline" style="">{{facility.name}}</h3>
-    </md-content>
-      <md-content style="background-color:White;margin:30px auto;width:50%">
-        <h3 class="headline" style="">Address</h3>
-        {{facility.address}}, {{facility.city}}, {{facility.state}}, {{facility.zip}}
-      </md-content>
-      <md-content style="background-color:White;margin:30px auto;width:50%">
-        <h3 class="headline" style="">Description</h3>
-        {{facility.specialHmFeature}}
-      </md-content>
-      <md-content style="background-color:White;margin:30px auto;width:50%">
-        <h3 class="headline" style="">Room Configuration</h3>
-        Beds: {{facility.beds}}
-
-      </md-content>
-
-      <!-- <md-button class="md-primary md-raised" ng-click="showAdvanced($event)">
-         Custom Dialog
-       </md-button> -->
-<!-- </div> -->
-
-  <!-- <div ng-repeat="file in files">
-    <img ng-src="{{file.LINK}}">
   </div> -->
 
-  <!-- <img ng-src="{{files[0].LINK}}"> -->
+  <header layout=row ng-style="{'background-image': 'url(http://18.236.125.242/groupHomes/photos/' + userFacilityId + '/' + facilityPhotos[0].largePhoto + ')'}">
+    <md-button class="md-raised md-cornered" ng-click="showAdvanced($event)" style="position:absolute;right:0;height:0">View Photos</md-button>
+  </header>
+  <div style="display:flex">
+    <div style="background-color:White; width:50%;float:left;padding: 0 100px">
+      <div style="margin-top:20px">
+        <h1 class="headline" style="">{{facility.name}}</h1>
+      </div>
+        <div style="padding: 10px 0">
+          <h3 class="headline" style="">Address</h3>
+          {{facility.address}}, {{facility.city}}, {{facility.state}}, {{facility.zip}}
+        </div>
+        <div style="padding: 10px 0">
+          <h3 class="headline" style="">Description</h3>
+          {{facility.specialHmFeature}}
+        </div>
+        <div style="padding: 10px 0">
+          <h3 class="headline" style="">Room Configuration</h3>
+          Beds: {{facility.beds}}
+        </div>
+        <div style="padding: 10px 0">
+          <h3 class="headline" style="">Pricing</h3>
+          Category 1 Private: {{facility.category1PrivateRange}} <br>
+          Category 1 Shared: {{facility.category1SharedRange}} <br>
+          Category 2 Private: {{facility.category2PrivateRange}} <br>
+          Category 2 Shared: {{facility.category2SharedRange}} <br>
+        </div>
+      </div>
+      <div style="background-color:white;width:50%;">
+        <md-card style="padding:30px;margin-top:30px; margin-right:50px;margin-left:25px">
+          <h1 class="headline" style="text-align:center">Current Occupancy Chart</h1>
+          <h5 class="" style="text-align:center">Total Licensed Beds</h5>
+          <div class="row" style="text-align:center;font-weight:bold;">
+            <div class="" style="width:25%;line-height:35px;">
+              Room Number
+            </div>
+            <div class="" style="width:25%;line-height:35px;">
+              Room Occupancy
+            </div>
+            <div class="" style="width:25%;line-height:35px;">
+              # Beds Available
+            </div>
+            <div class="" style="width:25%;line-height:35px;">
+              Room Gender
+            </div>
+          </div>
+          <div style="border-bottom:1px solid grey"></div>
+          <div class="row" style="text-align:center">
+            <div ng-repeat="room in rooms" style="width:100%">
+              <div class="row">
+                <div class="" style="width:25%;line-height:35px;">
+                  Room {{room.roomNumber}}
+                </div>
+                <div class="" style="width:25%;line-height:35px;">
+                  {{room.roomBedCount}}
+                </div>
+                <div class="" style="width:25%;line-height:35px;">
+                  {{room.bedsAvailable}}
+                </div>
+                <div class="" style="width:25%;line-height:35px;">
+                  {{room.roomGender}}
+                </div>
+              </div>
+            </div>
+          </div>
 
-
+        </md-card>
+      </div>
+    </div>
 </div>

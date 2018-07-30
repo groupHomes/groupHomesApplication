@@ -1,8 +1,8 @@
-app.controller('HeaderNavController', function($scope, $http, userService) {
+app.controller('HeaderNavController', function($scope, $http, userService, $location) {
 
 
   $scope.user=userService.get();
-  console.log($scope.user)
+  console.log($scope.user);
 
   $scope.isLoggedIn=function () {
     $scope.user=userService.get();
@@ -14,6 +14,7 @@ app.controller('HeaderNavController', function($scope, $http, userService) {
 
 
 
+  $scope.currentPage=$location.path();
 
   $scope.isLoggedIn();
 });
