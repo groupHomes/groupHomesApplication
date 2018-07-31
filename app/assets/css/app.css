@@ -200,6 +200,191 @@ body {
   padding: 0 10px 6px;
 }
 
+#listing-preferred {
+  /* Always set the map height explicitly to define the size of the div
+    * element that contains the map. */
+  /* Optional: Makes the sample page fill the window. */
+}
+
+#listing-preferred #map {
+  height: calc(100vh - 140px);
+}
+
+#listing-preferred .card {
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+}
+
+#listing-preferred div:focus {
+  outline: none;
+  border: 0;
+}
+
+#listing-preferred .gm-style-iw {
+  width: 350px !important;
+  top: 15px !important;
+  left: 0px !important;
+  background-color: #fff;
+  box-shadow: 0 1px 6px rgba(178, 178, 178, 0.6);
+  border: 1px solid rgba(72, 181, 233, 0.6);
+  border-radius: 2px 2px 10px 10px;
+}
+
+#listing-preferred #iw-container {
+  margin-bottom: 10px;
+}
+
+#listing-preferred #iw-container .iw-title {
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-size: 22px;
+  font-weight: 400;
+  padding: 10px;
+  background-color: #48b5e9;
+  color: white;
+  margin: 0;
+  border-radius: 2px 2px 0 0;
+}
+
+#listing-preferred #iw-container .iw-content {
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 400;
+  margin-right: 1px;
+  padding: 15px 5px 20px 15px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+#listing-preferred .iw-content img {
+  float: right;
+  margin: 0 5px 5px 10px;
+}
+
+#listing-preferred .iw-subTitle {
+  font-size: 16px;
+  font-weight: 700;
+  padding: 5px 0;
+}
+
+#listing-preferred .iw-bottom-gradient {
+  position: absolute;
+  width: 326px;
+  height: 25px;
+  bottom: 10px;
+  right: 18px;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, white 100%);
+  background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 0%, white 100%);
+  background: -moz-linear-gradient(top, rgba(255, 255, 255, 0) 0%, white 100%);
+  background: -ms-linear-gradient(top, rgba(255, 255, 255, 0) 0%, white 100%);
+}
+
+#listing-preferred .active {
+  background-color: dodgerblue;
+}
+
+#listing-preferred li:hover {
+  cursor: pointer;
+}
+
+#listing-preferred .info table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#listing-preferred .info th,
+#listing-preferred td {
+  text-align: left;
+  padding: 2px !important;
+}
+
+#listing-preferred .info td:first-child {
+  font-weight: bold;
+}
+
+#listing-preferred .info tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+#listing-preferred #floating-panel {
+  /*position: absolute;
+        top: 10px;
+        left: 30%;
+        z-index: 5;*/
+  background-color: #fff;
+  /*padding: 5px;*/
+  border: 1px solid #999;
+  text-align: center;
+  font-family: 'Roboto','sans-serif';
+  line-height: 30px;
+  padding-left: 10px;
+}
+
+#listing-preferred .ui-autocomplete {
+  overflow: auto;
+  height: 300px;
+  width: 300px;
+  z-index: 1000;
+}
+
+#listing-preferred .ui-front {
+  z-index: 500 !important;
+}
+
+#listing-preferred .Layer1,
+#listing-preferred .Layer2,
+#listing-preferred .Layer4,
+#listing-preferred .Layer6,
+#listing-preferred .Layer7 {
+  width: 10px;
+  height: auto;
+  padding-top: 10px;
+  border-radius: 50%;
+  background: #66ff66;
+  margin-top: 6px;
+  margin-left: 6px;
+}
+
+#listing-preferred .Layer1 {
+  background: #66ff66;
+}
+
+#listing-preferred .Layer2 {
+  background: #c299ff;
+}
+
+#listing-preferred .Layer4 {
+  background: #ff99ff;
+}
+
+#listing-preferred .Layer6 {
+  background: #ffff99;
+}
+
+#listing-preferred .Layer7 {
+  background: #ff4d4d;
+}
+
+#listing-preferred .imgLegend {
+  width: 20px;
+  height: 20px;
+}
+
+#listing-preferred .ui-tooltip {
+  border: 1px solid white;
+  background: #111111;
+  color: white;
+}
+
+#listing-preferred .toggler {
+  width: 450px;
+  height: 200px;
+  display: none;
+  top: 60px;
+  left: 10px;
+  z-index: 500;
+  position: fixed;
+  padding-left: 10px;
+}
+
 #listing-preview header {
   width: 100%;
   height: 600px;
@@ -406,6 +591,17 @@ body {
   z-index: 500;
   position: fixed;
   padding-left: 10px;
+}
+
+#signup {
+  height: 100%;
+}
+
+#signup #signup-image {
+  background-image: url("/app/images/login.jpg");
+  background-size: cover;
+  background-position: center center;
+  height: 100%;
 }
 
 #listing-view-images .md-dialog-container {

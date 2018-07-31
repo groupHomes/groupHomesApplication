@@ -15,7 +15,7 @@
           </div><!-- /input-group -->
           <button class="btn btn-default" style="border-radius: .25em;line-height:50px;border: 1px solid #ced4da; margin-left:20px;" type="button" ng-disabled="compareArr.length===0" ng-click="compareFacilities()">Compare</button>
         </div>
-        <div ng-if="user.role==='user'" ng-click="getPreferredList()">Saved List</div>
+        <div ng-if="user.role==='user'" style="padding-right:30px; text-align:right"><a ui-sref="listingPreferred">Saved List</a></div>
         <div ng-show="noResults" style="color:red; padding-left:30px">No Results Found. Please try again.</div>
 
 

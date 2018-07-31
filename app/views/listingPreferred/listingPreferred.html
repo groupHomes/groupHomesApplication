@@ -1,0 +1,39 @@
+<div id="listing-preferred" style="margin-top:65px;padding:15px 15px 0 15px">
+  <h1>Compare Facilities</h1>
+  <div class="row" style="height:100%;background-color:#FFF">
+    <div class=""style="width:60%">
+      <div style="display:flex;flex-wrap:wrap;justify-content:space-between; padding:20px">
+        <div ng-repeat="facility in facilities track by $index" on-finish-render="ngRepeatFinished" style="margin: 10px">
+          <!--facility card-->
+          <div id="{{ 'card-' + $index }}" class="card" style="width:300px;height:500px" ng-mouseenter="showInfo(facility, $index);" ng-mouseleave="hideInfo(facility,$index);">
+            <!--image-->
+            <div style="width:300px; height:200px;overflow:hidden;position:relative;">
+              <img ng-click="selectFacility(facility)" ng-src="http://18.236.125.242/groupHomes/photos/{{facility.id}}/{{facility.smallPhoto}}"  style="min-width:100%;min-height:100%;position:absolute;left:-1000%;right:-1000%;top:-1000%;bottom:-1000%;margin:auto;">
+            </div>
+            <!--compare heart-->
+            <div style="margin:10px;color:red">
+              <!-- <i class="far fa-heart" ng-hide="compare[$index]" ng-click="addToCompare(facility, $index)"></i> -->
+              <!-- <i class="fas fa-heart" ng-show="compare[$index]" ng-click="removeFromCompare(facility, $index)"></i> -->
+              <i class="fas fa-heart"></i>
+            </div>
+            <div>
+              <div style="font-size:14px;margin:10px;color:grey">Total Beds Available: {{facility.availability}}</div>
+              <div style="font-size:14px;margin:10px;color:grey">Total Beds: {{facility.beds}}</div>
+              <div style="font-size:14px;margin:10px;font-weight:bold">{{facility.name}}</div>
+              <div style="font-size:12px;margin:0 10px 10px 10px;">{{facility.address}},<br> {{facility.city}}, {{facility.state}}, {{facility.zip}}</div>
+              <div style="font-size:12px;margin:0 10px 10px 10px">Pricing</div>
+              <div style="font-size:12px;margin:0 10px 10px 10px"><span style="font-weight:bold">Category 1 Private:</span> ${{facility.category1PrivateRange}},
+                <br> <span style="font-weight:bold">Category 1 Shared:</span> ${{facility.category1SharedRange}},
+                <br> <span style="font-weight:bold">Category 2 Private:</span> ${{facility.category2PrivateRange}},
+                <br> <span style="font-weight:bold">Category 2 Shared:</span> ${{facility.category2SharedRange}},
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="" style="width:40%;padding:30px;position:fixed;right:0;bottom: 0">
+      <div id="map" style=""></div>
+    </div>
+  </div>
+</div>
