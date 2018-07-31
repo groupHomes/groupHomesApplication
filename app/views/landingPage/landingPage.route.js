@@ -1,6 +1,6 @@
 app.config(function($stateProvider, $locationProvider) {
   $stateProvider.state('landingPage', {
-    url: '/',
+    url: '/landingPage',
     views: {
       // 'headerNav': {
       //   templateUrl: 'views/headerNav/headerNav.html',

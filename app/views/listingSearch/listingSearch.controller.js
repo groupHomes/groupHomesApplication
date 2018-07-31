@@ -35,19 +35,21 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
   $scope.user = userService.get();
 
   //check for previous route
-  $rootScope.$on('$locationChangeStart', function (event, current, previous) {
-    console.log("Previous URL: " + previous);
-    if(previous === 'http://18.236.125.242/homes/dist/#/'){ //if previous route is home search page, get search text and results
-    // if(previous === 'http://localhost:3000/app/#/'){
-      $scope.search = searchService.get();
-      $scope.facilities = $scope.search.searchResult;
-      $scope.searchText = $scope.search.searchText;
-      $scope.initMap();
-    } else { //if previous not home search page, then start with empty map
+  // $rootScope.$on('$locationChangeStart', function (event, current, previous) {
+  //   console.log("Previous URL: " + previous);
+  //   if(previous === 'http://18.236.125.242/homes/dist/#/'){ //if previous route is home search page, get search text and results
+  //   // if(previous === 'http://localhost:3000/app/#/'){
+  //     $scope.search = searchService.get();
+  //     $scope.facilities = $scope.search.searchResult;
+  //     $scope.searchText = $scope.search.searchText;
+  //     $scope.initMap();
+  //   } else { //if previous not home search page, then start with empty map
+  //     $scope.facilities=[];
+  //     $scope.initMap();
+  //   }
+  // });
+
       $scope.facilities=[];
-      $scope.initMap();
-    }
-  });
 //
 //
 //   $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
@@ -177,7 +179,7 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
   //   facilityService.set($scope.facilities[i]);
   //   $state.go('listingView');
   // };
-  // 
+  //
   // $scope.getPreferredList = function () {
   //   $state.go('listingPreferred');
   // };
@@ -312,4 +314,7 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
     var compiled = $compile(content)($scope);
     return compiled;
   }
+
+  $scope.initMap();
+  
 });

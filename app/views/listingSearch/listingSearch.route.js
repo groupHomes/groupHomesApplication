@@ -1,6 +1,6 @@
 app.config(function($stateProvider, $locationProvider) {
   $stateProvider.state('listingSearch', {
-    url: '/listingSearch',
+    url: '/',
     views: {
       'headerNav': {
         templateUrl: 'views/headerNav/headerNav.html',

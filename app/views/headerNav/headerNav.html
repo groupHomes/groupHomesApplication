@@ -11,7 +11,7 @@
       <a ui-sref="signup" style="margin: 0 50px 0 0" ng-if="user === undefined"><div class="nav-item">Sign Up</div></a>
 
       <!-- <a ui-sref="signup" style="margin: 0 50px 0 0" ng-if="user === undefined"><div class="nav-item">Sign Up</div></a> -->
-      <a ui-sref="landingPage" ng-if="user !== undefined"><div class="nav-item">Logout</div></a>
+      <a ui-sref="listingSearch" ng-if="user !== undefined"><div class="nav-item">Logout</div></a>
       <a ng-if="user !== undefined"><div class="nav-item">{{user.userid}}</div></a>
     </div>
   </div>
