@@ -1,10 +1,11 @@
-<div id="listing-view-images" style="padding:30px">
-  <div style="display:flex; flex-wrap:wrap">
-    <div class="thumb" ng-repeat="photo in facilityPhotos" style="margin:10px;width:100%">
-      <!-- <img ng-src="{{file.LINK}}" style="height:200px;width:auto;"> -->
-      <img ng-src="http://18.236.125.242/groupHomes/photos/{{facility.id}}/{{photo.largePhoto}}" style="width:100%">
+<div id="listing-view-images" >
+  <!-- <div > -->
+    <div style="width:800px;height:600px">
+      <div style="position:absolute;top:50%;left:1%;transform:translateY(-35px);color:#FFF;background-color:grey;padding:0 5px;border:1px solid #FFF"><i ng-click="leftPhoto()" class="fa fa-angle-left fa-4x" aria-hidden="true"></i></div>
+      <img ng-src="http://18.236.125.242/groupHomes/photos/{{facility.id}}/{{selectedPhoto.largePhoto}}" style="height:100%;width:100%;object-fit:cover">
+      <div style="position:absolute;top:50%;right:1%;transform:translateY(-35px);color:#FFF;background-color:grey;padding:0 5px;border:1px solid #FFF"><i ng-click="rightPhoto()" class="fa fa-angle-right fa-4x" aria-hidden="true"></i></div>
     </div>
-  </div>
-  <md-button class="md-raised md-cornered" ng-click="cancel()" style="float:right">CLOSE</md-button>
+  <!-- </div> -->
+  <!-- <md-button class="md-raised md-cornered" ng-click="cancel()" style="float:right">CLOSE</md-button> -->
 
 </div>

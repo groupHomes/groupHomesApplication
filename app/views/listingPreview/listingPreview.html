@@ -3,9 +3,30 @@
     <div>You Are In Preview Mode <i class="fa fa-times-circle-o fa-lg" ng-click="closePreview()"></i></div>
   </div> -->
 
-  <header layout=row ng-style="{'background-image': 'url(http://18.236.125.242/groupHomes/photos/' + userFacilityId + '/' + facilityPhotos[0].largePhoto + ')'}">
+  <!-- <header layout=row ng-style="{'background-image': 'url(http://18.236.125.242/groupHomes/photos/' + userFacilityId + '/' + facilityPhotos[0].largePhoto + ')'}">
     <md-button class="md-raised md-cornered" ng-click="showAdvanced($event)" style="position:absolute;right:0;height:0">View Photos</md-button>
-  </header>
+  </header> -->
+  <div style="display:flex">
+    <div style="position: relative; width: 50%; height: 500px; overflow: hidden;border:1px solid white;box-sizing:content-box">
+      <img style="min-height: 100%; " ng-src="{{facility.mediumPhotoLink}}">
+    </div>
+    <div style="overflow:hidden;width:30%;height:250px;position:relative;border:1px solid white;box-sizing:content-box">
+      <div id="detailmap" style=""></div>
+    </div>
+    <div style="height:500px;border-left:1px solid white;border-bottom:1px solid white;background-color:lightgrey;box-sizing:content-box">
+      <div style="height:10%;font-size:25px;display:flex;justify-content:center;align-items:center;margin-top:20px">Closest Hospitals</div>
+      <div ng-repeat="hospital in hospitals" style="height:30%;padding:20px">
+        <div style="font-size:18px;font-weight:bold">{{hospital.name}}</div>
+        <div>City: {{hospital.city}}</div>
+        <div>Distance: {{hospital.distance}}</div>
+      </div>
+    </div>
+  </div>
+  <div style="display:flex">
+    <div ng-repeat="facilityPhoto in facilityPhotos" style="height:100px;width:auto;border:1px solid white; box-sizing:content-box;">
+      <img ng-src="http://18.236.125.242/groupHomes/photos/{{facility.id}}/{{facilityPhoto.smallPhoto}}" style="height:100%;">
+    </div>
+  </div>
   <div style="display:flex">
     <div style="background-color:White; width:50%;float:left;padding: 0 100px">
       <div style="margin-top:20px">

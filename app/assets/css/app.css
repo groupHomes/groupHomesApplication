@@ -28,7 +28,7 @@ body {
 }
 
 #landingPage #image {
-  background-image: url("/app/images/landing.jpg");
+  background-image: url("/app/images/landing_alt.jpg");
   background-size: cover;
   background-position: center center;
   top: 0;
@@ -36,8 +36,12 @@ body {
   height: 100%;
 }
 
+#landingPage .selectedType {
+  background-color: blue !important;
+}
+
 #nav {
-  background-color: white;
+  background-color: #FFF;
   border-bottom: 1px solid lightgrey;
   top: 0;
   left: 0;
@@ -59,7 +63,8 @@ body {
 }
 
 #nav a {
-  color: #5F6263;
+  color: black;
+  text-shadow: 1px 1px 2px #FFF;
   text-decoration: none;
 }
 
@@ -408,6 +413,10 @@ body {
   -o-background-size: cover;
 }
 
+#listing-view #detailmap {
+  height: 100%;
+}
+
 #listing-search {
   /* Always set the map height explicitly to define the size of the div
     * element that contains the map. */
@@ -593,6 +602,14 @@ body {
   padding-left: 10px;
 }
 
+#listing-search .highlight {
+  box-shadow: 0 1px 5px 5px grey;
+}
+
+#listing-search .selectedType {
+  background-color: blue !important;
+}
+
 #signup {
   height: 100%;
 }
@@ -604,6 +621,7 @@ body {
   height: 100%;
 }
 
-#listing-view-images .md-dialog-container {
-  height: 800px;
+#listing-view-images md-dialog {
+  height: 800px !important;
+  width: 2000px !important;
 }

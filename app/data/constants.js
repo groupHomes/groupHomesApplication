@@ -19,6 +19,9 @@ app.constant('CONSTANTS', {
         add: 'addFacilityBed',
         edit: 'editFacilityBed'
       },
+      hospital: {
+        get: 'getFacilityNearestHospitals'
+      },
       roomBed: {
         get: 'getFacilityRoomBed'
       },

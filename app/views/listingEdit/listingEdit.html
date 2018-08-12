@@ -88,21 +88,21 @@
 
           <!--room config-->
           <md-card id="room{{room.roomNumber}}" style="padding:30px;margin-top:30px" ng-repeat="room in roomIndexes track by $index">
-            <div layout="row" layout-align="end" style="margin-bottom:30px;margin-top:10px">
+            <!-- <div layout="row" layout-align="end" style="margin-bottom:30px;margin-top:10px">
               <md-button class="md-raised md-warn" ng-click="removeRoom(room)">Remove Room</md-button>
-            </div>
+            </div> -->
             <h1 class="headline" style="">Room {{room.roomNumber}} Configuration</h1>
             <!--gender of room-->
             <div layout="row" layout-align="space-between center" style="margin-bottom:30px;margin-top:10px">
               <h4 class="md-title" style="margin:0;">Select gender of room</h4>
               <div style="display:inline-flex">
                 <div style="width:110px">
-                  <md-radio-group ng-model="room.roomGender" layout="row" >
+                  <md-radio-group ng-model="room.roomGender" layout="row">
                     <md-radio-button value="Female">Female</md-radio-button>
                   </md-radio-group>
                 </div>
                 <div style="width:110px">
-                  <md-radio-group ng-model="room.roomGender" layout="row" >
+                  <md-radio-group ng-model="room.roomGender" layout="row">
                     <md-radio-button value="Male">Male</md-radio-button>
                   </md-radio-group>
                 </div>
@@ -216,7 +216,7 @@
                 </div>
               </div>
              </md-card>
-          <md-button class="md-raised md-cornered" ng-click="submit()" style="float:right">Create Listing</md-button>
+          <md-button class="md-raised md-cornered" ng-click="submit()" style="float:right">Update Listing</md-button>
         </form>
       </md-content>
 

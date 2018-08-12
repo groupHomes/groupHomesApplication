@@ -7,13 +7,17 @@
           <md-button class="md-raised md-cornered" ng-click="compare()" style="width:10%;float:right">Compare</md-button>
         </div> -->
         <div style="padding:30px;display:flex">
-          <div class="input-group">
+          <div class="input-group" style="height:45px;">
             <input type="text" ng-model="searchText" class="form-control" placeholder="Search address..." style="line-height:50px;">
             <span class="input-group-btn">
-              <button class="btn btn-default" style="border-radius: 0 .25em .25em 0;line-height:50px;border: 1px solid #ced4da" type="button" ng-click="submit(searchText)">Search!</button>
+              <button class="btn btn-default" style="border-radius: 0 .25em .25em 0;height:45px;border: 1px solid #ced4da" type="button" ng-click="submit(searchText, searchType)">Search!</button>
             </span>
           </div><!-- /input-group -->
-          <button class="btn btn-default" style="border-radius: .25em;line-height:50px;border: 1px solid #ced4da; margin-left:20px;" type="button" ng-disabled="compareArr.length===0" ng-click="compareFacilities()">Compare</button>
+          <button class="btn btn-default" style="border-radius: .25em;height:45px;border: 1px solid #ced4da; margin-left:20px;" type="button" ng-disabled="compareArr.length===0" ng-click="compareFacilities()">Compare</button>
+        </div>
+        <div style="display:flex;margin-bottom:15px">
+          <div style="width:165px;border-radius: 4px;text-align: center;line-height:45px; margin-left: 30px;background-color:darkgrey;" ng-class="{'selectedType': searchType === 'AGC'}" ng-click="searchType='AGC'">Group Homes</div>
+          <div style="width:165px;border-radius: 4px;text-align: center;line-height:45px; margin-left: 30px;background-color:darkgrey;" ng-class="{'selectedType': searchType === 'HIC'}" ng-click="searchType='HIC'">Residential Homes</div>
         </div>
         <div ng-if="user.role==='user'" style="padding-right:30px; text-align:right"><a ui-sref="listingPreferred">Saved List</a></div>
         <div ng-show="noResults" style="color:red; padding-left:30px">No Results Found. Please try again.</div>
@@ -22,10 +26,11 @@
         <div style="display:flex;flex-wrap:wrap;justify-content:space-between; padding:20px">
           <div ng-repeat="facility in facilities track by $index" on-finish-render="ngRepeatFinished" style="margin: 10px">
             <!--facility card-->
-            <div id="{{ 'card-' + $index }}" class="card" style="width:300px;height:345px" ng-mouseenter="showInfo(facility, $index);" ng-mouseleave="hideInfo(facility,$index);">
+            <div id="{{ 'card-' + $index }}" class="card" style="width:250px;height:345px;box-sizing:content-box" ng-mouseenter="showInfo(facility, $index);" ng-mouseleave="hideInfo(facility,$index);">
               <!--image-->
-              <div style="width:300px; height:200px;overflow:hidden;position:relative;">
-                <img ng-click="selectFacility(facility)" ng-src="http://18.236.125.242/groupHomes/photos/{{facility.id}}/{{facility.smallPhoto}}"  style="min-width:100%;min-height:100%;position:absolute;left:-1000%;right:-1000%;top:-1000%;bottom:-1000%;margin:auto;">
+              <div style="width:250px; height:200px;overflow:hidden;position:relative;border-bottom:1px solid rgba(0, 0, 0, 0.2)">
+                <img ng-click="selectFacility(facility)" ng-src="{{facility.smallPhotoLink}}"  style="min-width:100%;min-height:100%;position:absolute;left:-1000%;right:-1000%;top:-1000%;bottom:-1000%;margin:auto;">
+                <!-- <img ng-if="facility.smallPhoto === 'notFound_sm.jpg'" ng-click="selectFacility(facility)" ng-src="{{sf}}"  style="min-width:100%;min-height:100%;position:absolute;left:-1000%;right:-1000%;top:-1000%;bottom:-1000%;margin:auto;"> -->
               </div>
               <!--compare heart-->
               <div style="margin:10px;color:red">

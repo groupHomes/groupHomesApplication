@@ -1,4 +1,4 @@
-app.controller('ListingEditController', function($scope, $location, $http, $state, dataService, fileReader, CONSTANTS, userService) {
+app.controller('ListingEditController', function($scope, $q, $location, $http, $state, dataService, fileReader, CONSTANTS, userService) {
   console.log('listingEdit');
 
   $scope.userFacilityId=userService.get().facilityId;
@@ -69,9 +69,78 @@ app.controller('ListingEditController', function($scope, $location, $http, $stat
     //got to view
     $state.go('listingPreview');
     // $state.go('listingView');
+  }
 
+  // $scope.roomGenderChange = function (roomNum) {
+  //   console.log(roomNum, $scope.roomIndexes)
+  // }
+
+  $scope.submit = function () {
+    var loopPromises = [];
+
+    console.log($scope.roomBed)
+    //update listing
+    var listing={
+      id: $scope.userFacilityId,
+      name: $scope.userFacility.name,
+      address: $scope.userFacility.address,
+      city: $scope.userFacility.city,
+      state: $scope.userFacility.state,
+      zip: $scope.userFacility.zip,
+      specialHmFeature: $scope.userFacility.specialHmFeature,
+      roomCount: $scope.userFacility.roomCount,
+      level1Price: $scope.userFacility.level1Price,
+      level2Price: $scope.userFacility.level2Price
+    };
+
+    //edit listing info
+    dataService.edit('facility', listing).then(function (response) {
+      console.log(response);
+      if (response.data.status === 'success') {
+        dataService.get('facility', {id: $scope.userFacilityId}).then(function (response) {
+          console.log('facility', response.data[0]);
+          $scope.userFacility=response.data[0];
+        });
+      } else {
+        alert('error updating')
+      }
+    })
+
+    console.log($scope.roomIndexes)
+
+    //edit bed info
+    $scope.roomIndexes.forEach(function (room) {
+      var deferred = $q.defer();
+      room.beds.forEach(function (bed) {
+        let bedToEdit = {
+          // facilityid: $scope.userFacilityId,
+          // roomNumber: room.roomNumber,
+          // roomid: room.roomid,
+          bedlevel: bed.bedlevel,
+          availability: bed.availability,
+          availabilitydate: bed.availabilitydate,
+          // bedNumber: bed.bedNumber,
+          id: bed.bedid
+        }
+
+        console.log(bedToEdit)
+        dataService.edit('facilityBed', bedToEdit).then(function (response) {
+          console.log(response);
+          deferred.resolve();
+        })
+      })
+    })
+
+    $q.all(loopPromises).then(function () {
+      console.log('foreach loop completed. Do something after it...');
+
+      // facilityService.set($scope.userFacility);
+      $scope.initRoomConfig()
+      // $state.go('listingView')
+    });
 
   }
+
 
   $scope.initRoomConfig();
 

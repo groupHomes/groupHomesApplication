@@ -22,7 +22,7 @@
     div:focus {
     outline: none;
     border: 0;
- }
+  }
 
  // div.gm-style div div div div div div div {
  //   background-color: none !important;
@@ -188,6 +188,14 @@
         padding-left: 10px;
       }
 
+      .highlight {
+        // box-shadow: 0 0 3px #ccc;
+        box-shadow: 0 1px 5px 5px grey;
 
+      }
+
+      .selectedType {
+        background-color: blue !important
+      }
 
 }

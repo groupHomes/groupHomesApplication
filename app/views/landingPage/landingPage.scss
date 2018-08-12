@@ -5,13 +5,17 @@
 height: 100%;
 
   #image {
-    background-image: url(/app/images/landing.jpg);
+    background-image: url(/app/images/landing_alt.jpg);
     background-size: cover;
     background-position: center center;
     // height: 100%
     top: 0;
     bottom:0;
     height:100%;
+  }
+
+  .selectedType {
+    background-color: blue !important
   }
 
 

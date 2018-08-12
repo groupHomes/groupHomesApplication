@@ -11,6 +11,17 @@ app.controller('ListingPreviewController', function($scope, dataService, CONSTAN
   dataService.get('facility', {id: $scope.userFacilityId}).then(function (response) {
     console.log('facility', response.data[0]);
     $scope.facility=response.data[0];
+    //insert link for med and lg photo
+    // $scope.facility.forEach(function (facility) {
+      if ($scope.facility.mediumPhoto === 'notFound_md.jpg') {
+        $scope.facility.mediumPhotoLink = "http://18.236.125.242/groupHomes/photos/notFound/notFound_md.jpg";
+        $scope.facility.largePhotoLink = "http://18.236.125.242/groupHomes/photos/notFound/notFound_lg.jpg"
+      } else {
+        $scope.facility.mediumPhotoLink = "http://18.236.125.242/groupHomes/photos/" + $scope.facility.id + "/" + $scope.facility.mediumPhoto
+        $scope.facility.largePhotoLink = "http://18.236.125.242/groupHomes/photos/" + $scope.facility.id + "/" + $scope.facility.largePhoto
+      }
+    // })
+
   });
 
   //get facility rooms info

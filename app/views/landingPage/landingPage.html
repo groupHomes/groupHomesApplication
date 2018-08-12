@@ -2,7 +2,7 @@
 
   <div id="nav" style="background-color:transparent;border:none;">
     <div style="display:flex;justify-content:space-between;padding-right:20px">
-      <a class="logo" href="#" style="font-size:20px; color:#FFF">Nursing Homes</a>
+      <a class="logo" href="#" style="font-size:20px; ">Nursing Homes</a>
       <div>
         <!-- <a ng-click=selectFacility() style="margin: 0 50px 0 0" ng-if="selectedUser !== undefined"><div class="nav-item">View Listing</div></a> -->
         <!-- <a ui-sref="listingCreate" style="margin: 0 50px 0 0" ng-if="user.role==='client'"><div class="nav-item">Add Listing</div></a> -->
@@ -10,22 +10,26 @@
         <!-- <a ui-sref="landingPage" style="margin: 0 50px 0 0" ng-if="user === undefined"><div class="nav-item">Login</div></a> -->
         <!-- <a ui-sref="listingSearch" style="margin: 0 50px 0 0"  ng-if="user.role==='admin'"><div class="nav-item">Search</div></a> -->
         <!-- <a ui-sref="landingPage" ng-if="(user.role === 'client') || (user.role === 'admin')"><div class="nav-item">Logout</div></a> -->
-        <a ui-sref="login"  ng-if="user === undefined" style="margin: 0 50px 0 0;color: #FFF;font-weight:bold"><div class="nav-item">Login</div></a>
+        <a ui-sref="login"  ng-if="user === undefined" style="margin: 0 50px 0 0;;font-weight:bold"><div class="nav-item">Login</div></a>
         <!-- <a ui-sref="listingSearch" style="margin: 0 50px 0 0"><div class="nav-item">Search</div></a> -->
-        <a ui-sref="landingPage" ng-if="user !== undefined" style="color: #FFF;font-weight:bold"><div class="nav-item">Logout</div></a>
-        <a ui-sref="signup" ng-if="user === undefined" style="color: #FFF;font-weight:bold"><div class="nav-item">Sign Up</div></a>
+        <a ui-sref="landingPage" ng-if="user !== undefined" style=";font-weight:bold"><div class="nav-item">Logout</div></a>
+        <a ui-sref="signup" ng-if="user === undefined" style=";font-weight:bold"><div class="nav-item">Sign Up</div></a>
       </div>
     </div>
 
   </div>
   <!-- <div id="login" layout="row"> -->
     <div id="image"></div>
-    <div style="width:500px;position:fixed;top:30%;left:50%;margin-left:-250px;color:#FFF;text-align:center;">
-      <h1 style="font-weight:bold">Find your nursing home</h1>
+    <div style="width:800px;position:fixed;top:20%;left:50%;margin-left:-400px;color:#FFF;text-align:center;">
+      <h1 style="font-weight:bold;font-size:57px;text-shadow: 1px 1px 2px black;">The Best Fit For Your Loved Ones</h1>
+      <div style="display:flex;justify-content: space-between;margin-bottom:15px">
+        <div style="width:50%;border:1px solid #FFF;line-height:45px;background-color:darkgrey;" ng-class="{'selectedType': searchType === 'AGC'}" ng-click="searchType='AGC'">Group Homes</div>
+        <div style="width:50%;border:1px solid #FFF;line-height:45px;background-color:darkgrey;" ng-class="{'selectedType': searchType === 'HIC'}" ng-click="searchType='HIC'">Residential Homes</div>
+      </div>
       <div class="input-group">
-        <input type="text" ng-model="searchText" class="form-control" placeholder="Search address..." style="line-height:50px;">
+        <input type="text" ng-model="searchText" class="form-control" placeholder="Search address..." style="line-height:50px;height:50px">
         <span class="input-group-btn">
-          <button class="btn btn-default" style="border-radius: 0 .25em .25em 0;line-height:50px;border: 1px solid #ced4da" type="button" ng-click="submit(searchText)">Search!</button>
+          <button class="btn btn-default" style="border-radius: 0 .25em .25em 0;height:50px;border: 1px solid #ced4da" type="button" ng-click="submit(searchText)">Search!</button>
         </span>
       </div><!-- /input-group -->
       <!-- <md-button ng-click="submit(search)"style="float:right">Search</md-button> -->

@@ -4,6 +4,7 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
   var map;
   var marker;
   $scope.markerArr = [];
+  $scope.hospitalMarkerArr = []
   var layerHospital;
   var layerResidential;
   var layerPersonal;
@@ -34,20 +35,46 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
   //set user to scope
   $scope.user = userService.get();
 
+  //hospital array
+  $scope.hospitalArr = []
+
   //check for previous route
   $rootScope.$on('$locationChangeStart', function (event, current, previous) {
     console.log("Previous URL: " + previous);
-    if(previous === 'http://18.236.125.242/homes/dist/#/'){ //if previous route is home search page, get search text and results
-    // if(previous === 'http://localhost:3000/app/#/'){
-      $scope.search = searchService.get();
-      $scope.facilities = $scope.search.searchResult;
-      $scope.searchText = $scope.search.searchText;
+    // if(previous === 'http://18.236.125.242/homes/dist/#/'){ //if previous route is home search page, get search text and results
+    if(previous === 'http://localhost:3000/app/#/'){
+      let search = searchService.get();
+      $scope.facilities = search.searchResult;
+      $scope.searchType = search.searchType;
+
+      createHospitalArr();
+      createImageLink()
+
+
+      $scope.searchText = search.searchText;
       $scope.initMap();
     } else { //if previous not home search page, then start with empty map
       $scope.facilities=[];
       $scope.initMap();
     }
   });
+
+  function createHospitalArr() {
+    //remove all hospital type and create array of type hospital
+    $scope.hospitalArr = $scope.facilities.filter(x => x.type ==='HOS');
+    $scope.facilities = $scope.facilities.filter(x => x.type !=='HOS');
+  }
+
+  function createImageLink() {
+    //instead photo link
+    $scope.facilities.forEach(function (facility) {
+      if (facility.smallPhoto !== 'notFound_sm.jpg') {
+        facility.smallPhotoLink = "http://18.236.125.242/groupHomes/photos/" + facility.id + "/" + facility.smallPhoto
+      } else {
+        facility.smallPhotoLink = "http://18.236.125.242/groupHomes/photos/notFound/notFound_sm.jpg"
+      }
+    })
+  }
 //
 //
 //   $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
@@ -94,7 +121,8 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
   // });
 
   //search for facility
-  $scope.submit = function (search) {
+  $scope.submit = function (search, searchType) {
+    console.log(search,searchType)
     // clear old markers and facilities
     $scope.facilities = [];
      for (var i = 0; i < $scope.markerArr.length; i++) {
@@ -103,12 +131,15 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
     $scope.markerArr.length=0;
 
     //get new search results
-    dataService.search('facility', {address:search}).then(function (response) {
+    dataService.search('facility', {address:search, type: $scope.searchType}).then(function (response) {
       if (response.data.length === 0){ //no results found
         $scope.noResults = true;
       } else { //if results found, set facilities and build markers
         $scope.noResults = false;
         $scope.facilities = response.data;
+        console.log($scope.facilities)
+        createHospitalArr();
+        createImageLink()
         buildMarkers();
       }
     });
@@ -177,7 +208,7 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
   //   facilityService.set($scope.facilities[i]);
   //   $state.go('listingView');
   // };
-  // 
+  //
   // $scope.getPreferredList = function () {
   //   $state.go('listingPreferred');
   // };
@@ -189,6 +220,7 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
     });
     buildInfowindow();
     buildMarkers();
+    buildHospitalMarker();
   };
 
   function buildInfowindow() {
@@ -239,6 +271,40 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
     });
   }
 
+  function buildHospitalMarker() {
+    //hover over markers on map to open infowindow
+    for (i = 0; i < $scope.hospitalArr.length; i++) {
+      //create a marker for each facaility
+      marker = new google.maps.Marker({
+        position: new google.maps.LatLng($scope.hospitalArr[i].lat, $scope.hospitalArr[i].lng),
+        map: map,
+        icon: "http://maps.google.com/mapfiles/ms/icons/hospitals.png"
+      });
+
+      //create an array of these markers
+      $scope.hospitalMarkerArr.push(marker);
+
+      //mouseover on map markers to open infobox
+      google.maps.event.addListener(marker, 'mouseover', (function(marker, i) {
+        return function() {
+          //get the specific info for each facility
+          var content = getHospitalContent(i);
+          //set the content to the infowindow
+          infowindow.setContent(content[0]);
+          //open the infowindow
+          infowindow.open(map, marker);
+        };
+      })(marker, i));
+
+      //close infobox on mouseout
+      google.maps.event.addListener(marker, 'mouseout', (function (marker, i) {
+        return function() {
+          infowindow.close();
+        };
+      })(marker, i));
+    }
+  }
+
   function buildMarkers() {
     //hover over markers on map to open infowindow
     for (i = 0; i < $scope.facilities.length; i++) {
@@ -264,6 +330,7 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
           infowindow.setContent(content[0]);
           //open the infowindow
           infowindow.open(map, marker);
+          addHighlightCard(i);
         };
       })(marker, i));
 
@@ -271,6 +338,8 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
       google.maps.event.addListener(marker, 'mouseout', (function (marker, i) {
         return function() {
           infowindow.close();
+          removeHighlightCard(i)
+
         };
       })(marker, i));
 
@@ -299,8 +368,7 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
     var content = '<div id="iw-container" ng-click="viewFacility(' + i + ')">' +
              '<div class="iw-title">'+facility.name+'</div>' +
              '<div class="iw-content">' +
-               '<img src="http://18.236.125.242/groupHomes/photos/' + facility.id + '/' + facility.smallPhoto + '" style="width:45%">' +
-               '<div class="iw-subTitle">'+facility.address+ ', ' +facility.city+', '+facility.state+', '+facility.zip+'</div>' +
+               '<img src="' + facility.smallPhotoLink + '" style="width:45%">' +
                '<div class="iw-subTitle">Total Beds: ' + facility.beds + '</div>' +
 
                '<p>' + facility.specialHmFeature + '</p>' +
@@ -312,4 +380,41 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
     var compiled = $compile(content)($scope);
     return compiled;
   }
+
+  //set hospital content info window
+  function getHospitalContent(i) {
+    var hospital = $scope.hospitalArr[i];
+    var content = '<div id="iw-container" ng-click="viewFacility(' + i + ')">' +
+             '<div class="iw-title">'+hospital.name+'</div>' +
+             '<div class="iw-content">' +
+               // '<img src="' + hospital.smallPhotoLink + '" style="width:45%">' +
+               '<div class="iw-subTitle">City: ' + hospital.city + ', Zip: ' + hospital.zip + '</div>' +
+
+               // '<p>' + hospital.specialHmFeature + '</p>' +
+               // '<p>Level 1 Price: $' + facility.level1Price + '<br>'+
+               // 'Level 2 Price: $' + facility.level2Price + '</p>'+
+             '</div>' +
+             '<div class="iw-bottom-gradient"></div>' +
+           '</div>';
+    var compiled = $compile(content)($scope);
+    return compiled;
+  }
+
+  function addHighlightCard(i) {
+    // console.log($scope.facilities[i])
+    let cardId = "card-" + i
+    let card = document.getElementById(cardId)
+    card.scrollIntoView({behavior: "smooth"});
+    card.scrollTop += 60;
+    card.classList.add('highlight')
+  }
+
+  function removeHighlightCard(i) {
+    let cardId = "card-" + i
+    let card = document.getElementById(cardId)
+    // card.scrollIntoView({behavior: "smooth"});
+    // card.scrollTop += 60;
+    card.classList.remove('highlight')
+  }
+
 });
