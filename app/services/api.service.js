@@ -42,7 +42,6 @@ app.service('dataService', function($http, $q, CONSTANTS, $httpParamSerializerJQ
 
   service.edit = function(dataType, dataObj) {
     var action = CONSTANTS.api.actions[dataType].edit;
-    // var deferred = $q.defer();
     return $http({
       url: base + path + query + action,
       method: 'POST',
@@ -51,13 +50,26 @@ app.service('dataService', function($http, $q, CONSTANTS, $httpParamSerializerJQ
         'Content-Type': 'application/x-www-form-urlencoded'
       }
     });
-    // }).success (function(data) {
-    //   deferred.resolve(data);
-    // }).error(function(error) {
-    //   deferred.reject();
-    // });
-    // return deferred.promise;
   };
+
+
+  // service.edit = function(dataType, dataObj) {
+  //   var action = CONSTANTS.api.actions[dataType].edit;
+  //   var deferred = $q.defer();
+  //   $http({
+  //     url: base + path + query + action,
+  //     method: 'POST',
+  //     data: $httpParamSerializerJQLike(dataObj),
+  //     headers: {
+  //       'Content-Type': 'application/x-www-form-urlencoded'
+  //     }
+  //   }).success (function(data) {
+  //     deferred.resolve(data);
+  //   }).error(function(error) {
+  //     deferred.reject();
+  //   });
+  //   return deferred.promise;
+  // };
 
   // service.user = function(dataType, dataObj) {
   //   var action = CONSTANTS.api.actions[dataType].loginUser;

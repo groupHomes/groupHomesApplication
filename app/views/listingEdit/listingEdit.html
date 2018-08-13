@@ -164,12 +164,12 @@
                 <md-input-container>
                   <div style="display:inline-flex;margin-bottom:20px;margin-top:10px">
                     <div style="width:110px">
-                      <md-radio-group ng-model="bed.availability" layout="row">
+                      <md-radio-group ng-model="bed.availability" layout="row" ng-change="changeAvail(bed.availability, bed.bedNumber, room.roomNumber)">
                         <md-radio-button value="Available">Available</md-radio-button>
                       </md-radio-group>
                     </div>
                     <div style="width:110px">
-                      <md-radio-group ng-model="bed.availability" layout="row" >
+                      <md-radio-group ng-model="bed.availability" layout="row" ng-change="changeAvail(bed.availability, bed.bedNumber, room.roomNumber)">
                         <md-radio-button value="Occupied" class="md-primary">Occupied</md-radio-button>
                       </md-radio-group>
                     </div>
@@ -187,7 +187,7 @@
                 </md-input-container>
                 <md-input-container style="margin:0" ng-show="bed.availability==='Available'">
                   <label>Enter date</label>
-                  <md-datepicker ng-model="bed.availabilitydate" ng-init="bed.availabilitydate=todayDate"></md-datepicker>
+                  <md-datepicker ng-model="bed.availabilitydate"></md-datepicker>
                 </md-input-container>
               </div>
               <div layout="row" layout-align="space-between center" ng-show="bed.bedlevel==='Custom'">
