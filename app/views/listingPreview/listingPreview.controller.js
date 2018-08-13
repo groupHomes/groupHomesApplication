@@ -10,7 +10,16 @@ app.controller('ListingPreviewController', function($scope, dataService, CONSTAN
   //get user facility info
   dataService.get('facility', {id: $scope.userFacilityId}).then(function (response) {
     console.log('facility', response.data[0]);
-    $scope.facility=response.data[0];
+    $scope.facility=response.data[0]; //FIXME lat and lng not returned with object
+    //get closest hospital info
+    dataService.get('hospital', {lat: $scope.facility.lat, lng:$scope.facility.lng}).then(function (response) {
+      console.log(response)
+      $scope.hospitals = response.data;
+    })
+
+    //init map
+    $scope.initDetailMap();
+
     //insert link for med and lg photo
     // $scope.facility.forEach(function (facility) {
       if ($scope.facility.mediumPhoto === 'notFound_md.jpg') {
@@ -40,6 +49,29 @@ app.controller('ListingPreviewController', function($scope, dataService, CONSTAN
   //     }
   //   });
   // });
+
+
+
+
+  $scope.initDetailMap = function () {
+    console.log($scope.facility)
+    map = new google.maps.Map(document.getElementById('detailmap'), {
+        center: { lat: parseFloat($scope.facility.lat), lng: parseFloat($scope.facility.lng) },
+        zoom: 15
+    });
+
+    //build marker
+    var marker = new google.maps.Marker({
+      position: new google.maps.LatLng(parseFloat($scope.facility.lat), parseFloat($scope.facility.lng)),
+      map: map
+    });
+
+    var bounds = new google.maps.LatLngBounds();
+    bounds.extend(marker.position);
+  };
+
+
+
 
   //get all facility photos
   dataService.get('photo', {id: $scope.userFacilityId}).then(function (response) {

@@ -17,4 +17,6 @@ app.controller('HeaderNavController', function($scope, $http, userService, $loca
   $scope.currentPage=$location.path();
 
   $scope.isLoggedIn();
+  // console.log( searchService.get() )
+
 });

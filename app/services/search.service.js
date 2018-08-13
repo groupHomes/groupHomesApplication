@@ -1,5 +1,9 @@
 app.factory('searchService', function() {
 
+
+  var selectedSearch;
+
+
   function set(data) {
     selectedSearch = data;
     console.log("set", selectedSearch);
@@ -9,6 +13,7 @@ app.factory('searchService', function() {
   }
 
   function get() {
+
     return selectedSearch;
     // return localStorageService.get('selStudent');
   }

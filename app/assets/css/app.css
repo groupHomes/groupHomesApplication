@@ -37,7 +37,7 @@ body {
 }
 
 #landingPage .selectedType {
-  background-color: blue !important;
+  background-color: #0f0f94 !important;
 }
 
 #nav {
@@ -402,6 +402,10 @@ body {
   -o-background-size: cover;
 }
 
+#listing-preview #detailmap {
+  height: 100%;
+}
+
 #listing-view header {
   width: 100%;
   height: 600px;
@@ -607,7 +611,7 @@ body {
 }
 
 #listing-search .selectedType {
-  background-color: blue !important;
+  background-color: #0f0f94 !important;
 }
 
 #signup {

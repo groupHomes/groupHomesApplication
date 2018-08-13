@@ -38,26 +38,46 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
   //hospital array
   $scope.hospitalArr = []
 
-  //check for previous route
-  $rootScope.$on('$locationChangeStart', function (event, current, previous) {
-    console.log("Previous URL: " + previous);
-    // if(previous === 'http://18.236.125.242/homes/dist/#/'){ //if previous route is home search page, get search text and results
-    if(previous === 'http://localhost:3000/app/#/'){
-      let search = searchService.get();
+
+  function setSearch() {
+    let search = searchService.get();
+
+    //if no search text, then start with empty map
+    if (search === undefined) {
+      $scope.facilities=[];
+      $scope.initMap();
+    } else { //else load search results and init map
       $scope.facilities = search.searchResult;
       $scope.searchType = search.searchType;
 
       createHospitalArr();
       createImageLink()
 
-
       $scope.searchText = search.searchText;
       $scope.initMap();
-    } else { //if previous not home search page, then start with empty map
-      $scope.facilities=[];
-      $scope.initMap();
     }
-  });
+  }
+
+  //check for previous route
+  // $rootScope.$on('$locationChangeStart', function (event, current, previous) {
+  //   console.log("Previous URL: " + previous);
+  //   // if(previous === 'http://18.236.125.242/homes/dist/#/'){ //if previous route is home search page, get search text and results
+  //   if(previous === 'http://localhost:3000/app/#/'){
+  //     let search = searchService.get();
+  //     $scope.facilities = search.searchResult;
+  //     $scope.searchType = search.searchType;
+  //
+  //     createHospitalArr();
+  //     createImageLink()
+  //
+  //
+  //     $scope.searchText = search.searchText;
+  //     $scope.initMap();
+  //   } else { //if previous not home search page, then start with empty map
+  //     $scope.facilities=[];
+  //     $scope.initMap();
+  //   }
+  // });
 
   function createHospitalArr() {
     //remove all hospital type and create array of type hospital
@@ -131,12 +151,13 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
     $scope.markerArr.length=0;
 
     //get new search results
-    dataService.search('facility', {address:search, type: $scope.searchType}).then(function (response) {
+    dataService.search('facility', {address:search, type: searchType}).then(function (response) {
       if (response.data.length === 0){ //no results found
         $scope.noResults = true;
       } else { //if results found, set facilities and build markers
         $scope.noResults = false;
         $scope.facilities = response.data;
+        searchService.set({searchText: search, searchResult: response.data, searchType: searchType});
         console.log($scope.facilities)
         createHospitalArr();
         createImageLink()
@@ -416,5 +437,8 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
     // card.scrollTop += 60;
     card.classList.remove('highlight')
   }
+
+
+  setSearch()
 
 });

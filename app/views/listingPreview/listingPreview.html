@@ -7,11 +7,16 @@
     <md-button class="md-raised md-cornered" ng-click="showAdvanced($event)" style="position:absolute;right:0;height:0">View Photos</md-button>
   </header> -->
   <div style="display:flex">
-    <div style="position: relative; width: 50%; height: 500px; overflow: hidden;border:1px solid white;box-sizing:content-box">
-      <img style="min-height: 100%; " ng-src="{{facility.mediumPhotoLink}}">
+    <div style="width: 50%; height: 500px; border:1px solid white;box-sizing:content-box">
+      <img style="height: 100%; width:100%;object-fit: cover" ng-src="{{facility.largePhotoLink}}">
     </div>
-    <div style="overflow:hidden;width:30%;height:250px;position:relative;border:1px solid white;box-sizing:content-box">
-      <div id="detailmap" style=""></div>
+    <div style="display:flex; flex-direction:column;width:30%">
+      <div style="height:250px;border:1px solid white;box-sizing:content-box">
+        <div id="detailmap" style=""></div>
+      </div>
+      <div style="height: 250px; border:1px solid white;">
+        <img style="height: 100%; width:100%;object-fit: cover" ng-src="{{facility.mediumPhotoLink}}">
+      </div>
     </div>
     <div style="height:500px;border-left:1px solid white;border-bottom:1px solid white;background-color:lightgrey;box-sizing:content-box">
       <div style="height:10%;font-size:25px;display:flex;justify-content:center;align-items:center;margin-top:20px">Closest Hospitals</div>
@@ -22,9 +27,9 @@
       </div>
     </div>
   </div>
-  <div style="display:flex">
-    <div ng-repeat="facilityPhoto in facilityPhotos" style="height:100px;width:auto;border:1px solid white; box-sizing:content-box;">
-      <img ng-src="http://18.236.125.242/groupHomes/photos/{{facility.id}}/{{facilityPhoto.smallPhoto}}" style="height:100%;">
+  <div style="display:flex;overflow-x:scroll">
+    <div ng-repeat="facilityPhoto in facilityPhotos track by $index" style="height:100px;width:auto;border:1px solid white; box-sizing:content-box;">
+      <img ng-click="showAdvanced($event, $index)" ng-src="http://18.236.125.242/groupHomes/photos/{{facility.id}}/{{facilityPhoto.smallPhoto}}" style="height:100%;">
     </div>
   </div>
   <div style="display:flex">

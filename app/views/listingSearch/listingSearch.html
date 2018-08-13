@@ -8,7 +8,7 @@
         </div> -->
         <div style="padding:30px;display:flex">
           <div class="input-group" style="height:45px;">
-            <input type="text" ng-model="searchText" class="form-control" placeholder="Search address..." style="line-height:50px;">
+            <input type="text" ng-model="searchText" class="form-control" placeholder="Search address..." style="height:45px;">
             <span class="input-group-btn">
               <button class="btn btn-default" style="border-radius: 0 .25em .25em 0;height:45px;border: 1px solid #ced4da" type="button" ng-click="submit(searchText, searchType)">Search!</button>
             </span>
@@ -16,8 +16,8 @@
           <button class="btn btn-default" style="border-radius: .25em;height:45px;border: 1px solid #ced4da; margin-left:20px;" type="button" ng-disabled="compareArr.length===0" ng-click="compareFacilities()">Compare</button>
         </div>
         <div style="display:flex;margin-bottom:15px">
-          <div style="width:165px;border-radius: 4px;text-align: center;line-height:45px; margin-left: 30px;background-color:darkgrey;" ng-class="{'selectedType': searchType === 'AGC'}" ng-click="searchType='AGC'">Group Homes</div>
-          <div style="width:165px;border-radius: 4px;text-align: center;line-height:45px; margin-left: 30px;background-color:darkgrey;" ng-class="{'selectedType': searchType === 'HIC'}" ng-click="searchType='HIC'">Residential Homes</div>
+          <div style="width:165px;border-radius: 4px;text-align: center;line-height:45px; margin-left: 30px;background-color:darkgrey;color:#FFF" ng-class="{'selectedType': searchType === 'AGC'}" ng-click="searchType='AGC'" ng-model="searchType">Group Homes</div>
+          <div style="width:165px;border-radius: 4px;text-align: center;line-height:45px; margin-left: 30px;background-color:darkgrey;color:#FFF" ng-class="{'selectedType': searchType === 'HIC'}" ng-click="searchType='HIC'" ng-model="searchType">Residential Homes</div>
         </div>
         <div ng-if="user.role==='user'" style="padding-right:30px; text-align:right"><a ui-sref="listingPreferred">Saved List</a></div>
         <div ng-show="noResults" style="color:red; padding-left:30px">No Results Found. Please try again.</div>

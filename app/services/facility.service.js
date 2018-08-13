@@ -1,5 +1,8 @@
 app.factory('facilityService', function() {
 
+  var selectedFacility;
+
+
   function set(data) {
     selectedFacility = data;
     console.log("set",selectedFacility);
