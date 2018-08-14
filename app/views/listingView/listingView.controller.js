@@ -138,6 +138,9 @@ app.controller('ListingViewController', function($scope, $uibModal, dataService,
     dataService.get('hospital', {lat: $scope.facility.lat, lng:$scope.facility.lng}).then(function (response) {
       console.log(response)
       $scope.hospitals = response.data;
+      $scope.hospitals.forEach(function (hospital) {
+          hospital.distance = (hospital.distance).toFixed(2)
+      })
     })
 
 
