@@ -40,6 +40,7 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
 
 
   function setSearch() {
+    console.log('setting search')
     let search = searchService.get();
 
     //if no search text, then start with empty map
@@ -50,6 +51,7 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
       $scope.facilities = search.searchResult;
       $scope.searchType = search.searchType;
 
+      console.log($scope.facilities)
       createHospitalArr();
       createImageLink()
 
@@ -83,6 +85,7 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
     //remove all hospital type and create array of type hospital
     $scope.hospitalArr = $scope.facilities.filter(x => x.type ==='HOS');
     $scope.facilities = $scope.facilities.filter(x => x.type !=='HOS');
+    console.log($scope.hospitalArr)
   }
 
   function createImageLink() {
@@ -145,10 +148,17 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
     console.log(search,searchType)
     // clear old markers and facilities
     $scope.facilities = [];
+    $scope.hospitalArr = [];
      for (var i = 0; i < $scope.markerArr.length; i++) {
       $scope.markerArr[i].setMap(null);
     }
     $scope.markerArr.length=0;
+
+    for (var i = 0; i < $scope.hospitalMarkerArr.length; i++) {
+      $scope.hospitalMarkerArr[i].setMap(null);
+    }
+    $scope.markerArr.length=0;
+
 
     //get new search results
     dataService.search('facility', {address:search, type: searchType}).then(function (response) {
@@ -162,6 +172,7 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
         createHospitalArr();
         createImageLink()
         buildMarkers();
+        buildHospitalMarker();
       }
     });
   };
@@ -235,6 +246,8 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
   // };
 
   $scope.initMap = function () {
+    console.log('getting map')
+    console.log($scope.facilities, $scope.hospitalArr)
     map = new google.maps.Map(document.getElementById('map'), {
         center: { lat: initLat, lng: initLng },
         zoom: 11
