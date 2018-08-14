@@ -355,6 +355,19 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
       var bounds = new google.maps.LatLngBounds();
       bounds.extend(marker.position);
 
+      //click on map markers to open infobox
+      google.maps.event.addListener(marker, 'click', (function(marker, i) {
+        return function() {
+          //get the specific info for each facility
+          var content = getInfoContent(i);
+          //set the content to the infowindow
+          infowindow.setContent(content[0]);
+          //open the infowindow
+          infowindow.open(map, marker);
+          addHighlightCardNoScroll(i);
+        };
+      })(marker, i));
+
       //mouseover on map markers to open infobox
       google.maps.event.addListener(marker, 'mouseover', (function(marker, i) {
         return function() {
@@ -377,17 +390,17 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
         };
       })(marker, i));
 
-      //route to facility on click on marker
-      google.maps.event.addListener(marker, 'click', (function (marker, i) {
-        return function() {
-          $scope.viewFacility(i);
-        };
-      })(marker, i));
+      // //route to facility on click on marker
+      // google.maps.event.addListener(marker, 'click', (function (marker, i) {
+      //   return function() {
+      //     $scope.viewFacility(i);
+      //   };
+      // })(marker, i));
     }
 
     //function to trigger mouseover event on marker
     $scope.showInfo = function (facility, index) {
-      google.maps.event.trigger($scope.markerArr[index], 'mouseover');
+      google.maps.event.trigger($scope.markerArr[index], 'click');
     };
 
     //function to trigger mouseout event on marker
@@ -440,6 +453,12 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
     let card = document.getElementById(cardId)
     card.scrollIntoView({behavior: "smooth"});
     card.scrollTop += 60;
+    card.classList.add('highlight')
+  }
+
+  function addHighlightCardNoScroll(i){
+    let cardId = "card-" + i
+    let card = document.getElementById(cardId)
     card.classList.add('highlight')
   }
 
