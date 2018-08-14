@@ -1,5 +1,6 @@
 app.controller('ListingViewController', function($scope, $uibModal, dataService, CONSTANTS, $mdDialog, userService, facilityService) {
   console.log('listingView');
+  document.body.scrollTop = document.documentElement.scrollTop = 0
 
   // $scope.loadAll = function() {
   //   dataService.get('patientUpload', {'PATID' : '1'}).then(function(data) {
