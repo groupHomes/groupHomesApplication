@@ -250,7 +250,7 @@
                 <div class="" style="width:25%;line-height:35px;">
                   {{room.roomBedCount}}
                 </div>
-                <div class="" style="width:25%;line-height:35px;">
+                <div class="" style="width:25%;line-height:35px;color:red;font-weight:bold" ng-class="{'not-available': room.bedsAvailable === '0'}">
                   {{room.bedsAvailable}}
                 </div>
                 <div class="" style="width:25%;line-height:35px;">

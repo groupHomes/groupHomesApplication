@@ -205,6 +205,11 @@ body {
   padding: 0 10px 6px;
 }
 
+#listing-edit .not-available {
+  color: black !important;
+  font-weight: normal !important;
+}
+
 #listing-preferred {
   /* Always set the map height explicitly to define the size of the div
     * element that contains the map. */
