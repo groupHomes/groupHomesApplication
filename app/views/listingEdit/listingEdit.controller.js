@@ -28,14 +28,18 @@ app.controller('ListingEditController', function($scope, $q, $location, $http, $
   });
 
   $scope.initRoomConfig = function () {
+    $scope.totalRoomBedCount=0;
+    $scope.totalBedsAvailable=0;
     $scope.roomIndexes=[];
 
     dataService.get('facilityRooms', {id: $scope.userFacilityId}).then(function (response) {
-      // console.log(response.data);
+      console.log(response.data);
       $scope.rooms = response.data;
       for (let i = 0; i < $scope.rooms.length; i++) {
         // $scope.rooms[i].buildBedCard=false;
         $scope.roomIndexes.push($scope.rooms[i]);
+        $scope.totalRoomBedCount += $scope.rooms[i].roomBedCount;
+        $scope.totalBedsAvailable += parseInt($scope.rooms[i].bedsAvailable);
       }
 
       dataService.get('roomBed', {id: $scope.userFacilityId}).then(function (response) {

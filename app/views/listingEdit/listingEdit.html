@@ -259,7 +259,19 @@
               </div>
             </div>
           </div>
-
+          <div class="row" style="text-align:center">
+            <div class="" style="width:25%;line-height:35px;">
+              Total: 
+            </div>
+            <div class="" style="width:25%;line-height:35px;border-top:1px solid black">
+              {{totalRoomBedCount}}
+            </div>
+            <div class="" style="width:25%;line-height:35px;color:red;font-weight:bold;border-top:1px solid black" ng-class="{'not-available': room.bedsAvailable === '0'}">
+              {{totalBedsAvailable}}
+            </div>
+            <div class="" style="width:25%;line-height:35px;">
+            </div>
+          </div>
         </md-card>
       </md-content>
 </div>
