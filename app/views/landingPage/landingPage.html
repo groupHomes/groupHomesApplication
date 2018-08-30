@@ -23,8 +23,8 @@
     <div style="width:800px;position:fixed;top:20%;left:50%;margin-left:-400px;color:#FFF;text-align:center;">
       <h1 style="font-weight:bold;font-size:57px;text-shadow: 1px 1px 2px black;">The Best Fit For Your Loved Ones</h1>
       <div style="display:flex;justify-content: space-between;margin-bottom:15px">
-        <div style="width:50%;border:1px solid #FFF;line-height:45px;background-color:darkgrey;" ng-class="{'selectedType': searchType === 'AGC'}" ng-click="searchType='AGC'">Residential Care</div>
-        <div style="width:50%;border:1px solid #FFF;line-height:45px;background-color:darkgrey;" ng-class="{'selectedType': searchType === 'HIC'}" ng-click="searchType='HIC'">Individual Residential Care</div>
+        <div style="width:50%;border:1px solid #FFF;line-height:45px;background-color:darkgrey;" ng-class="{'selectedType': searchGroupHomeAGC === true}" ng-click="searchGroupHomeAGC=true;searchGroupHomeHIC=false">Residential Care</div>
+        <div style="width:50%;border:1px solid #FFF;line-height:45px;background-color:darkgrey;" ng-class="{'selectedType': searchGroupHomeHIC === true}" ng-click="searchGroupHomeHIC=true;searchGroupHomeAGC=false">Individual Residential Care</div>
       </div>
       <div class="input-group">
         <input type="text" ng-model="searchText" ng-keyup="$event.keyCode == 13 ? submit(searchText) : null" class="form-control" placeholder="Search address..." style="line-height:50px;height:50px">

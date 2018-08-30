@@ -42,6 +42,7 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
   function setSearch() {
     console.log('setting search')
     let search = searchService.get();
+    $scope.searchFilterObj = search.searchFilterObj
 
     //if no search text, then start with empty map
     if (search === undefined) {
@@ -49,7 +50,8 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
       $scope.initMap();
     } else { //else load search results and init map
       $scope.facilities = search.searchResult;
-      $scope.searchType = search.searchType;
+
+      console.log(search)
 
       console.log($scope.facilities)
       createHospitalArr();
@@ -144,8 +146,8 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
   // });
 
   //search for facility
-  $scope.submit = function (search, searchType) {
-    console.log(search,searchType)
+  $scope.submit = function (search) {
+    console.log(search, $scope.searchFilterObj)
     // clear old markers and facilities
     $scope.facilities = [];
     $scope.hospitalArr = [];
@@ -159,15 +161,79 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
     }
     $scope.markerArr.length=0;
 
+    var searchGender;
+    var searchRoomType;
+    var searchFacilityType;
+    var searchPrice;
+
+    //setting search gender
+    if ($scope.searchFilterObj.searchGenderMale && $scope.searchFilterObj.searchGenderFemale) {
+      searchGender = 'Female, Male'
+    } else if($scope.searchFilterObj.searchGenderMale) {
+      searchGender = 'Male'
+    } else {
+      searchGender = 'Female'
+    }
+
+    //setting room type
+    if ($scope.searchFilterObj.searchRoomTypeShared && $scope.searchFilterObj.searchRoomTypePrivate) {
+      searchRoomType = 'Shared, Private'
+    } else if($scope.searchFilterObj.searchRoomTypeShared) {
+      searchRoomType = 'Shared'
+    } else {
+      searchRoomType = 'Private'
+    }
+
+    //setting group home type
+    if ($scope.searchFilterObj.searchGroupHomeAGC && $scope.searchFilterObj.searchGroupHomeHIC) {
+      searchFacilityType = 'AGC, HIC'
+    } else if($scope.searchFilterObj.searchGroupHomeAGC) {
+      searchFacilityType = 'AGC'
+    } else {
+      searchFacilityType = 'HIC'
+    }
+
+    //setting prie
+    switch ($scope.searchFilterObj.searchPrice) {
+      case '< $1000':
+        searchPrice = 1000;
+        break;
+      case '< $2000':
+        searchPrice = 2000;
+        break;
+      case '< $3000':
+        searchPrice = 3000;
+        break;
+      case '< $4000':
+        searchPrice = 4000;
+        break;
+      case 'Any Price':
+        searchPrice = 9999;
+        break;
+      default:
+    }
+
+    //creating search obj to be passed into API
+    var searchObj = {
+      address: search,
+      // type: searchType
+      facilitytype: searchFacilityType,
+      roomtype: searchRoomType,
+      gender: searchGender,
+      price: searchPrice
+    }
+
+    console.log('search obj to be passed to api', searchObj)
 
     //get new search results
-    dataService.search('facility', {address:search, type: searchType}).then(function (response) {
+    dataService.search('facility', searchObj).then(function (response) {
+      console.log('search results', response)
       if (response.data.length === 0){ //no results found
         $scope.noResults = true;
       } else { //if results found, set facilities and build markers
         $scope.noResults = false;
         $scope.facilities = response.data;
-        searchService.set({searchText: search, searchResult: response.data, searchType: searchType});
+        // searchService.set({searchText: search, searchResult: response.data, searchType: searchType});
         console.log($scope.facilities)
         createHospitalArr();
         createImageLink()

@@ -612,11 +612,15 @@ body {
 }
 
 #listing-search .highlight {
-  box-shadow: 0 1px 5px 5px dodgerblue;
+  box-shadow: 0 1px 5px 5px grey;
 }
 
 #listing-search .selectedType {
   background-color: #0f0f94 !important;
+}
+
+#listing-search label {
+  font-weight: normal;
 }
 
 #signup {

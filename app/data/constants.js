@@ -8,7 +8,8 @@ app.constant('CONSTANTS', {
         get: 'getLTCFacilities',
         getAll: 'getAllFacilities',
         edit: 'editFacility',
-        search: 'getAllFacilitiesByAddress'
+        // search: 'getAllFacilitiesByAddress',
+        search: 'getAllFacilitiesByAddressV2',
       },
       facilityRooms: {
         get: 'getFacilityRooms',

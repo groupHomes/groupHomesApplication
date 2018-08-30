@@ -4,21 +4,47 @@ app.controller('LandingPageController', function($scope, $state, dataService, se
   console.log( $scope.user)
 
   // $scope.noResults = false
-  $scope.searchType = 'AGC'
+  $scope.searchGroupHomeAGC = true;
 
   //search address
   $scope.submit = function (search) {
     console.log('search address: ',search);
 
+    var searchType;
+
+    if ($scope.searchGroupHomeAGC) {
+      searchType = 'AGC'
+      $scope.searchGroupHomeHIC = false;
+    } else {
+      searchType = 'HIC'
+      $scope.searchGroupHomeAGC = false;
+    }
+
     let searchObj = {
       address: search,
-      type: $scope.searchType
+      // type: searchType
+      facilitytype: searchType,
+      roomtype: 'Shared, Private',
+      gender: 'Female, Male',
+      price: 9999
     };
 
-    dataService.search('facility',searchObj).then(function (response) {
+    dataService.search('facility', searchObj).then(function (response) {
       console.log(response.data);
       if (response.data.length !== 0 ) {
-        searchService.set({searchText: search, searchResult: response.data, searchType: $scope.searchType});
+
+        let searchFilterObj = {
+          searchText: search,
+          searchGroupHomeHIC: $scope.searchGroupHomeHIC,
+          searchGroupHomeAGC: $scope.searchGroupHomeAGC,
+          searchGenderMale: true,
+          searchGenderFemale: true,
+          searchRoomTypePrivate: true,
+          searchRoomTypeShared: true,
+          searchPrice: 'Any Price'
+        }
+
+        searchService.set({searchText: search, searchResult: response.data, searchFilterObj: searchFilterObj});
         $state.go('listingSearch');
         $scope.noResults = false;
       } else {

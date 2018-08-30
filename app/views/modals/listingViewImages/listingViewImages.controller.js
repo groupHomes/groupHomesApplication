@@ -1,5 +1,6 @@
-app.controller('ListingViewImagesController', function($scope, dataService, facility, CONSTANTS, $mdDialog, facilityPhotos, selectedPhotoIndex) {
+app.controller('ListingViewImagesController', function($scope, $uibModalInstance, dataService, facility, CONSTANTS, $mdDialog, facilityPhotos, selectedPhotoIndex) {
   console.log('listingViewImages');
+
 
   // $scope.files=[
   //   "http://52.37.19.44/examApp/api.php?x=getPatientUploadFile&KEYID=1",

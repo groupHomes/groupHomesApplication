@@ -18,12 +18,15 @@
         <img style="height: 100%; width:100%;object-fit: cover" ng-src="{{facility.mediumPhotoLink}}">
       </div>
     </div>
-    <div style="height:500px;border-left:1px solid white;border-bottom:1px solid white;background-color:lightgrey;box-sizing:content-box">
-      <div style="height:10%;font-size:25px;display:flex;justify-content:center;align-items:center;margin-top:20px">Closest Hospitals</div>
-      <div ng-repeat="hospital in hospitals" style="height:30%;padding:20px">
-        <div style="font-size:18px;font-weight:bold">{{hospital.name}}</div>
-        <div>City: {{hospital.city}}</div>
-        <div>Distance: {{hospital.distance}}</div>
+    <div style="max-width: 30%; height:501px;border-left:1px solid white;border-bottom:1px solid white;background-color:lightgrey;box-sizing:content-box">
+      <div style="height:10%;font-size:25px;display:flex;justify-content:center;align-items:center;">Closest Hospitals</div>
+      <div ng-repeat="hospital in hospitals" style="height:30%;padding:20px;display:flex;justify-content: space-between">
+        <div style="width:50%">
+          <div style="font-size:18px;font-weight:bold">{{hospital.name}}</div>
+          <div>City: {{hospital.city}}</div>
+          <div>Distance: {{hospital.distance}}</div>
+        </div>
+        <div style="width:30%"><img ng-src="http://18.236.125.242/groupHomes/photos/HOS/{{hospital.smallPhoto}}" style="object-fit:cover;width:100%;height:100%"></div>
       </div>
     </div>
   </div>

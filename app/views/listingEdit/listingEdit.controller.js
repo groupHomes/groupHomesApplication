@@ -40,6 +40,9 @@ app.controller('ListingEditController', function($scope, $q, $location, $http, $
         $scope.roomIndexes.push($scope.rooms[i]);
         $scope.totalRoomBedCount += $scope.rooms[i].roomBedCount;
         $scope.totalBedsAvailable += parseInt($scope.rooms[i].bedsAvailable);
+        // if ($scope.rooms[i].bedsAvailable === '1') {
+        //   $scope.rooms[i].roomGender = ''
+        // }
       }
 
       dataService.get('roomBed', {id: $scope.userFacilityId}).then(function (response) {
@@ -51,11 +54,11 @@ app.controller('ListingEditController', function($scope, $q, $location, $http, $
 
           for (let j = 0; j < $scope.roomBed.length; j++) {
             if ($scope.roomIndexes[i].roomNumber === $scope.roomBed[j].roomNumber) {
-              console.log(j, $scope.roomBed[j])
+              console.log(j, $scope.roomBed[j]);
               if ($scope.roomBed[j].availability === 'Occupied') {
                 var availabilitydate = null;
               } else {
-                availabilitydate = new Date($scope.roomBed[j].availabilitydate)
+                availabilitydate = new Date($scope.roomBed[j].availabilitydate);
               }
               let bedObj={
                 bedid: $scope.roomBed[j].bedid,
@@ -65,8 +68,8 @@ app.controller('ListingEditController', function($scope, $q, $location, $http, $
                 availability: $scope.roomBed[j].availability,
                 availabilitydate: availabilitydate
               };
-              $scope.roomIndexes[i].beds.push(bedObj)
-              console.log(i, $scope.roomIndexes)
+              $scope.roomIndexes[i].beds.push(bedObj);
+              console.log(i, $scope.roomIndexes);
 
             }
             // console.log($scope.roomIndexes)
@@ -81,10 +84,6 @@ app.controller('ListingEditController', function($scope, $q, $location, $http, $
     $state.go('listingPreview');
     // $state.go('listingView');
   }
-
-  // $scope.roomGenderChange = function (roomNum) {
-  //   console.log(roomNum, $scope.roomIndexes)
-  // }
 
   $scope.submit = function () {
     // var loopPromises = [];
@@ -121,6 +120,19 @@ app.controller('ListingEditController', function($scope, $q, $location, $http, $
 
     //edit bed info
     $scope.roomIndexes.forEach(function (room) {
+
+      let roomToEdit = {
+        id: room.id,
+        facilityid: $scope.userFacilityId,
+        roomNumber: room.roomNumber,
+        roomGender: room.roomGender,
+        roomType: room.roomType,
+      }
+
+      dataService.edit('facilityRooms', roomToEdit).then(function (response) {
+        console.log('editRoomToEdit', response)
+      })
+
       // var deferred = $q.defer();
       room.beds.forEach(function (bed) {
         // if (bed.availability === 'Occupied') {
@@ -144,7 +156,7 @@ app.controller('ListingEditController', function($scope, $q, $location, $http, $
 
         console.log(bedToEdit)
         dataService.edit('facilityBed', bedToEdit).then(function (response) {
-          console.log(response);
+          console.log('editBedToEdit', response);
           // deferred.resolve();
         })
 
