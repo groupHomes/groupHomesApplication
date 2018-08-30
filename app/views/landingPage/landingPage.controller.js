@@ -13,10 +13,10 @@ app.controller('LandingPageController', function($scope, $state, dataService, se
     var searchType;
 
     if ($scope.searchGroupHomeAGC) {
-      searchType = 'AGC'
+      searchType = "'AGC'"
       $scope.searchGroupHomeHIC = false;
     } else {
-      searchType = 'HIC'
+      searchType = "'HIC'"
       $scope.searchGroupHomeAGC = false;
     }
 
@@ -24,10 +24,12 @@ app.controller('LandingPageController', function($scope, $state, dataService, se
       address: search,
       // type: searchType
       facilitytype: searchType,
-      roomtype: 'Shared, Private',
-      gender: 'Female, Male',
+      roomtype: "'Shared', 'Private'",
+      gender: "'Female', 'Male'",
       price: 9999
     };
+
+    console.log('search Obj to be passed to api', searchObj)
 
     dataService.search('facility', searchObj).then(function (response) {
       console.log(response.data);

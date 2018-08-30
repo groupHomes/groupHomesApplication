@@ -168,29 +168,29 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
 
     //setting search gender
     if ($scope.searchFilterObj.searchGenderMale && $scope.searchFilterObj.searchGenderFemale) {
-      searchGender = 'Female, Male'
+      searchGender = "'Female', 'Male'"
     } else if($scope.searchFilterObj.searchGenderMale) {
-      searchGender = 'Male'
+      searchGender = "'Male'"
     } else {
-      searchGender = 'Female'
+      searchGender = "'Female'"
     }
 
     //setting room type
     if ($scope.searchFilterObj.searchRoomTypeShared && $scope.searchFilterObj.searchRoomTypePrivate) {
-      searchRoomType = 'Shared, Private'
+      searchRoomType = "'Shared', 'Private'"
     } else if($scope.searchFilterObj.searchRoomTypeShared) {
-      searchRoomType = 'Shared'
+      searchRoomType = "'Shared'"
     } else {
-      searchRoomType = 'Private'
+      searchRoomType = "'Private'"
     }
 
     //setting group home type
     if ($scope.searchFilterObj.searchGroupHomeAGC && $scope.searchFilterObj.searchGroupHomeHIC) {
-      searchFacilityType = 'AGC, HIC'
+      searchFacilityType = "'AGC', 'HIC'"
     } else if($scope.searchFilterObj.searchGroupHomeAGC) {
-      searchFacilityType = 'AGC'
+      searchFacilityType = "'AGC'"
     } else {
-      searchFacilityType = 'HIC'
+      searchFacilityType = "'HIC'"
     }
 
     //setting prie
