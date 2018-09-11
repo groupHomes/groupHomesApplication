@@ -58,7 +58,8 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
         searchGenderFemale: true,
         searchRoomTypePrivate: true,
         searchRoomTypeShared: true,
-        searchPrice: 'Any Price'
+        searchPrice: 'Any Price',
+        searchMedicaid: false
       }
       $scope.initMap();
     } else { //else load search results and init map
@@ -101,6 +102,7 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
   // });
 
   function setCompareArr() {
+    $scope.compareArr=[]
     dataService.get('preferredFacilities', {userid: $scope.user.userid}).then(function (response) {
       console.log('preferred facilities:', response.data);
 
@@ -201,6 +203,7 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
     var searchRoomType;
     var searchFacilityType;
     var searchPrice;
+    var searchMedicaid;
 
     //setting search gender
     if ($scope.searchFilterObj.searchGenderMale && $scope.searchFilterObj.searchGenderFemale) {
@@ -229,7 +232,7 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
       searchFacilityType = "'HIC'"
     }
 
-    //setting prie
+    //setting price
     switch ($scope.searchFilterObj.searchPrice) {
       case '< $1000':
         searchPrice = 1000;
@@ -249,6 +252,11 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
       default:
     }
 
+    //setting medicaid
+    if ($scope.searchFilterObj.searchMedicaid) {
+      searchMedicaid = "Y"
+    }
+
     //creating search obj to be passed into API
     var searchObj = {
       address: search,
@@ -256,7 +264,8 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
       facilitytype: searchFacilityType,
       roomtype: searchRoomType,
       gender: searchGender,
-      price: searchPrice
+      price: searchPrice,
+      medicaid: searchMedicaid
     }
 
     // console.log('search obj to be passed to api', searchObj)
@@ -274,7 +283,10 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
         // searchService.set({searchText: search, searchResult: response.data, searchType: searchType});
         // console.log($scope.facilities)
 
-        setCompareArr();
+        //set compare arr if user is logged in
+        if ($scope.user) {
+          setCompareArr();
+        }
         createHospitalArr();
         createImageLink()
         buildMarkers();

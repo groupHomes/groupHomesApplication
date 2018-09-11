@@ -43,7 +43,8 @@ app.controller('LandingPageController', function($scope, $state, dataService, se
           searchGenderFemale: true,
           searchRoomTypePrivate: true,
           searchRoomTypeShared: true,
-          searchPrice: 'Any Price'
+          searchPrice: 'Any Price',
+          searchMedicaid: false
         }
 
         searchService.set({searchText: search, searchResult: response.data, searchFilterObj: searchFilterObj});

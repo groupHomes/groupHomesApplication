@@ -80,6 +80,24 @@
                 <a class="dropdown-item" ng-click="searchFilterObj.searchPrice = 'Any Price'">Any Price</a>
               </div>
             </div>
+            <!--medicare-->
+            <div class="dropdown">
+              <button class="btn btn-default dropdown-toggle" style="border-radius: .25em;height:45px;border: 1px solid #ced4da; margin-left:20px;" type="button" id="medicaidMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Medicaid</button>
+              <div class="dropdown-menu" aria-labelledby="medicaidMenu">
+                <div class="form-check">
+                  <input type="checkbox" class="form-check-input" id="searchMedicaid" ng-model="searchFilterObj.searchMedicaid">
+                  <label class="form-check-label" for="searchMedicaid" style="margin-left:20px">
+                    Yes
+                  </label>
+                </div>
+                <!-- <div class="form-check">
+                  <input type="checkbox" class="form-check-input" id="searchGenderFemale" ng-model="searchFilterObj.searchGenderFemale">
+                  <label class="form-check-label" for="searchGenderFemale" style="margin-left:20px">
+                    Female
+                  </label>
+                </div> -->
+              </div>
+            </div>
           </div>
 
           <button class="btn btn-default" style="border-radius: .25em;height:45px;border: 1px solid #ced4da; margin-left:20px;" type="button" ng-disabled="compareArr.length===0" ng-click="compareFacilities()">Compare</button>
