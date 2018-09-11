@@ -1,7 +1,7 @@
 app.controller('LandingPageController', function($scope, $state, dataService, searchService) {
 
   console.log('hello world');
-  console.log( $scope.user)
+  console.log('user:', $scope.user)
 
   // $scope.noResults = false
   $scope.searchGroupHomeAGC = true;

@@ -1,24 +1,29 @@
 app.factory('userService', function() {
 
-  var selectedUser;
+  // var user;
 
   function set(data) {
-    selectedUser = data;
-    console.log("set",selectedUser);
+    // selectedUser = data;
+    console.log("set",JSON.stringify(data));
 
-    // localStorageService.set('selStudent', data);
+    sessionStorage.setItem('user', JSON.stringify(data));
     // console.log("set",data);
   }
 
   function get() {
     // if (selectedUser) {
-      return selectedUser;
+      // return selectedUser;
     // }
-    // return localStorageService.get('selStudent');
+    return JSON.parse(sessionStorage.getItem('user'));
+  }
+
+  function logout() {
+    sessionStorage.clear();
   }
 
   return {
     set: set,
     get: get,
+    logout: logout
   };
 });

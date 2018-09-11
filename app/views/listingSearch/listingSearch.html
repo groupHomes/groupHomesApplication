@@ -83,7 +83,7 @@
           </div>
 
           <button class="btn btn-default" style="border-radius: .25em;height:45px;border: 1px solid #ced4da; margin-left:20px;" type="button" ng-disabled="compareArr.length===0" ng-click="compareFacilities()">Compare</button>
-          <div ng-if="user.role==='user'" style="padding-right:30px; text-align:right"><a ui-sref="listingPreferred">Saved List</a></div>
+          <button class="btn btn-default" ng-if="user.role==='user'" style="border-radius: .25em;height:45px;border: 1px solid #ced4da; margin-left:20px;text-align:right"><a ui-sref="listingPreferred">Saved List</a></button>
         </div>
       <!-- </div> -->
 
@@ -121,8 +121,8 @@
               </div>
               <!--compare heart-->
               <div style="margin:10px;color:red">
-                <i class="far fa-heart" ng-hide="compare[$index]" ng-click="addToCompare(facility, $index)"></i>
-                <i class="fas fa-heart" ng-show="compare[$index]" ng-click="removeFromCompare(facility, $index)"></i>
+                <i class="far fa-heart" ng-hide="facility.compare" ng-click="addToCompare(facility, $index)"></i>
+                <i class="fas fa-heart" ng-show="facility.compare" ng-click="removeFromCompare(facility, $index)"></i>
               </div>
               <div>
                 <div style="font-size:14px;margin:10px;color:grey">Total Beds: {{facility.beds}}</div>

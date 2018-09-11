@@ -1,5 +1,7 @@
 app.controller('ListingSearchController', function($scope, $transitions, $rootScope, $location, dataService, CONSTANTS, $window, $compile, $state, facilityService, userService, searchService) {
 
+
+
   ////////////////////GOOGLE MAPS///////////////////////////////
   var map;
   var marker;
@@ -34,31 +36,46 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
 
   //set user to scope
   $scope.user = userService.get();
+  console.log('user:', $scope.user)
 
   //hospital array
   $scope.hospitalArr = []
 
 
   function setSearch() {
-    console.log('setting search')
+    console.log('set search')
     let search = searchService.get();
-    $scope.searchFilterObj = search.searchFilterObj
 
     //if no search text, then start with empty map
     if (search === undefined) {
       $scope.facilities=[];
+      //setting initial search filters
+      $scope.searchFilterObj = {
+        // searchText: search,
+        searchGroupHomeHIC: true,
+        searchGroupHomeAGC: true,
+        searchGenderMale: true,
+        searchGenderFemale: true,
+        searchRoomTypePrivate: true,
+        searchRoomTypeShared: true,
+        searchPrice: 'Any Price'
+      }
       $scope.initMap();
     } else { //else load search results and init map
-      $scope.facilities = search.searchResult;
-
-      console.log(search)
-
-      console.log($scope.facilities)
+      $scope.facilities = JSON.parse(JSON.stringify( search.searchResult )); //makes a copy of results
+      $scope.searchFilterObj = search.searchFilterObj
+      console.log('search:', search)
+      console.log('$scope.facilities:', $scope.facilities)
+      // console.log('$scope.compareArr', $scope.compareArr)
       createHospitalArr();
       createImageLink()
 
       $scope.searchText = search.searchText;
       $scope.initMap();
+
+      if ($scope.user) {
+        setCompareArr()
+      }
     }
   }
 
@@ -83,11 +100,30 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
   //   }
   // });
 
+  function setCompareArr() {
+    dataService.get('preferredFacilities', {userid: $scope.user.userid}).then(function (response) {
+      console.log('preferred facilities:', response.data);
+
+      response.data.forEach(function (preferred) {
+        $scope.compareArr.push(preferred.id)
+      })
+      console.log('$scope.compareArr;', $scope.compareArr)
+      //add heart to facility card
+      for (var i = 0; i < $scope.facilities.length; i++) {
+        for (var j = 0; j < response.data.length; j++) {
+          if ($scope.facilities[i].id === response.data[j].id) {
+            $scope.facilities[i].compare = true;
+          }
+        }
+      }
+    });
+  }
+
   function createHospitalArr() {
     //remove all hospital type and create array of type hospital
     $scope.hospitalArr = $scope.facilities.filter(x => x.type ==='HOS');
     $scope.facilities = $scope.facilities.filter(x => x.type !=='HOS');
-    console.log($scope.hospitalArr)
+    // console.log('$scope.hospitalArr:', $scope.hospitalArr)
   }
 
   function createImageLink() {
@@ -147,7 +183,7 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
 
   //search for facility
   $scope.submit = function (search) {
-    console.log(search, $scope.searchFilterObj)
+    // console.log(search, $scope.searchFilterObj)
     // clear old markers and facilities
     $scope.facilities = [];
     $scope.hospitalArr = [];
@@ -223,24 +259,30 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
       price: searchPrice
     }
 
-    console.log('search obj to be passed to api', searchObj)
+    // console.log('search obj to be passed to api', searchObj)
 
     //get new search results
     dataService.search('facility', searchObj).then(function (response) {
-      console.log('search results', response)
+      // console.log('search results', response)
       if (response.data.length === 0){ //no results found
         $scope.noResults = true;
       } else { //if results found, set facilities and build markers
         $scope.noResults = false;
-        $scope.facilities = response.data;
+        $scope.facilities = JSON.parse(JSON.stringify(response.data));
+        //set search filter obj
+        searchService.set({searchText: search, searchResult: response.data, searchFilterObj: $scope.searchFilterObj});
         // searchService.set({searchText: search, searchResult: response.data, searchType: searchType});
-        console.log($scope.facilities)
+        // console.log($scope.facilities)
+
+        setCompareArr();
         createHospitalArr();
         createImageLink()
         buildMarkers();
         buildHospitalMarker();
       }
     });
+
+
   };
 
   //create array of selected facilities to be compared
@@ -248,48 +290,67 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
 
   //add facility to be compared
   $scope.addToCompare = function (facility, index) {
-    console.log('add facility to compare', facility);
-    console.log($scope.compare[index])
+    // console.log('add facility to compare', facility);
 
-    if ($scope.user === undefined) { //if user not logged in
+
+    // console.log($scope.compare[index])
+
+    if (!$scope.user) { //if user not logged in
       $state.go('login'); //route to login page
     } else {
-      $scope.compare[index] = true;
+
+      $scope.facilities[index].compare = true;
+
+      // console.log('$scope.facilities:', $scope.facilities)
+      // console.log('$scope.search:', searchService.get())
+      // $scope.compare[index] = true;
       //if nothing in compare array, then add facility
-      // if ($scope.compareArr.length === 0) {
-        var facilityObj = {
-          userid: $scope.user.userid,
-          facilityid: facility.id
-        }
-        $scope.compareArr.push(facilityObj);
-      // } else { //else add to compare array
-      //   $scope.compareArr.push(facilityObj);
-      // }
+      if ($scope.compareArr.length === 0) {
+
+        $scope.compareArr.push(facility.id);
+      } else { //else add to compare array
+        $scope.compareArr.push(facility.id);
+      }
     }
+    // console.log($scope.compareArr)
   };
 
   //remove facility from compare array
   $scope.removeFromCompare = function (facility, index) {
     console.log('remove facility from compare', facility);
-    $scope.compare[index] = false;
+    $scope.facilities[index].compare = false;
+
+    // $scope.compare[index] = false;
     // console.log($scope.compare[index])
     for (var i = 0; i < $scope.compareArr.length; i++) {
-      if ($scope.compareArr[i].facilityid === facility.id) { //find facility to removed
+      if ($scope.compareArr[i] === facility.id) { //find facility to removed
         $scope.compareArr.splice(i,1); //remove from array
         break; //can stop looping if facility added
       }
     }
+    console.log($scope.compareArr)
   };
 
   //send array of facilities to be compared
-  $scope.compare = function () {
-    console.log($scope.compareArr);
-  };
+  // $scope.compare = function () {
+  //   console.log($scope.compareArr);
+  // };
 
   $scope.compareFacilities=function () {
-    console.log($scope.compareArr)
-    dataService.add('preferredFacilities', $scope.compareArr).then(function (response) {
-      console.log(response)
+    let compareArr = $scope.compareArr.join();
+
+    let facilityObj = {
+      userid: $scope.user.userid,
+      facilityid: compareArr
+    }
+
+    dataService.add('preferredFacilities', facilityObj).then(function (response) {
+      // console.log(response)
+      if (response.data.status === 'success') {
+        $state.go('listingPreferred')
+      } else {
+        alert('Error.')
+      }
     })
   }
 
@@ -312,8 +373,8 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
   // };
 
   $scope.initMap = function () {
-    console.log('getting map')
-    console.log($scope.facilities, $scope.hospitalArr)
+    // console.log('getting map')
+    // console.log($scope.facilities, $scope.hospitalArr)
     map = new google.maps.Map(document.getElementById('map'), {
         center: { lat: initLat, lng: initLng },
         zoom: 11
