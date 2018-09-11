@@ -142,6 +142,9 @@ app.controller('ListingViewController', function($scope, $uibModal, dataService,
       $scope.hospitals.forEach(function (hospital) {
           hospital.distance = (hospital.distance).toFixed(2)
       })
+
+      $scope.initDetailMap();
+
     })
 
 
@@ -152,16 +155,25 @@ app.controller('ListingViewController', function($scope, $uibModal, dataService,
       });
 
       //build marker
-      var marker = new google.maps.Marker({
+      let marker = new google.maps.Marker({
         position: new google.maps.LatLng(parseFloat($scope.facility.lat), parseFloat($scope.facility.lng)),
         map: map
       });
+
+      //build hospital markers
+      for (i = 0; i < $scope.hospitals.length; i++) {
+        //create a marker for each facaility
+      let marker = new google.maps.Marker({
+          position: new google.maps.LatLng($scope.hospitals[i].lat, $scope.hospitals[i].lng),
+          map: map,
+          icon: "http://maps.google.com/mapfiles/ms/icons/hospitals.png"
+        });
+      }
 
       var bounds = new google.maps.LatLngBounds();
       bounds.extend(marker.position);
     };
 
 
-    $scope.initDetailMap();
 
 });

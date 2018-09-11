@@ -18,10 +18,11 @@ app.controller('ListingPreviewController', function($scope, dataService, CONSTAN
       $scope.hospitals.forEach(function (hospital) {
           hospital.distance = (hospital.distance).toFixed(2)
       })
+      //init map
+      $scope.initDetailMap();
     })
 
-    //init map
-    $scope.initDetailMap();
+
 
     //insert link for med and lg photo
     // $scope.facility.forEach(function (facility) {
@@ -68,6 +69,16 @@ app.controller('ListingPreviewController', function($scope, dataService, CONSTAN
       position: new google.maps.LatLng(parseFloat($scope.facility.lat), parseFloat($scope.facility.lng)),
       map: map
     });
+
+    //build hospital markers
+    for (i = 0; i < $scope.hospitals.length; i++) {
+      //create a marker for each facaility
+    let marker = new google.maps.Marker({
+        position: new google.maps.LatLng($scope.hospitals[i].lat, $scope.hospitals[i].lng),
+        map: map,
+        icon: "http://maps.google.com/mapfiles/ms/icons/hospitals.png"
+      });
+    }
 
     var bounds = new google.maps.LatLngBounds();
     bounds.extend(marker.position);
