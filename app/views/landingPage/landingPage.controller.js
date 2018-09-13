@@ -1,17 +1,13 @@
 app.controller('LandingPageController', function($scope, $state, dataService, searchService) {
 
-  console.log('hello world');
-  console.log('user:', $scope.user)
-
-  // $scope.noResults = false
+  //setting search by group home AGC to be true on page load
   $scope.searchGroupHomeAGC = true;
 
-  //search address
+  //submit search
   $scope.submit = function (search) {
-    console.log('search address: ',search);
+    let searchType;
 
-    var searchType;
-
+    //setting searchType
     if ($scope.searchGroupHomeAGC) {
       searchType = "'AGC'"
       $scope.searchGroupHomeHIC = false;
@@ -20,21 +16,20 @@ app.controller('LandingPageController', function($scope, $state, dataService, se
       $scope.searchGroupHomeAGC = false;
     }
 
+    //creating search obj to be passed to api
     let searchObj = {
       address: search,
-      // type: searchType
       facilitytype: searchType,
       roomtype: "'Shared', 'Private'",
       gender: "'Female', 'Male'",
       price: 9999
     };
 
-    console.log('search Obj to be passed to api', searchObj)
-
+    //sending searchObj to api
     dataService.search('facility', searchObj).then(function (response) {
-      console.log(response.data);
       if (response.data.length !== 0 ) {
 
+        //creating searchFilterObj with defaults to true for all filters, except Medicaid and Group Homes
         let searchFilterObj = {
           searchText: search,
           searchGroupHomeHIC: $scope.searchGroupHomeHIC,
@@ -47,14 +42,13 @@ app.controller('LandingPageController', function($scope, $state, dataService, se
           searchMedicaid: false
         }
 
+        //store search text, search results and searchFilterObj
         searchService.set({searchText: search, searchResult: response.data, searchFilterObj: searchFilterObj});
         $state.go('listingSearch');
         $scope.noResults = false;
       } else {
-        $scope.noResults = true;
+        $scope.noResults = true; //display msg for no results
       }
     });
   };
-
-
 });

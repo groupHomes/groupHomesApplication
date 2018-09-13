@@ -27,8 +27,18 @@ body {
   height: 100%;
 }
 
+#landingPage .nav-bar {
+  background-color: transparent;
+  border: none;
+  font-weight: bold;
+}
+
+#landingPage .nav-bar a {
+  color: #FFF !important;
+}
+
 #landingPage #image {
-  background-image: url("/app/images/landing_alt.jpg");
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("/app/images/landing_alt.jpg");
   background-size: cover;
   background-position: center center;
   top: 0;
@@ -36,8 +46,53 @@ body {
   height: 100%;
 }
 
-#landingPage .selectedType {
+#landingPage .search-wrapper {
+  position: fixed;
+  top: 20%;
+  margin-left: 20%;
+  margin-right: 20%;
+  color: #FFF;
+  text-align: center;
+}
+
+#landingPage .search-header {
+  font-weight: bold;
+  font-size: 57px;
+  text-shadow: 1px 1px 2px black;
+  width: 80%;
+  margin: auto;
+}
+
+#landingPage .search-filter-wrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+#landingPage .search-filter__item {
+  width: 50%;
+  border: 1px solid #FFF;
+  line-height: 45px;
+  background-color: darkgrey;
+}
+
+#landingPage .selectedGroupHomeType {
   background-color: #0f0f94 !important;
+}
+
+#landingPage .search-input input {
+  line-height: 50px;
+  height: 50px;
+}
+
+#landingPage .search-input button {
+  border-radius: 0 .25em .25em 0;
+  height: 50px;
+  border: 1px solid #ced4da;
+}
+
+#landingPage .search-msg {
+  color: red;
 }
 
 #nav {
@@ -52,6 +107,12 @@ body {
   z-index: 10;
 }
 
+#nav .nav-bar-container {
+  display: flex;
+  justify-content: space-between;
+  padding-right: 20px;
+}
+
 #nav .nav-item {
   display: inline;
   padding: 10px;
@@ -64,11 +125,11 @@ body {
 
 #nav a {
   color: black;
-  text-shadow: 1px 1px 2px #FFF;
   text-decoration: none;
 }
 
 #nav .logo {
+  font-size: 20px;
   float: left;
   padding: 0 20px;
 }
