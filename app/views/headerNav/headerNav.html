@@ -2,15 +2,9 @@
   <div style="display:flex;justify-content:space-between;padding-right:20px">
     <a ui-sref="listingSearch" class="logo" href="#" style="font-size:20px">Group Homes</a>
     <div>
-      <!-- <a ng-click=selectFacility() style="margin: 0 50px 0 0" ng-if="selectedUser !== undefined"><div class="nav-item">View Listing</div></a> -->
-      <!-- <a ui-sref="listingCreate" style="margin: 0 50px 0 0" ng-if="user.role==='client'"><div class="nav-item">Add Listing</div></a> -->
-      <!-- <a ui-sref="listingView" style="margin: 0 50px 0 0" ng-if="user.role === 'client'"><div class="nav-item">Preview Listing</div></a> -->
-      <!-- <a ui-sref="landingPage" style="margin: 0 50px 0 0" ng-if="user === undefined"><div class="nav-item">Login</div></a> -->
-      <a ui-sref="listingEdit" style="margin: 0 50px 0 0"  ng-if="(currentPage !== '/listingEdit') && (user.role === 'client')"><div class="nav-item">Edit Listing</div></a>
-      <a ui-sref="login" style="margin: 0 50px 0 0" ng-if="user === null"><div class="nav-item">Login</div></a>
-      <a ui-sref="signup" style="margin: 0 50px 0 0" ng-if="user === null"><div class="nav-item">Sign Up</div></a>
-
-      <!-- <a ui-sref="signup" style="margin: 0 50px 0 0" ng-if="user === undefined"><div class="nav-item">Sign Up</div></a> -->
+      <a ui-sref="listingEdit" ng-if="(currentPage !== '/listingEdit') && (user.role === 'client')"><div class="nav-item">Edit Listing</div></a>
+      <a ui-sref="login" ng-if="user === null"><div class="nav-item">Login</div></a>
+      <a ui-sref="signup" ng-if="user === null"><div class="nav-item">Sign Up</div></a>
       <a ng-if="user !== null" ng-click="logout()"><div class="nav-item">Logout</div></a>
       <a ng-if="user !== null"><div class="nav-item">{{user.userid}}</div></a>
     </div>

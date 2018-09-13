@@ -73,15 +73,6 @@ body {
   padding: 0 20px;
 }
 
-#nav .menu {
-  float: right;
-  padding: 0 20px;
-}
-
-#nav .menu a {
-  padding: 0 10px;
-}
-
 #login {
   height: 100%;
 }
