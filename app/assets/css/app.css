@@ -60,7 +60,7 @@ body {
   font-size: 57px;
   text-shadow: 1px 1px 2px black;
   width: 80%;
-  margin: auto;
+  margin: 10px auto;
 }
 
 #landingPage .search-filter-wrapper {
@@ -93,6 +93,17 @@ body {
 
 #landingPage .search-msg {
   color: red;
+}
+
+@media (max-width: 425px) {
+  #landingPage .search-wrapper {
+    margin: 0 5%;
+  }
+
+  #landingPage .search-header {
+    width: 100%;
+    font-size: 40px;
+  }
 }
 
 #nav {
