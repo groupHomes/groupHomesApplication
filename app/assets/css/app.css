@@ -490,22 +490,35 @@ body {
 }
 
 #listing-search {
+  margin-top: 65px;
+  padding: 15px 15px 0 15px;
+  /* General */
   /* Always set the map height explicitly to define the size of the div
-    * element that contains the map. */
-  /* Optional: Makes the sample page fill the window. */
+  * element that contains the map. */
+  /* map info box */
+  /* end map styles */
+  /* search header */
+  /* card section */
+}
+
+#listing-search .bold {
+  font-weight: bold;
+}
+
+#listing-search .lightgrey {
+  color: lightgrey;
+}
+
+#listing-search .map-wrapper {
+  width: 40%;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  top: 131px;
 }
 
 #listing-search #map {
-  height: calc(100vh - 140px);
-}
-
-#listing-search .card {
-  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
-}
-
-#listing-search div:focus {
-  outline: none;
-  border: 0;
+  height: calc(100vh - 131px);
 }
 
 #listing-search .gm-style-iw {
@@ -566,125 +579,263 @@ body {
   background: -ms-linear-gradient(top, rgba(255, 255, 255, 0) 0%, white 100%);
 }
 
-#listing-search .active {
-  background-color: dodgerblue;
+#listing-search .header-wrapper {
+  padding: 10px;
+  display: flex;
+  background-color: #0f0f94;
+  margin-top: -14px;
+  position: fixed;
+  z-index: 1;
+}
+
+#listing-search .search-wrapper {
+  display: flex;
+}
+
+#listing-search .search-bar {
+  height: 45px;
+  width: 30%;
+}
+
+#listing-search .search-bar input {
+  height: 100%;
+}
+
+#listing-search .search-bar button {
+  border-radius: 0 .25em .25em 0;
+  height: 45px;
+  border: 1px solid #ced4da;
+}
+
+#listing-search .filters {
+  display: flex;
+}
+
+#listing-search .filters button {
+  border-radius: .25em;
+  height: 45px;
+  border: 1px solid #ced4da;
+  width: 115px;
+  margin-left: 10px;
+}
+
+#listing-search .filters label {
+  margin-left: 20px;
+}
+
+#listing-search .preferred {
+  display: flex;
+}
+
+#listing-search .preferred button:nth-child(2) {
+  margin-left: 10px;
+}
+
+#listing-search .no-results-msg {
+  color: red;
+  padding-left: 30px;
+}
+
+#listing-search .main-section-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+#listing-search .card-section-wrapper {
+  width: 60%;
+  margin-top: 60px;
+}
+
+#listing-search .cards-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+#listing-search .card-wrapper {
+  margin: 10px;
+}
+
+#listing-search .card {
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+  width: 250px;
+  height: 345px;
+  box-sizing: content-box;
+}
+
+#listing-search .card-image {
+  width: 250px;
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+#listing-search .card-image img {
+  min-width: 100%;
+  min-height: 100%;
+  position: absolute;
+  left: -1000%;
+  right: -1000%;
+  top: -1000%;
+  bottom: -1000%;
+  margin: auto;
+}
+
+#listing-search .card-heart {
+  margin: 10px;
+  color: red;
+}
+
+#listing-search .card-info {
+  margin: 10px;
+}
+
+#listing-search div:focus {
+  outline: none;
+  border: 0;
 }
 
 #listing-search li:hover {
   cursor: pointer;
 }
 
-#listing-search .info table {
-  border-collapse: collapse;
-  width: 100%;
-}
-
-#listing-search .info th,
-#listing-search td {
-  text-align: left;
-  padding: 2px !important;
-}
-
-#listing-search .info td:first-child {
-  font-weight: bold;
-}
-
-#listing-search .info tr:nth-child(even) {
-  background-color: #f2f2f2;
-}
-
-#listing-search #floating-panel {
-  /*position: absolute;
-        top: 10px;
-        left: 30%;
-        z-index: 5;*/
-  background-color: #fff;
-  /*padding: 5px;*/
-  border: 1px solid #999;
-  text-align: center;
-  font-family: 'Roboto','sans-serif';
-  line-height: 30px;
-  padding-left: 10px;
-}
-
-#listing-search .ui-autocomplete {
-  overflow: auto;
-  height: 300px;
-  width: 300px;
-  z-index: 1000;
-}
-
-#listing-search .ui-front {
-  z-index: 500 !important;
-}
-
-#listing-search .Layer1,
-#listing-search .Layer2,
-#listing-search .Layer4,
-#listing-search .Layer6,
-#listing-search .Layer7 {
-  width: 10px;
-  height: auto;
-  padding-top: 10px;
-  border-radius: 50%;
-  background: #66ff66;
-  margin-top: 6px;
-  margin-left: 6px;
-}
-
-#listing-search .Layer1 {
-  background: #66ff66;
-}
-
-#listing-search .Layer2 {
-  background: #c299ff;
-}
-
-#listing-search .Layer4 {
-  background: #ff99ff;
-}
-
-#listing-search .Layer6 {
-  background: #ffff99;
-}
-
-#listing-search .Layer7 {
-  background: #ff4d4d;
-}
-
-#listing-search .imgLegend {
-  width: 20px;
-  height: 20px;
-}
-
-#listing-search .ui-tooltip {
-  border: 1px solid white;
-  background: #111111;
-  color: white;
-}
-
-#listing-search .toggler {
-  width: 450px;
-  height: 200px;
-  display: none;
-  top: 60px;
-  left: 10px;
-  z-index: 500;
-  position: fixed;
-  padding-left: 10px;
-}
-
 #listing-search .highlight {
   box-shadow: 0 1px 5px 5px #48b5e9;
-}
-
-#listing-search .selectedType {
-  background-color: #0f0f94 !important;
 }
 
 #listing-search label {
   font-weight: normal;
 }
+
+#listing-search .map-icon {
+  display: none;
+}
+
+#listing-search .close-icon {
+  display: none;
+}
+
+@media (max-width: 425px) {
+  #listing-search {
+    /* search header */
+    /* card section */
+    /* map */
+  }
+
+  #listing-search .header-wrapper {
+    flex-wrap: wrap;
+    background-color: #FFF;
+    box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.24), 0px 1px 4px 0px rgba(0, 0, 0, 0.04);
+  }
+
+  #listing-search .search-wrapper {
+    flex-wrap: wrap;
+  }
+
+  #listing-search .search-bar {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  #listing-search .filters {
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  #listing-search .filters button {
+    margin-left: 0;
+    margin-bottom: 10px;
+    height: 34px;
+  }
+
+  #listing-search hr {
+    width: 100%;
+    margin: 0 0 10px 0;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.05);
+  }
+
+  #listing-search .hide {
+    display: none;
+  }
+
+  #listing-search .show {
+    display: inline-block;
+  }
+
+  #listing-search .card-section-wrapper {
+    margin-top: 185px;
+  }
+
+  #listing-search .card-section-wrapper {
+    width: 100%;
+  }
+
+  #listing-search .card-wrapper {
+    width: 100%;
+  }
+
+  #listing-search .card {
+    width: 100%;
+  }
+
+  #listing-search .card-image {
+    width: 100%;
+  }
+
+  #listing-search .map-icon {
+    display: inline;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    border: 1px solid #FFF;
+    height: 45px;
+    width: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #FFF;
+    color: #0f0f94;
+    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+    cursor: pointer;
+  }
+
+  #listing-search .map-wrapper {
+    display: none;
+    position: fixed;
+    width: 100%;
+    top: 274px;
+    padding: 0;
+    margin: 0;
+  }
+
+  #listing-search .map-wrapper #map {
+    height: calc(100vh - 274px);
+  }
+
+  #listing-search .close-icon {
+    z-index: 10;
+    display: inline;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    border: 1px solid #FFF;
+    height: 45px;
+    width: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #FFF;
+    color: #0f0f94;
+    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+    cursor: pointer;
+  }
+}
+
+/* PREVIOUS SEARCH?? */
 
 #signup {
   height: 100%;

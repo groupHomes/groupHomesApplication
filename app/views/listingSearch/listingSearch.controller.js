@@ -1,46 +1,25 @@
 app.controller('ListingSearchController', function($scope, $transitions, $rootScope, $location, dataService, CONSTANTS, $window, $compile, $state, facilityService, userService, searchService) {
 
-
-
   ////////////////////GOOGLE MAPS///////////////////////////////
   var map;
   var marker;
   $scope.markerArr = [];
   $scope.hospitalMarkerArr = []
-  var layerHospital;
-  var layerResidential;
-  var layerPersonal;
-  var layerDrugAlcohol;
-  var layerADC;
-  var layerDVPNSP;
-  var layerDialysis;
-  var layerOthers;
   var circle, circlemarker;
   var initLat = 36.1699; //36.13842925; //36.125541;
   var initLng = -115.1398; //-115.1717376708;
-  var initDistance = 15;
-  var FacilityAllTable = "1kkN0paFz4_KF_mMw0A1wSjr9CfiA5ohvBCgRQijY"; //"1tLrXcHFJSeBIQidORougpBuRF_HGiXbOJwsXH_YA"; //"1bAQPd8rlrO8jItgP07MhwqM3wX8Vg58OoHDpo02f";  //All Nevada Nursing Homes <-- Table Name
   var userKey = "AIzaSyDsWy4Qwn4FJ4iQ8Ufr-GM1FQssMxG1msY";  //"AIzaSyB9I2qkvtn821Tc7cGJ5v9JoX8AUiv6SUw";
-  //var hospitalTable = "1tMnZ8T6L8jFhfxKoVoKYHV3M-j5P7oWmubpCCw-l";
-  var Layer1 = "1zjYA7Xnf_a8cKLge6zZ5DEmgFxcvKCP_-Rvau_oX";
-  var Layer2 = "1Uti6_8cBvHt5J29rK-OV88bQt7LzyaqqNJDS78K4";
-  var Layer3 = "1P41LGCcnVmr42ZEx3QFDVSs857KwJQ7h6GCctLws";
-  var Layer4 = "1cR3u3xfyE161GLziONUWgFeScQer4TRjvHpnwhdg";
-  var Layer5 = "1gtklv0kmSQB4vZoWQTAWfNXcLAYOws65V9y-odCy";
-  var Layer6 = "1LrXM4L55EuI0di2VSDiJQEpyYI8tksDXSR4LqQcR";
-  var Layer7 = "1Luc7yAyvhmIKn8PLodIThRauY-13Exls4g7xaBho";
-  var Layer8 = "1Fvpw0RKetEveZzOputgL_L-NJBrbADHNS6hSll30";
-  var AutoComplete;
   var infowindow = new google.maps.InfoWindow();
-//////////GOOGLE MAPS END///////////////////
+  //////////GOOGLE MAPS END///////////////////
 
   //set user to scope
   $scope.user = userService.get();
-  console.log('user:', $scope.user)
 
   //hospital array
   $scope.hospitalArr = []
 
+  //create array of selected facilities to be compared
+  $scope.compareArr = [];
 
   function setSearch() {
     console.log('set search')
@@ -51,7 +30,6 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
       $scope.facilities=[];
       //setting initial search filters
       $scope.searchFilterObj = {
-        // searchText: search,
         searchGroupHomeHIC: true,
         searchGroupHomeAGC: true,
         searchGenderMale: true,
@@ -65,52 +43,26 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
     } else { //else load search results and init map
       $scope.facilities = JSON.parse(JSON.stringify( search.searchResult )); //makes a copy of results
       $scope.searchFilterObj = search.searchFilterObj
-      console.log('search:', search)
-      console.log('$scope.facilities:', $scope.facilities)
-      // console.log('$scope.compareArr', $scope.compareArr)
       createHospitalArr();
       createImageLink()
 
       $scope.searchText = search.searchText;
       $scope.initMap();
 
+      //if the user is logged in, set preferred facilities list
       if ($scope.user) {
         setCompareArr()
       }
     }
   }
 
-  //check for previous route
-  // $rootScope.$on('$locationChangeStart', function (event, current, previous) {
-  //   console.log("Previous URL: " + previous);
-  //   // if(previous === 'http://18.236.125.242/homes/dist/#/'){ //if previous route is home search page, get search text and results
-  //   if(previous === 'http://localhost:3000/app/#/'){
-  //     let search = searchService.get();
-  //     $scope.facilities = search.searchResult;
-  //     $scope.searchType = search.searchType;
-  //
-  //     createHospitalArr();
-  //     createImageLink()
-  //
-  //
-  //     $scope.searchText = search.searchText;
-  //     $scope.initMap();
-  //   } else { //if previous not home search page, then start with empty map
-  //     $scope.facilities=[];
-  //     $scope.initMap();
-  //   }
-  // });
-
   function setCompareArr() {
     $scope.compareArr=[]
     dataService.get('preferredFacilities', {userid: $scope.user.userid}).then(function (response) {
-      console.log('preferred facilities:', response.data);
-
       response.data.forEach(function (preferred) {
         $scope.compareArr.push(preferred.id)
       })
-      console.log('$scope.compareArr;', $scope.compareArr)
-      //add heart to facility card
+      //add selected heart to facility card
       for (var i = 0; i < $scope.facilities.length; i++) {
         for (var j = 0; j < response.data.length; j++) {
           if ($scope.facilities[i].id === response.data[j].id) {
@@ -125,7 +77,6 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
     //remove all hospital type and create array of type hospital
     $scope.hospitalArr = $scope.facilities.filter(x => x.type ==='HOS');
     $scope.facilities = $scope.facilities.filter(x => x.type !=='HOS');
-    // console.log('$scope.hospitalArr:', $scope.hospitalArr)
   }
 
   function createImageLink() {
@@ -138,54 +89,9 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
       }
     })
   }
-//
-//
-//   $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
-//     console.log(event)
-//     console.log(toState)
-//     console.log(fromState)
-//     console.log(fromParams)
-//   });
-//
-//   $transitions.onSuccess({}, function() {
-//   console.log("statechange success");
-// });
-
-// $rootScope.previousState;
-// $rootScope.currentState;
-// $rootScope.$on('$stateChangeSuccess', function(ev, to, toParams, from, fromParams) {
-//     // $rootScope.previousState = from.name;
-//     // $rootScope.currentState = to.name;
-//     console.log('Previous state:'+$rootScope.previousState)
-//     console.log('Current state:'+$rootScope.currentState)
-// });
-
-  // $scope.isSearchText = function () {
-  //   console.log($scope.search)
-  //   if ($scope.search !== undefined) {
-  //     //set search result
-  //
-  //     console.log('facilities', $scope.facilities)
-  //     $scope.initMap();
-  //   } else {
-  //     $scope.initMap();
-  //   }
-  // }
-
-  //get all listingView
-  // dataService.getAll('facility').then(function (response) {
-  //   console.log(response);
-  //   $scope.facilities=response.data;
-  //   //testing search
-  //   // var address = $scope.facilities[0].address + $scope.facilities[0].city + $scope.facilities[0].state + $scope.facilities[0].zip;
-  //   // dataService.search('facility', address).then(function (response) {
-  //   //   console.log(response)
-  //   // })
-  // });
 
   //search for facility
   $scope.submit = function (search) {
-    // console.log(search, $scope.searchFilterObj)
     // clear old markers and facilities
     $scope.facilities = [];
     $scope.hospitalArr = [];
@@ -260,15 +166,12 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
     //creating search obj to be passed into API
     var searchObj = {
       address: search,
-      // type: searchType
       facilitytype: searchFacilityType,
       roomtype: searchRoomType,
       gender: searchGender,
       price: searchPrice,
       medicaid: searchMedicaid
     }
-
-    // console.log('search obj to be passed to api', searchObj)
 
     //get new search results
     dataService.search('facility', searchObj).then(function (response) {
@@ -293,60 +196,29 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
         buildHospitalMarker();
       }
     });
-
-
   };
 
-  //create array of selected facilities to be compared
-  $scope.compareArr = [];
 
   //add facility to be compared
   $scope.addToCompare = function (facility, index) {
-    // console.log('add facility to compare', facility);
-
-
-    // console.log($scope.compare[index])
-
     if (!$scope.user) { //if user not logged in
       $state.go('login'); //route to login page
     } else {
-
       $scope.facilities[index].compare = true;
-
-      // console.log('$scope.facilities:', $scope.facilities)
-      // console.log('$scope.search:', searchService.get())
-      // $scope.compare[index] = true;
-      //if nothing in compare array, then add facility
-      if ($scope.compareArr.length === 0) {
-
-        $scope.compareArr.push(facility.id);
-      } else { //else add to compare array
-        $scope.compareArr.push(facility.id);
-      }
+      $scope.compareArr.push(facility.id);
     }
-    // console.log($scope.compareArr)
   };
 
   //remove facility from compare array
   $scope.removeFromCompare = function (facility, index) {
-    console.log('remove facility from compare', facility);
     $scope.facilities[index].compare = false;
-
-    // $scope.compare[index] = false;
-    // console.log($scope.compare[index])
     for (var i = 0; i < $scope.compareArr.length; i++) {
       if ($scope.compareArr[i] === facility.id) { //find facility to removed
         $scope.compareArr.splice(i,1); //remove from array
-        break; //can stop looping if facility added
+        break; //can stop looping if facility found
       }
     }
-    console.log($scope.compareArr)
   };
-
-  //send array of facilities to be compared
-  // $scope.compare = function () {
-  //   console.log($scope.compareArr);
-  // };
 
   $scope.compareFacilities=function () {
     let compareArr = $scope.compareArr.join();
@@ -357,7 +229,6 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
     }
 
     dataService.add('preferredFacilities', facilityObj).then(function (response) {
-      // console.log(response)
       if (response.data.status === 'success') {
         $state.go('listingPreferred')
       } else {
@@ -372,21 +243,7 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
     $state.go('listingView');
   };
 
-  //
-  // //route to listing view page; set selected facility
-  // $scope.viewFacility=function (i) {
-  //   console.log('view facility', $scope.facilities[i]);
-  //   facilityService.set($scope.facilities[i]);
-  //   $state.go('listingView');
-  // };
-  //
-  // $scope.getPreferredList = function () {
-  //   $state.go('listingPreferred');
-  // };
-
   $scope.initMap = function () {
-    // console.log('getting map')
-    // console.log($scope.facilities, $scope.hospitalArr)
     map = new google.maps.Map(document.getElementById('map'), {
         center: { lat: initLat, lng: initLng },
         zoom: 11
@@ -528,13 +385,6 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
 
         };
       })(marker, i));
-
-      // //route to facility on click on marker
-      // google.maps.event.addListener(marker, 'click', (function (marker, i) {
-      //   return function() {
-      //     $scope.viewFacility(i);
-      //   };
-      // })(marker, i));
     }
 
     //function to trigger mouseover event on marker
@@ -587,7 +437,6 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
   }
 
   function addHighlightCard(i) {
-    // console.log($scope.facilities[i])
     let cardId = "card-" + i
     let card = document.getElementById(cardId)
     card.scrollIntoView({behavior: "smooth"});
@@ -604,12 +453,8 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
   function removeHighlightCard(i) {
     let cardId = "card-" + i
     let card = document.getElementById(cardId)
-    // card.scrollIntoView({behavior: "smooth"});
-    // card.scrollTop += 60;
     card.classList.remove('highlight')
   }
-
-
+  
   setSearch()
-
 });
