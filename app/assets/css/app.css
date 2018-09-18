@@ -149,11 +149,47 @@ body {
   height: 100%;
 }
 
-#login #login-image {
+#login .full-width {
+  width: 100%;
+}
+
+#login .float-right {
+  float: right;
+}
+
+#login .image-wrapper {
   background-image: url("/app/images/login.jpg");
   background-size: cover;
   background-position: center center;
   height: 100%;
+  flex: 70;
+}
+
+#login .login-wrapper {
+  flex: 30;
+  position: relative;
+}
+
+#login .login-box {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+#login .login-field {
+  background-color: white;
+  margin: 0 30px;
+}
+
+@media (max-width: 415px) {
+  #login .image-wrapper {
+    width: 100%;
+    position: fixed;
+  }
+
+  #login .login-field {
+    padding: 0 20px;
+  }
 }
 
 #listing-create {
@@ -841,11 +877,47 @@ body {
   height: 100%;
 }
 
-#signup #signup-image {
+#signup .full-width {
+  width: 100%;
+}
+
+#signup .float-right {
+  float: right;
+}
+
+#signup .image-wrapper {
   background-image: url("/app/images/login.jpg");
   background-size: cover;
   background-position: center center;
   height: 100%;
+  flex: 70;
+}
+
+#signup .signup-wrapper {
+  flex: 30;
+  position: relative;
+}
+
+#signup .signup-box {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+#signup .signup-field {
+  background-color: white;
+  margin: 0 30px;
+}
+
+@media (max-width: 415px) {
+  #signup .image-wrapper {
+    width: 100%;
+    position: fixed;
+  }
+
+  #signup .signup-field {
+    padding: 0 20px;
+  }
 }
 
 #listing-view-images md-dialog {

@@ -1,35 +1,32 @@
 <div id="signup" layout="row" style="height:100%">
-  <div id="signup-image" style="flex:70;"></div>
-    <div id="signup-box" style="flex:30;position:relative">
-      <div style="position:absolute; top:50%; transform:translateY(-50%)">
-      <md-content style="background-color:white;margin:0 30px">
-        <h1 class="md-display-2" style-"color:blue">Sign Up</h1>
+  <div class="image-wrapper"></div>
+    <div class="signup-wrapper">
+      <div class="signup-box">
+      <md-content class="signup-field">
+        <h1 class="md-display-2">Sign Up</h1>
         <p class="md-body-1">Please enter username, password and select role to sign up. If you have an account, please login.</p>
       </md-content>
-      <md-content style="background-color:white;margin:0 30px">
+      <md-content class="signup-field">
         <div>
           <form name="userForm">
-            <md-input-container class="md-block" style="width:100%">
+            <md-input-container class="md-block full-width">
               <label>Email</label>
               <input ng-model="email">
             </md-input-container>
-            <md-input-container class="md-block" style="width:100%">
+            <md-input-container class="md-block full-width">
               <label>Password</label>
               <input ng-model="password">
             </md-input-container>
-            <md-input-container style="width:100%">
+            <md-input-container class="full-width">
              <label>Role</label>
              <md-select ng-model="role" placeholder="Select Role" class="md-no-underline">
                 <md-option value="user">User</md-option>
-                <!-- <md-option value="sword">Sword</md-option> -->
-                <!-- <md-option value="wand">Wand</md-option> -->
-                <!-- <md-option value="pen">Pen?</md-option> -->
               </md-select>
            </md-input-container>
           </form>
         </div>
-        <md-button ng-click="login()" style="float:right">LOGIN</md-button>
-        <md-button class="md-raised md-cornered" style="float:right" ng-click="signup()">SIGN UP</md-button>
+        <md-button ng-click="login()" class="float-right">LOGIN</md-button>
+        <md-button class="md-raised md-cornered float-right" ng-click="signup()">SIGN UP</md-button>
       </md-content>
     </div>
   </div>

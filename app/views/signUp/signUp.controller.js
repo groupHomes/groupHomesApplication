@@ -14,13 +14,9 @@ app.controller('SignUpController', function($scope, $rootScope, $state, dataServ
     };
 
     dataService.add('user', signinfo).then(function (response) {
-      console.log(response);
       if (response.data.status === 'success') {
         userService.set(signinfo);
         $state.go('listingSearch')
-        // $rootScope.$on('$locationChangeStart', function (event, current, previous) {
-        //   console.log("Previous URL: " + previous);
-        // }
       }
     });
   };

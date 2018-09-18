@@ -1,19 +1,39 @@
 #signup{
-
-// position: fixed;
-// top:66px;
-// bottom:0;
-height:100%;
-  #signup-image {
+  height:100%;
+  .full-width {
+    width: 100%
+  }
+  .float-right {
+    float: right;
+  }
+  .image-wrapper {
     background-image: url(/app/images/login.jpg);
     background-size: cover;
     background-position: center center;
     height: 100%;
-    // top: 0;
-    // bottom:0;
-    // left: 0;
-    // width:70%;
-    // position: fixed;
-    // height:100%;
+    flex: 70
+  }
+  .signup-wrapper {
+    flex: 30;
+    position: relative
+  }
+  .signup-box {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%)
+  }
+  .signup-field {
+    background-color: white;
+    margin:0 30px
+  }
+
+  @media (max-width: 415px) {
+    .image-wrapper {
+      width: 100%;
+      position: fixed;
+    }
+    .signup-field {
+      padding: 0 20px
+    }
   }
 }

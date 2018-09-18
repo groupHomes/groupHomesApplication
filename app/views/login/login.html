@@ -1,69 +1,27 @@
 <div id="login" layout="row">
-  <div id="login-image" style="flex:70;"></div>
-  <div id="login-box" style="flex:30;position:relative">
-    <div style="position:absolute; top:50%; transform:translateY(-50%)">
-    <md-content style="background-color:white;margin:0 30px">
-      <h1 class="md-display-2" style-"color:blue">Login</h1>
+  <div class="image-wrapper"></div>
+  <div class="login-wrapper">
+    <div class="login-box">
+    <md-content class="login-field">
+      <h1 class="md-display-2">Login</h1>
       <p class="md-body-1">Please enter username and password to login. If you do not have an account, please sign up.</p>
     </md-content>
-    <md-content style="background-color:white;margin:0 30px">
+    <md-content class="login-field">
       <div>
         <form name="userForm">
-          <md-input-container class="md-block" style="width:100%">
+          <md-input-container class="md-block full-width">
             <label>Email</label>
             <input ng-model="email">
           </md-input-container>
-          <md-input-container class="md-block" style="width:100%">
+          <md-input-container class="md-block full-width">
             <label>Password</label>
             <input type="password" ng-model="password">
           </md-input-container>
         </form>
       </div>
-      <md-button class="md-raised md-cornered" ng-click="login()" style="float:right">LOGIN</md-button>
-      <md-button style="float:right" ng-click="signup()">SIGN UP</md-button>
+      <md-button class="md-raised md-cornered float-right" ng-click="login()">LOGIN</md-button>
+      <md-button class="float-right" ng-click="signup()">SIGN UP</md-button>
     </md-content>
   </div>
-
   </div>
-
-    <!-- <div id="tagline" class="col-md-7 col-md-offset-5">
-      <h2>Insert Tagline</h2>
-      <md-button> Accept </md-button>
-      <md-button class="md-warn">Careful</md-button>
-      <md-checkbox ng-model="data.cb1" aria-label="Checkbox 1">
-           Checkbox 1: {{ data.cb1 }}
-         </md-checkbox>
-         <md-button><md-icon class='mdi mdi-plus-circle'></md-icon>New Classified</md-button>
-         <md-content layout-gt-sm="row" layout-padding>
-             <div>
-               <md-input-container>
-                 <label>Title</label>
-                 <input ng-model="user.title">
-               </md-input-container>
-
-               <md-input-container>
-                 <label>Email</label>
-                 <input ng-model="user.email" type="email">
-               </md-input-container>
-             </div>
-           </md-content>
-      <h5>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut quis ligula ut arcu aliquet dictum. Nunc libero sem, luctus non risus a, volutpat malesuada orci. Etiam sollicitudin dui nec nibh malesuada gravida. Morbi sollicitudin id odio in ultrices. Nullam sagittis velit nec bibendum pellentesque.
-        Nunc libero sem, luctus non risus a, volutpat malesuada orci. Etiam sollicitudin dui nec nibh malesuada gravida. Morbi sollicitudin id odio in ultrices. Nullam sagittis velit nec bibendum pellentesque.
-      </h5>
-      <form id="sign-in-form">
-        <div class="inline-input">
-          <input type="text" class="form-control login-width" id="email" placeholder="Email" ng-model='email'>
-          <md-input-container>
-            <label>Title</label>
-            <input ng-model="user.title">
-          </md-input-container>
-
-          <input type="password" class="form-control login-width" id="password" placeholder="Password" ng-model="password">
-        </div>
-        <button type="submit" class="btn btn-primary btn-block" ng-click="login()">Login</button> -->
-      <!-- </form> -->
-    <!-- </div> -->
-  <!-- </div> -->
-
 </div>
