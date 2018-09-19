@@ -310,22 +310,47 @@ body {
 }
 
 #listing-preferred {
+  margin-top: 65px;
+  padding: 15px 15px 0 15px;
+  background-color: #FFF;
+  /* General */
   /* Always set the map height explicitly to define the size of the div
-    * element that contains the map. */
-  /* Optional: Makes the sample page fill the window. */
-}
-
-#listing-preferred #map {
-  height: calc(100vh - 140px);
-}
-
-#listing-preferred .card {
-  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+  * element that contains the map. */
+  /* map info box */
+  /* card section */
 }
 
 #listing-preferred div:focus {
   outline: none;
   border: 0;
+}
+
+#listing-preferred li:hover {
+  cursor: pointer;
+}
+
+#listing-preferred .bold {
+  font-weight: bold;
+}
+
+#listing-preferred .grey {
+  color: grey;
+}
+
+#listing-preferred .no-margin {
+  margin: 0;
+}
+
+#listing-preferred .map-wrapper {
+  width: 40%;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  top: 66px;
+}
+
+#listing-preferred #map {
+  height: calc(100vh - 66px);
 }
 
 #listing-preferred .gm-style-iw {
@@ -386,112 +411,148 @@ body {
   background: -ms-linear-gradient(top, rgba(255, 255, 255, 0) 0%, white 100%);
 }
 
+#listing-preferred h1 {
+  margin-left: 15px;
+}
+
+#listing-preferred .main-section-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+#listing-preferred .card-section-wrapper {
+  width: 60%;
+}
+
+#listing-preferred .cards-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+#listing-preferred .card-wrapper {
+  margin: 10px;
+  width: 250px;
+}
+
+#listing-preferred .card {
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+  height: 100%;
+  box-sizing: content-box;
+}
+
+#listing-preferred .card-image img {
+  object-fit: cover;
+  width: 100%;
+  height: 200px;
+}
+
+#listing-preferred .card-heart {
+  margin: 10px;
+  color: red;
+}
+
+#listing-preferred .card-info {
+  margin: 10px;
+}
+
 #listing-preferred .active {
   background-color: dodgerblue;
 }
 
-#listing-preferred li:hover {
-  cursor: pointer;
-}
-
-#listing-preferred .info table {
-  border-collapse: collapse;
-  width: 100%;
-}
-
-#listing-preferred .info th,
-#listing-preferred td {
-  text-align: left;
-  padding: 2px !important;
-}
-
-#listing-preferred .info td:first-child {
-  font-weight: bold;
-}
-
-#listing-preferred .info tr:nth-child(even) {
-  background-color: #f2f2f2;
-}
-
-#listing-preferred #floating-panel {
-  /*position: absolute;
-        top: 10px;
-        left: 30%;
-        z-index: 5;*/
-  background-color: #fff;
-  /*padding: 5px;*/
-  border: 1px solid #999;
-  text-align: center;
-  font-family: 'Roboto','sans-serif';
-  line-height: 30px;
-  padding-left: 10px;
-}
-
-#listing-preferred .ui-autocomplete {
-  overflow: auto;
-  height: 300px;
-  width: 300px;
-  z-index: 1000;
-}
-
-#listing-preferred .ui-front {
-  z-index: 500 !important;
-}
-
-#listing-preferred .Layer1,
-#listing-preferred .Layer2,
-#listing-preferred .Layer4,
-#listing-preferred .Layer6,
-#listing-preferred .Layer7 {
-  width: 10px;
-  height: auto;
-  padding-top: 10px;
-  border-radius: 50%;
-  background: #66ff66;
-  margin-top: 6px;
-  margin-left: 6px;
-}
-
-#listing-preferred .Layer1 {
-  background: #66ff66;
-}
-
-#listing-preferred .Layer2 {
-  background: #c299ff;
-}
-
-#listing-preferred .Layer4 {
-  background: #ff99ff;
-}
-
-#listing-preferred .Layer6 {
-  background: #ffff99;
-}
-
-#listing-preferred .Layer7 {
-  background: #ff4d4d;
-}
-
-#listing-preferred .imgLegend {
-  width: 20px;
-  height: 20px;
-}
-
-#listing-preferred .ui-tooltip {
-  border: 1px solid white;
-  background: #111111;
-  color: white;
-}
-
-#listing-preferred .toggler {
-  width: 450px;
-  height: 200px;
+#listing-preferred .map-icon {
   display: none;
-  top: 60px;
-  left: 10px;
-  z-index: 500;
-  position: fixed;
-  padding-left: 10px;
+}
+
+#listing-preferred .close-icon {
+  display: none;
+}
+
+@media (max-width: 425px) {
+  #listing-preferred {
+    /* card section */
+    /* map */
+  }
+
+  #listing-preferred h1 {
+    font-size: 25px;
+  }
+
+  #listing-preferred .hide {
+    display: none;
+  }
+
+  #listing-preferred .show {
+    display: inline-block;
+  }
+
+  #listing-preferred .card-section-wrapper {
+    width: 100%;
+  }
+
+  #listing-preferred .card-wrapper {
+    width: 100%;
+  }
+
+  #listing-preferred .card {
+    width: 100%;
+  }
+
+  #listing-preferred .card-image {
+    width: 100%;
+  }
+
+  #listing-preferred .map-icon {
+    display: inline;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    border: 1px solid #FFF;
+    height: 45px;
+    width: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #FFF;
+    color: #0f0f94;
+    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+    cursor: pointer;
+  }
+
+  #listing-preferred .map-wrapper {
+    display: none;
+    position: fixed;
+    width: 100%;
+    top: 66px;
+    padding: 0;
+    margin: 0;
+  }
+
+  #listing-preferred .map-wrapper #map {
+    height: calc(100vh - 66px);
+  }
+
+  #listing-preferred .close-icon {
+    z-index: 10;
+    display: inline;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    border: 1px solid #FFF;
+    height: 45px;
+    width: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #FFF;
+    color: #0f0f94;
+    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+    cursor: pointer;
+  }
 }
 
 #listing-preview header {
@@ -528,6 +589,7 @@ body {
 #listing-search {
   margin-top: 65px;
   padding: 15px 15px 0 15px;
+  background-color: #FFF;
   /* General */
   /* Always set the map height explicitly to define the size of the div
   * element that contains the map. */
@@ -700,23 +762,10 @@ body {
   box-sizing: content-box;
 }
 
-#listing-search .card-image {
-  width: 250px;
-  height: 200px;
-  overflow: hidden;
-  position: relative;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-}
-
 #listing-search .card-image img {
-  min-width: 100%;
-  min-height: 100%;
-  position: absolute;
-  left: -1000%;
-  right: -1000%;
-  top: -1000%;
-  bottom: -1000%;
-  margin: auto;
+  object-fit: cover;
+  width: 100%;
+  height: 200px;
 }
 
 #listing-search .card-heart {

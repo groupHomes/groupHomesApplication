@@ -1,40 +1,48 @@
-<div id="listing-preferred" style="margin-top:65px;padding:15px 15px 0 15px">
+<div id="listing-preferred">
   <h1>Compare Facilities</h1>
-  <div class="row" style="height:100%;background-color:#FFF">
-    <div class=""style="width:60%">
-      <div style="display:flex;flex-wrap:wrap;justify-content:space-between; padding:20px">
-        <div ng-repeat="facility in facilities track by $index" on-finish-render="ngRepeatFinished" style="margin: 10px">
-          <!--facility card-->
-          <div id="{{ 'card-' + $index }}" class="card" style="width:300px;height:500px" ng-mouseenter="showInfo(facility, $index);" ng-mouseleave="hideInfo(facility,$index);">
-            <!--image-->
-            <div style="width:300px; height:200px;overflow:hidden;position:relative;">
-              <img ng-click="selectFacility(facility)" ng-src="http://18.236.125.242/groupHomes/photos/{{facility.id}}/{{facility.smallPhoto}}"  style="min-width:100%;min-height:100%;position:absolute;left:-1000%;right:-1000%;top:-1000%;bottom:-1000%;margin:auto;">
-            </div>
-            <!--compare heart-->
-            <div style="margin:10px;color:red">
-              <!-- <i class="far fa-heart" ng-hide="compare[$index]" ng-click="addToCompare(facility, $index)"></i> -->
-              <!-- <i class="fas fa-heart" ng-show="compare[$index]" ng-click="removeFromCompare(facility, $index)"></i> -->
-              <i class="fas fa-heart"></i>
-            </div>
-            <div>
-              <div style="font-size:14px;margin:10px;color:grey">Total Beds Available: {{facility.availability}}</div>
-              <div style="font-size:14px;margin:10px;color:grey">Total Beds: {{facility.beds}}</div>
-              <div style="font-size:14px;margin:10px;font-weight:bold">{{facility.name}}</div>
-              <div style="font-size:12px;margin:0 10px 10px 10px;">{{facility.address}},<br> {{facility.city}}, {{facility.state}}, {{facility.zip}}</div>
-              <div style="font-size:12px;margin:0 10px 10px 10px">Pricing</div>
-              <div style="font-size:12px;margin:0 10px 10px 10px">
-                <div ng-if="facility.category1PrivateRange !== '0'"><span style="font-weight:bold">Category 1 Private:</span> ${{facility.category1PrivateRange}}</div>
-                <div ng-if="facility.category1SharedRange !== '0'"><span style="font-weight:bold">Category 1 Shared:</span> ${{facility.category1SharedRange}}</div>
-                <div ng-if="facility.category2PrivateRange !== '0'"><span style="font-weight:bold">Category 2 Private:</span> ${{facility.category2PrivateRange}}</div>
-                <div ng-if="facility.category2SharedRange !== '0'"><span style="font-weight:bold">Category 2 Shared:</span> ${{facility.category2SharedRange}}</div>
+  <div class="row">
+    <main class="main-section-wrapper">
+      <div class="card-section-wrapper" ng-class="{'hide': show}">
+        <div class="cards-wrapper">
+          <div class="card-wrapper" ng-repeat="facility in facilities track by $index" on-finish-render="ngRepeatFinished">
+            <!--facility card-->
+            <div id="{{ 'card-' + $index }}" class="card" ng-mouseenter="showInfo(facility, $index);" ng-mouseleave="hideInfo(facility,$index);">
+              <!--image-->
+              <div class="card-image">
+                <img ng-click="selectFacility(facility)" ng-src="http://18.236.125.242/groupHomes/photos/{{facility.id}}/{{facility.smallPhoto}}">
+              </div>
+              <!--compare heart-->
+              <div class="card-heart">
+                <i class="fas fa-heart"></i>
+              </div>
+              <div class="card-info">
+                <p class="grey">Total Beds Available: {{facility.availability}}</p>
+                <p class="grey">Total Beds: {{facility.beds}}</p>
+                <p class="bold">{{facility.name}}</p>
+                <p>{{facility.address}},<br> {{facility.city}}, {{facility.state}}, {{facility.zip}}</p>
+                <p>Pricing</p>
+                <div>
+                  <p class="no-margin" ng-if="facility.category1PrivateRange !== '0'"><span class="bold">Category 1 Private:</span> ${{facility.category1PrivateRange}}</p>
+                  <p class="no-margin" ng-if="facility.category1SharedRange !== '0'"><span class="bold">Category 1 Shared:</span> ${{facility.category1SharedRange}}</p>
+                  <p class="no-margin" ng-if="facility.category2PrivateRange !== '0'"><span class="bold">Category 2 Private:</span> ${{facility.category2PrivateRange}}</p>
+                  <p class="no-margin" ng-if="facility.category2SharedRange !== '0'"><span class="bold">Category 2 Shared:</span> ${{facility.category2SharedRange}}</p>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="" style="width:40%;padding:30px;position:fixed;right:0;bottom: 0">
-      <div id="map" style=""></div>
-    </div>
+      <!-- end facility cards-->
+      <!--map-->
+      <div class="map-wrapper" ng-class="{'show': show}">
+        <div class="close-icon" ng-click="show = !show"><i class="fa fa-times fa-lg"></i></div>
+        <div id="map" style=""></div>
+      </div>
+      <!--end map-->
+      <!--map icon only visible in mobile-->
+      <div class="map-icon" ng-init="show = false" ng-click="show = !show" ng-class="{'hide': show}">
+        <i class="fas fa-map-marker-alt fa-lg"></i>
+      </div>
+    </main>
   </div>
 </div>

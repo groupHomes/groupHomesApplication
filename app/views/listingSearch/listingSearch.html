@@ -1,7 +1,7 @@
   <div id="listing-search">
     <div class="row">
       <!-- search header nav-->
-      <div class="header-wrapper">
+      <header class="header-wrapper">
         <!--search bar and filter-->
         <div class="search-wrapper">
           <!--search input bar-->
@@ -111,12 +111,12 @@
           <button class="btn btn-default" type="button" ng-disabled="compareArr.length===0" ng-click="compareFacilities()">Compare</button>
           <button class="btn btn-default" ng-if="user.role==='user'"><a ui-sref="listingPreferred">Saved List</a></button>
         </div>
-      </div>
+      </header>
       <!--end search header nav-->
       <main class="main-section-wrapper">
         <!--facility cards-->
         <div class="card-section-wrapper" ng-class="{'hide': show}">
-          <div class="no-results-msg" ng-show="noResults">No Results Found. Please try again.</div>
+          <p class="no-results-msg" ng-show="noResults">No Results Found. Please try again.</p>
           <div class="cards-wrapper">
             <div class="card-wrapper" ng-repeat="facility in facilities track by $index" on-finish-render="ngRepeatFinished">
               <!--facility card-->
@@ -132,8 +132,8 @@
                 </div>
                 <!--facility info-->
                 <div class="card-info">
-                  <div class="lightgrey" >Total Beds: {{facility.beds}}</div>
-                  <div class="bold">{{facility.name}}</div>
+                  <p class="lightgrey" >Total Beds: {{facility.beds}}</p>
+                  <p class="bold">{{facility.name}}</p>
                 </div>
               </div><!--end facility card-->
             </div><!--end ng repeat-->

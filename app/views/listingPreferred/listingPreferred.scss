@@ -1,193 +1,215 @@
 #listing-preferred {
-  // height: 100vh;
-  // margin-top: 60px;
-  //      height: 100%;
-  //      margin: 0;
-  //      padding: 0;
-  //      font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
-  //      overflow: hidden;
-    /* Always set the map height explicitly to define the size of the div
-    * element that contains the map. */
-    #map {
-        height: calc(100vh - 140px); //65+30+30+30
-      // height: 100%;
-      // position: fixed;
-      // width: 50%;
-    }
+  margin-top: 65px;
+  padding: 15px 15px 0 15px;
+  background-color: #FFF;
 
-    .card {
-      box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12)
-    }
-
-    div:focus {
+  /* General */
+  div:focus {
     outline: none;
     border: 0;
- }
-
- // div.gm-style div div div div div div div {
- //   background-color: none !important;
- //   border-radius: none !important;
- //   box-shadow: none !important;
- // }
- .gm-style-iw {
-	width: 350px !important;
-	top: 15px !important;
-	left: 0px !important;
-	background-color: #fff;
-	box-shadow: 0 1px 6px rgba(178, 178, 178, 0.6);
-	border: 1px solid rgba(72, 181, 233, 0.6);
-	border-radius: 2px 2px 10px 10px;
-}
-#iw-container {
-	margin-bottom: 10px;
-}
-#iw-container .iw-title {
-	font-family: 'Open Sans Condensed', sans-serif;
-	font-size: 22px;
-	font-weight: 400;
-	padding: 10px;
-	background-color: #48b5e9;
-	color: white;
-	margin: 0;
-	border-radius: 2px 2px 0 0;
-}
-#iw-container .iw-content {
-	font-size: 13px;
-	line-height: 18px;
-	font-weight: 400;
-	margin-right: 1px;
-	padding: 15px 5px 20px 15px;
-	// max-height: 250px; //
-	overflow-y: auto;
-	overflow-x: hidden;
-}
-.iw-content img {
-	float: right;
-	margin: 0 5px 5px 10px;
-}
-.iw-subTitle {
-	font-size: 16px;
-	font-weight: 700;
-	padding: 5px 0;
-}
-.iw-bottom-gradient {
-	position: absolute;
-	width: 326px;
-	height: 25px;
-	bottom: 10px;
-	right: 18px;
-	background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
-	background: -webkit-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
-	background: -moz-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
-	background: -ms-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
-}
-    /* Optional: Makes the sample page fill the window. */
-    // html, body {
-    //      height: 100%;
-    //      margin: 0;
-    //      padding: 0;
-    //      font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
-    //      overflow: hidden;
-    //  }
-
-    .active {
-        background-color: dodgerblue;
-    }
-
-    li:hover{
-        cursor: pointer;
-    }
-
-    .info table {
-        border-collapse: collapse;
-        width: 100%;
-    }
-
-    .info th, td {
-        text-align: left;
-        padding: 2px !important;
-    }
-
-    .info td:first-child{
-        font-weight: bold;
-    }
-
-    .info tr:nth-child(even) {background-color: #f2f2f2;}
-
-     #floating-panel {
-        /*position: absolute;
-        top: 10px;
-        left: 30%;
-        z-index: 5;*/
-        background-color: #fff;
-        /*padding: 5px;*/
-        border: 1px solid #999;
-        text-align: center;
-        font-family: 'Roboto','sans-serif';
-        line-height: 30px;
-        padding-left: 10px;
+  }
+  li:hover{
+      cursor: pointer;
+  }
+  .bold {
+    font-weight: bold;
+  }
+  .grey {
+    color: grey
+  }
+  .no-margin {
+    margin: 0;
   }
 
-     .ui-autocomplete {
-        overflow: auto;
-        height: 300px;
-        width: 300px;
-        z-index: 1000;
+  /* Always set the map height explicitly to define the size of the div
+  * element that contains the map. */
+  .map-wrapper {
+    width: 40%;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    top: 66px;
+  }
+  #map {
+    height: calc(100vh - 66px);
+  }
+
+  /* map info box */
+  .gm-style-iw {
+  	width: 350px !important;
+  	top: 15px !important;
+  	left: 0px !important;
+  	background-color: #fff;
+  	box-shadow: 0 1px 6px rgba(178, 178, 178, 0.6);
+  	border: 1px solid rgba(72, 181, 233, 0.6);
+  	border-radius: 2px 2px 10px 10px;
+  }
+  #iw-container {
+  	margin-bottom: 10px;
+  }
+  #iw-container .iw-title {
+  	font-family: 'Open Sans Condensed', sans-serif;
+  	font-size: 22px;
+  	font-weight: 400;
+  	padding: 10px;
+  	background-color: #48b5e9;
+  	color: white;
+  	margin: 0;
+  	border-radius: 2px 2px 0 0;
+  }
+  #iw-container .iw-content {
+  	font-size: 13px;
+  	line-height: 18px;
+  	font-weight: 400;
+  	margin-right: 1px;
+  	padding: 15px 5px 20px 15px;
+  	// max-height: 250px; //
+  	overflow-y: auto;
+  	overflow-x: hidden;
+  }
+  .iw-content img {
+  	float: right;
+  	margin: 0 5px 5px 10px;
+  }
+  .iw-subTitle {
+  	font-size: 16px;
+  	font-weight: 700;
+  	padding: 5px 0;
+  }
+  .iw-bottom-gradient {
+  	position: absolute;
+  	width: 326px;
+  	height: 25px;
+  	bottom: 10px;
+  	right: 18px;
+  	background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
+  	background: -webkit-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
+  	background: -moz-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
+  	background: -ms-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
+  }
+
+  /* card section */
+  h1 {
+    margin-left: 15px;
+  }
+  .main-section-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  .card-section-wrapper {
+    width: 60%
+  }
+  .cards-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 20px
+  }
+  .card-wrapper {
+    margin: 10px;
+    width: 250px;
+  }
+  .card {
+    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+    height: 100%;
+    box-sizing: content-box;
+  }
+  .card-image {
+    img {
+      object-fit: cover;
+      width: 100%;
+      height: 200px;
+    }
+  }
+  .card-heart {
+    margin: 10px;
+    color: red
+  }
+  .card-info {
+    margin: 10px;
+  }
+  .active {
+      background-color: dodgerblue;
+  }
+  .map-icon {
+    display: none;
+  }
+  .close-icon {
+    display: none;
+  }
+
+  @media (max-width: 425px) {
+    h1 {
+      font-size: 25px;
+    }
+    .hide {
+      display: none;
+    }
+    .show {
+      display:inline-block;
     }
 
-     .ui-front {
-        z-index: 500 !important;
+    /* card section */
+    .card-section-wrapper {
+      width: 100%
+    }
+    .card-wrapper {
+      width: 100%;
+    }
+    .card {
+      width: 100%;
+    }
+    .card-image {
+      width: 100%
     }
 
-     .Layer1, .Layer2, .Layer4, .Layer6, .Layer7 {
-        width: 10px;
-        height: auto;
-        padding-top: 10px;
-        border-radius: 50%;
-        background: #66ff66;
-        margin-top: 6px;
-        margin-left: 6px;
-     }
-     .Layer1 {
-        background: #66ff66;
+    /* map */
+    .map-icon {
+      display: inline;
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      border: 1px solid #FFF;
+      height: 45px;
+      width: 45px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #FFF;
+      color: #0f0f94;
+      box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+      cursor: pointer;
+    }
+    .map-wrapper {
+      display: none;
+      position: fixed;
+      width: 100%;
+      top: 66px;
+      padding: 0;
+      margin: 0;
+      #map {
+        height: calc(100vh - 66px)
       }
-     .Layer2 {
-        background: #c299ff;
-     }
-     .Layer4 {
-         background: #ff99ff;
-     }
-     .Layer6 {
-         background: #ffff99;
-     }
-     .Layer7 {
-         background: #ff4d4d;
-     }
-     .imgLegend {
-         width: 20px;
-         height: 20px;
-     }
-
-     .LayerLabels {
-
-     }
-      .ui-tooltip {
-        border: 1px solid white;
-        background: #111111;
-        color: white;
-      }
-
-      .toggler {
-        width: 450px;
-        height: 200px;
-        display: none;
-        top: 60px;
-        left: 10px;
-        z-index: 500;
-        position: fixed;
-        padding-left: 10px;
-      }
-
-
-
+    }
+    .close-icon {
+      z-index: 10;
+      display: inline;
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      border: 1px solid #FFF;
+      height: 45px;
+      width: 45px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #FFF;
+      color: #0f0f94;
+      box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+      cursor: pointer;
+    }
+  }
 }

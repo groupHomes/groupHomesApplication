@@ -1,6 +1,7 @@
 #listing-search {
   margin-top: 65px;
   padding: 15px 15px 0 15px;
+  background-color: #FFF;
   /* General */
   .bold {
     font-weight: bold;
@@ -153,20 +154,23 @@
     box-sizing: content-box;
   }
   .card-image {
-    width: 250px;
-    height: 200px;
-    overflow: hidden;
-    position:relative;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    // width: 250px;
+    // height: 200px;
+    // overflow: hidden;
+    // position:relative;
+    // border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     img {
-      min-width: 100%;
-      min-height: 100%;
-      position: absolute;
-      left: -1000%;
-      right: -1000%;
-      top: -1000%;
-      bottom: -1000%;
-      margin: auto;
+      object-fit: cover;
+      width: 100%;
+      height: 200px
+      // min-width: 100%;
+      // min-height: 100%;
+      // position: absolute;
+      // left: -1000%;
+      // right: -1000%;
+      // top: -1000%;
+      // bottom: -1000%;
+      // margin: auto;
     }
   }
   .card-heart {
@@ -224,9 +228,6 @@
       margin: 0 0 10px 0;
       box-shadow: 0 0 2px rgba(0, 0, 0, 0.05)
     }
-    // .preferred {
-    //   justify-content: space-between;
-    // }
     .hide {
       display: none;
     }
