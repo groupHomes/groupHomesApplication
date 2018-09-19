@@ -181,7 +181,7 @@ body {
   margin: 0 30px;
 }
 
-@media (max-width: 415px) {
+@media (max-width: 425px) {
   #login .image-wrapper {
     width: 100%;
     position: fixed;
@@ -909,7 +909,7 @@ body {
   margin: 0 30px;
 }
 
-@media (max-width: 415px) {
+@media (max-width: 425px) {
   #signup .image-wrapper {
     width: 100%;
     position: fixed;
