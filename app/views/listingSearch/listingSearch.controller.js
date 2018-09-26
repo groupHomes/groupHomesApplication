@@ -175,6 +175,7 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
 
     //get new search results
     dataService.search('facility', searchObj).then(function (response) {
+      // console.log(response)
       // console.log('search results', response)
       if (response.data.length === 0){ //no results found
         $scope.noResults = true;
@@ -455,6 +456,6 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
     let card = document.getElementById(cardId)
     card.classList.remove('highlight')
   }
-  
+
   setSearch()
 });

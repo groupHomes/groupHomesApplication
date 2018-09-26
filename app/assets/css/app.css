@@ -95,7 +95,7 @@ body {
   color: red;
 }
 
-@media (max-width: 425px) {
+@media (max-width: 480px) {
   #landingPage .search-wrapper {
     margin: 0 5%;
   }
@@ -181,7 +181,7 @@ body {
   margin: 0 30px;
 }
 
-@media (max-width: 425px) {
+@media (max-width: 480px) {
   #login .image-wrapper {
     width: 100%;
     position: fixed;
@@ -335,7 +335,7 @@ body {
   text-align: center;
 }
 
-@media (max-width: 425px) {
+@media (max-width: 480px) {
   #listing-edit h1 {
     font-size: 28px;
   }
@@ -533,7 +533,7 @@ body {
   display: none;
 }
 
-@media (max-width: 425px) {
+@media (max-width: 480px) {
   #listing-preferred {
     /* card section */
     /* map */
@@ -865,7 +865,7 @@ body {
   display: none;
 }
 
-@media (max-width: 425px) {
+@media (max-width: 480px) {
   #listing-search {
     /* search header */
     /* card section */
@@ -1021,7 +1021,7 @@ body {
   margin: 0 30px;
 }
 
-@media (max-width: 425px) {
+@media (max-width: 480px) {
   #signup .image-wrapper {
     width: 100%;
     position: fixed;
