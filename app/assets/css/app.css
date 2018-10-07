@@ -171,7 +171,7 @@ body {
   margin: 0 30px;
 }
 
-@media (max-width: 480px) {
+@media only screen and (max-device-width: 480px) {
   #login .image-wrapper {
     width: 100%;
     position: fixed;
