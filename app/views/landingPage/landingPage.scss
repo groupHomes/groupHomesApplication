@@ -61,7 +61,7 @@
     color: red
   }
 
-  @media (max-width:480px) {
+  @media screen and (max-width: 480px) {
     .search-wrapper {
       margin: 0 5%
     }
