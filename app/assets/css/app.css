@@ -789,6 +789,19 @@ body {
   padding-left: 30px;
 }
 
+#listing-search .search-result-info {
+  padding: 0 30px;
+}
+
+#listing-search .search-result-text {
+  display: flex;
+  justify-content: space-between;
+}
+
+#listing-search .search-result-button {
+  text-align: right;
+}
+
 #listing-search .main-section-wrapper {
   display: flex;
   flex-direction: column;

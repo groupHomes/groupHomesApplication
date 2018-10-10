@@ -14,7 +14,7 @@
           <div class="filters">
             <!--group home filter-->
             <div class="dropdown">
-              <button id="searchGroupHomeMenu" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Group Home</button>
+              <button id="searchGroupHomeMenu" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Home Type</button>
               <div class="dropdown-menu" aria-labelledby="searchGroupHomeMenu">
                 <div class="form-check">
                   <input id="searchGroupHomeAGC" class="form-check-input" type="checkbox" ng-model="searchFilterObj.searchGroupHomeAGC">
@@ -99,6 +99,13 @@
         <!--facility cards-->
         <div class="card-section-wrapper" ng-class="{'hide': show}">
           <p class="no-results-msg" ng-show="noResults">No Results Found. Please try again.</p>
+          <div class="search-result-info" ng-if="facilities.length !== 0">
+            <div class="search-result-text">
+              <h4>Search result for: {{searchText}}</h4>
+              <h5>{{facilities.length}} facilities found</h5>
+            </div>
+            <div class="search-result-button">Map all facilties</div>
+          </div>
           <div class="cards-wrapper">
             <div class="card-wrapper" ng-repeat="facility in facilities track by $index" on-finish-render="ngRepeatFinished">
               <!--facility card-->

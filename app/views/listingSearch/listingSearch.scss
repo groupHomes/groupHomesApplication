@@ -127,7 +127,16 @@
     color: red;
     padding-left: 30px
   }
-
+  .search-result-info {
+    padding: 0 30px;
+  }
+  .search-result-text {
+    display: flex;
+    justify-content: space-between;
+  }
+  .search-result-button {
+    text-align: right;
+  }
   .main-section-wrapper {
     display: flex;
     flex-direction: column
