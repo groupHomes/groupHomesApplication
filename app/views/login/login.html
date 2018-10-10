@@ -15,7 +15,7 @@
           </md-input-container>
           <md-input-container class="md-block full-width">
             <label>Password</label>
-            <input type="password" ng-model="password">
+            <input type="password" ng-model="password" ng-keyup="$event.keyCode == 13 ? login() : null">
           </md-input-container>
         </form>
       </div>
