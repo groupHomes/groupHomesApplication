@@ -662,6 +662,11 @@ body {
   color: lightgrey;
 }
 
+#listing-search .blue {
+  background-color: #0f0f94;
+  color: #FFF;
+}
+
 #listing-search .map-wrapper {
   width: 40%;
   position: fixed;

@@ -95,6 +95,8 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
     // clear old markers and facilities
     $scope.facilities = [];
     $scope.hospitalArr = [];
+    $scope.toggleShowAll = false;
+
      for (var i = 0; i < $scope.markerArr.length; i++) {
       $scope.markerArr[i].setMap(null);
     }
@@ -103,7 +105,7 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
     for (var i = 0; i < $scope.hospitalMarkerArr.length; i++) {
       $scope.hospitalMarkerArr[i].setMap(null);
     }
-    $scope.markerArr.length=0;
+    $scope.hospitalMarkerArr.length=0;
 
     var searchGender;
     var searchRoomType;
@@ -337,8 +339,20 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
   }
 
   function buildMarkers() {
+    //setting number of markers to show
+    if ($scope.facilities.length < 6) { //if facilities found is less than 6, then show all markers
+      $scope.numMapMarkers = $scope.facilities.length;
+      $scope.toggleShowAll = true;
+    } else if (!$scope.toggleShowAll) { //if facilities found more than 6 and 'Map All' is false, show only 6 markers
+      $scope.numMapMarkers = 6;
+    } else { //if facilities found is more than 6 and 'Mapp All' is true, show all markers
+      $scope.numMapMarkers = $scope.facilities.length
+    }
+
+    var latlng = [];
+
     //hover over markers on map to open infowindow
-    for (i = 0; i < $scope.facilities.length; i++) {
+    for (i = 0; i < $scope.numMapMarkers; i++) {
       //create a marker for each facaility
       marker = new google.maps.Marker({
         position: new google.maps.LatLng($scope.facilities[i].lat, $scope.facilities[i].lng),
@@ -349,8 +363,8 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
       $scope.markerArr.push(marker);
 
       //center map around markers
-      var bounds = new google.maps.LatLngBounds();
-      bounds.extend(marker.position);
+      let facilityLatLng = new google.maps.LatLng($scope.facilities[i].lat, $scope.facilities[i].lng);
+      latlng.push(facilityLatLng);
 
       //click on map markers to open infobox
       google.maps.event.addListener(marker, 'click', (function(marker, i) {
@@ -397,6 +411,13 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
     $scope.hideInfo = function (facility, index) {
       google.maps.event.trigger($scope.markerArr[index], 'mouseout');
     };
+
+    //center map around markers
+    var latlngbounds = new google.maps.LatLngBounds();
+    for (var i = 0; i < latlng.length; i++) {
+      latlngbounds.extend(latlng[i]);
+    }
+    map.fitBounds(latlngbounds);
   }
 
   //set content of infowindow
@@ -455,6 +476,21 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
     let cardId = "card-" + i
     let card = document.getElementById(cardId)
     card.classList.remove('highlight')
+  }
+
+
+
+  $scope.toggleMapAll = function () {
+    $scope.toggleShowAll = !$scope.toggleShowAll
+
+    //clear all markers
+    for (var i = 0; i < $scope.markerArr.length; i++) {
+      $scope.markerArr[i].setMap(null);
+    }
+    $scope.markerArr.length=0;
+
+    //build markers
+    buildMarkers()
   }
 
   setSearch()
