@@ -1,4 +1,4 @@
-app.controller('ListingViewImagesController', function($scope, $uibModalInstance, dataService, facility, CONSTANTS, $mdDialog, facilityPhotos, selectedPhotoIndex) {
+app.controller('ListingViewImagesController', function($scope, $uibModalInstance, dataService, facility, CONSTANTS, $mdDialog, facilityPhotos, selectedPhoto) {
   console.log('listingViewImages');
 
 
@@ -20,11 +20,20 @@ app.controller('ListingViewImagesController', function($scope, $uibModalInstance
   //     });
   //   });
   // };
-  var selectedPhotoIndex = selectedPhotoIndex
+  $scope.selectedPhoto = {largePhoto: selectedPhoto}
+  $scope.facility = facility
+  $scope.facilityPhotos = facilityPhotos
+
+  console.log(selectedPhoto)
+  console.log(facilityPhotos)
   // var facilityPhotos = facilityPhotos
 
-  $scope.facility=facility
-  $scope.selectedPhoto = facilityPhotos[selectedPhotoIndex]
+  function findPhotoIndex() {
+    $scope.selectedPhotoIndex = $scope.facilityPhotos.findIndex(obj => obj.largePhoto === $scope.selectedPhoto.largePhoto)
+    console.log($scope.selectedPhotoIndex)
+  }
+
+
 
   $scope.close=function () {
     $uibModalInstance.close();
@@ -32,18 +41,20 @@ app.controller('ListingViewImagesController', function($scope, $uibModalInstance
 
   $scope.leftPhoto = function () {
     console.log('left')
-    if (selectedPhotoIndex !== 0) {
-      selectedPhotoIndex -= 1;
-      $scope.selectedPhoto = facilityPhotos[selectedPhotoIndex]
+    if ($scope.selectedPhotoIndex !== 0) {
+      $scope.selectedPhotoIndex -= 1;
+      $scope.selectedPhoto = $scope.facilityPhotos[$scope.selectedPhotoIndex]
+      console.log($scope.selectedPhotoIndex)
     }
   }
 
   $scope.rightPhoto = function () {
     console.log('right')
 
-    if (selectedPhotoIndex !== (facilityPhotos.length - 1) )
-    selectedPhotoIndex += 1;
-    $scope.selectedPhoto = facilityPhotos[selectedPhotoIndex]
+    if ($scope.selectedPhotoIndex !== ($scope.facilityPhotos.length - 1) )
+    $scope.selectedPhotoIndex += 1;
+    $scope.selectedPhoto = $scope.facilityPhotos[$scope.selectedPhotoIndex]
   }
 
+  findPhotoIndex()
 })

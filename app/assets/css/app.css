@@ -641,6 +641,12 @@ body {
   height: 100%;
 }
 
+#listing-view .image-wrapper:before {
+  content: "";
+  display: block;
+  padding-top: 75%;
+}
+
 #listing-search {
   margin-top: 65px;
   padding: 15px 15px 0 15px;

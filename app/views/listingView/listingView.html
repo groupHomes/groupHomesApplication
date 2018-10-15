@@ -1,4 +1,45 @@
 <div id="listing-view" style="margin-top:66px;background-color:white;padding-bottom:30px">
+  <!-- <div style="display:flex"> -->
+    <!-- <map-carousel></map-carousel> -->
+    <div id="map-carousel" style="position:relative">
+      <div style="display:flex;">
+        <div class="image-wrapper" style="width: calc(100%/3);position:relative"><img id="img-left" style="width:100%;position:absolute;height: 100%;object-fit: cover;top:0" ng-src="http://18.236.125.242/groupHomes/photos/{{facility.id}}/{{imgLeftPhoto}}" ng-click="showAdvanced($event, imgLeftPhoto)"></img></div>
+        <div class="image-wrapper" style="width: calc(100%/3);position:relative"><img id="img-center" style="width:100%;position:absolute;height: 100%;object-fit: cover;top:0" ng-src="http://18.236.125.242/groupHomes/photos/{{facility.id}}/{{imgCenterPhoto}}" ng-click="showAdvanced($event, imgCenterPhoto)"></img></div>
+        <div class="image-wrapper" style="width: calc(100%/3);position:relative"><img id="img-right" style="width:100%;position:absolute;height: 100%;object-fit: cover;top:0" ng-src="http://18.236.125.242/groupHomes/photos/{{facility.id}}/{{imgRightPhoto}}" ng-click="showAdvanced($event, imgRightPhoto)"></img></div>
+      </div>
+      <div style="position:absolute;top:50%;left:1%; transform:translateY(-27px);color:#FFF; height: 45px; width:45px; background-color:#333333;border-radius:50%;line-height:55px;text-align:center"><i ng-click="slideLeft()" class="fa fa-angle-left fa-2x" aria-hidden="true"></i></div>
+      <div style="position:absolute;top:50%;right:1%;transform:translateY(-27px);color:#FFF; height: 45px; width:45px; background-color:#333333;border-radius:50%;line-height:55px;text-align:center"><i ng-click="slideRight()" class="fa fa-angle-right fa-2x" aria-hidden="true"></i></div>
+    </div>
+
+      <div style="display:flex">
+        <!-- facility info -->
+        <div class="facility-info" style="width:33%;padding:10px">
+          <h3>General Description</h3>
+          <p>{{facility.specialHmFeature}}</p>
+        </div>
+        <!-- map -->
+        <div class="facility-map" style="width: 33%">
+          <div id="detailmap" style=""></div>
+        </div>
+        <!-- hospital info -->
+        <div class="facility-hospital-info" style="width:33%;padding:10px;background-color:lightgrey">
+          <!-- <div style="max-width: 30%; height:501px;border-left:1px solid white;border-bottom:1px solid white;background-color:lightgrey;box-sizing:content-box"> -->
+            <h3>Closest Hospitals</h3>
+            <div ng-repeat="hospital in hospitals" style="height:30%;padding:20px;display:flex;justify-content: space-between">
+              <div style="width:50%">
+                <h4>{{hospital.name}}</h4>
+                <div>City: {{hospital.city}}</div>
+                <div>Distance: {{hospital.distance}}</div>
+              </div>
+              <div style="width:30%"><img ng-src="http://18.236.125.242/groupHomes/photos/HOS/{{hospital.smallPhoto}}" style="object-fit:cover;width:100%;height:100%"></div>
+            </div>
+          <!-- </div> -->
+        </div>
+      </div>
+    </div>
+  <!-- </div> -->
+
+<!--
   <div style="display:flex">
     <div style="width: 50%; height: 500px; border:1px solid white;box-sizing:content-box">
       <img style="height: 100%; width:100%;object-fit: cover" ng-src="{{facility.largePhotoLink}}">
@@ -27,7 +68,7 @@
     <div ng-repeat="facilityPhoto in facilityPhotos track by $index" style="height:100px;width:auto;border:1px solid white; box-sizing:content-box;">
       <img ng-click="showAdvanced($event, $index)" ng-src="http://18.236.125.242/groupHomes/photos/{{facility.id}}/{{facilityPhoto.smallPhoto}}" style="height:100%;">
     </div>
-  </div>
+  </div> -->
   <!-- <header layout=row ng-style="{'background-image': 'url(http://18.236.125.242/groupHomes/photos/' + facility.id + '/' + facility.largePhoto + ')'}">
     <md-button class="md-raised md-cornered" ng-click="showAdvanced($event)" style="position:absolute;right:0;height:0">View Photos</md-button>
   </header>-->

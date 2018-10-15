@@ -23,6 +23,10 @@
 #detailmap {
   height: 100%
 }
-
+  .image-wrapper:before {
+    content: "";
+    display: block;
+    padding-top: 75%
+  }
 
 }
