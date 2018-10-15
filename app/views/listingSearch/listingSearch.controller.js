@@ -8,7 +8,7 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
   var circle, circlemarker;
   var initLat = 36.1699; //36.13842925; //36.125541;
   var initLng = -115.1398; //-115.1717376708;
-  var userKey = "AIzaSyDsWy4Qwn4FJ4iQ8Ufr-GM1FQssMxG1msY";  //"AIzaSyB9I2qkvtn821Tc7cGJ5v9JoX8AUiv6SUw";
+  // var userKey = "AIzaSyDsWy4Qwn4FJ4iQ8Ufr-GM1FQssMxG1msY";  //"AIzaSyB9I2qkvtn821Tc7cGJ5v9JoX8AUiv6SUw";
   var infowindow = new google.maps.InfoWindow();
   //////////GOOGLE MAPS END///////////////////
 
