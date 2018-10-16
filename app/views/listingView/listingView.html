@@ -13,16 +13,16 @@
 
       <div style="display:flex">
         <!-- facility info -->
-        <div class="facility-info" style="width:33%;padding:10px">
+        <div class="facility-info" style="width:calc(100%/3);padding:10px">
           <h3>General Description</h3>
           <p>{{facility.specialHmFeature}}</p>
         </div>
         <!-- map -->
-        <div class="facility-map" style="width: 33%">
+        <div class="facility-map" style="width:calc(100%/3)">
           <div id="detailmap" style=""></div>
         </div>
         <!-- hospital info -->
-        <div class="facility-hospital-info" style="width:33%;padding:10px;background-color:lightgrey">
+        <div class="facility-hospital-info" style="width:calc(100%/3);padding:10px;background-color:lightgrey">
           <!-- <div style="max-width: 30%; height:501px;border-left:1px solid white;border-bottom:1px solid white;background-color:lightgrey;box-sizing:content-box"> -->
             <h3>Closest Hospitals</h3>
             <div ng-repeat="hospital in hospitals" style="height:30%;padding:20px;display:flex;justify-content: space-between">
