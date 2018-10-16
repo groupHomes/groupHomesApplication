@@ -92,6 +92,7 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
 
   //search for facility
   $scope.submit = function (search) {
+    console.log(search)
     // clear old markers and facilities
     $scope.facilities = [];
     $scope.hospitalArr = [];
@@ -175,6 +176,7 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
       medicaid: searchMedicaid
     }
 
+    console.log('searchObj', searchObj)
     //get new search results
     dataService.search('facility', searchObj).then(function (response) {
       // console.log(response)

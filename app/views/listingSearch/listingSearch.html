@@ -8,7 +8,7 @@
           <div class="search-bar input-group">
             <input id="search" class="form-control" type="text" ng-model="searchText" ng-keyup="$event.keyCode == 13 ? submit(searchText) : null" placeholder="Search address..." aria-label="searchButton">
             <span class="input-group-btn">
-              <button id="searchButton" class="btn btn-default" type="button" ng-click="submit(searchText, searchType)" aria-label="searchButton">Search!</button>
+              <button id="searchButton" class="btn btn-default" type="button" ng-click="submit(searchText)" aria-label="searchButton">Search!</button>
             </span>
           </div>
           <div class="filters">
@@ -17,11 +17,11 @@
               <button id="searchGroupHomeMenu" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Home Type</button>
               <div class="dropdown-menu" aria-labelledby="searchGroupHomeMenu">
                 <div class="form-check">
-                  <input id="searchGroupHomeAGC" class="form-check-input" type="checkbox" ng-model="searchFilterObj.searchGroupHomeAGC">
+                  <input id="searchGroupHomeAGC" class="form-check-input" type="checkbox" ng-model="searchFilterObj.searchGroupHomeAGC" ng-change="submit(searchText)">
                   <label class="form-check-label" for="searchGroupHomeAGC">Residential Care</label>
                 </div>
                 <div class="form-check">
-                  <input id="searchGroupHomeHIC" class="form-check-input" type="checkbox"  ng-model="searchFilterObj.searchGroupHomeHIC">
+                  <input id="searchGroupHomeHIC" class="form-check-input" type="checkbox"  ng-model="searchFilterObj.searchGroupHomeHIC" ng-change="submit(searchText)">
                   <label class="form-check-label" for="searchGroupHomeHIC">Individual Residential Care</label>
                 </div>
               </div>
@@ -31,11 +31,11 @@
               <button id="searchRoomTypeMenu" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Room Type</button>
               <div class="dropdown-menu" aria-labelledby="searchRoomTypeMenu">
                 <div class="form-check">
-                  <input id="searchRoomTypePrivate" class="form-check-input" type="checkbox" ng-model="searchFilterObj.searchRoomTypePrivate">
+                  <input id="searchRoomTypePrivate" class="form-check-input" type="checkbox" ng-model="searchFilterObj.searchRoomTypePrivate" ng-change="submit(searchText)">
                   <label class="form-check-label" for="searchRoomTypePrivate">Private</label>
                 </div>
                 <div class="form-check">
-                  <input id="searchRoomTypeShared" class="form-check-input" type="checkbox" ng-model="searchFilterObj.searchRoomTypeShared">
+                  <input id="searchRoomTypeShared" class="form-check-input" type="checkbox" ng-model="searchFilterObj.searchRoomTypeShared" ng-change="submit(searchText)">
                   <label class="form-check-label" for="searchRoomTypeShared">Shared</label>
                 </div>
               </div>
@@ -45,11 +45,11 @@
               <button id="searchRoomGenderMenu" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Gender</button>
               <div class="dropdown-menu" aria-labelledby="searchRoomGenderMenu">
                 <div class="form-check">
-                  <input id="searchGenderMale" class="form-check-input" type="checkbox" ng-model="searchFilterObj.searchGenderMale">
+                  <input id="searchGenderMale" class="form-check-input" type="checkbox" ng-model="searchFilterObj.searchGenderMale" ng-change="submit(searchText)">
                   <label class="form-check-label" for="searchGenderMale">Male</label>
                 </div>
                 <div class="form-check">
-                  <input id="searchGenderFemale" class="form-check-input" type="checkbox" ng-model="searchFilterObj.searchGenderFemale">
+                  <input id="searchGenderFemale" class="form-check-input" type="checkbox" ng-model="searchFilterObj.searchGenderFemale" ng-change="submit(searchText)">
                   <label class="form-check-label" for="searchGenderFemale">Female</label>
                 </div>
               </div>
@@ -70,7 +70,7 @@
               <button id="searchMedicaidMenu" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Medicaid</button>
               <div class="dropdown-menu" aria-labelledby="searchMedicaidMenu">
                 <div class="form-check">
-                  <input id="searchMedicaid" class="form-check-input" type="checkbox" ng-model="searchFilterObj.searchMedicaid">
+                  <input id="searchMedicaid" class="form-check-input" type="checkbox" ng-model="searchFilterObj.searchMedicaid" ng-change="submit(searchText)">
                   <label class="form-check-label" for="searchMedicaid">Yes</label>
                 </div>
               </div>
