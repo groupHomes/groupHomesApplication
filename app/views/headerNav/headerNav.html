@@ -2,6 +2,7 @@
   <div class="nav-bar-container">
     <a ui-sref="listingSearch" class="logo" href="#"></a>
     <div>
+      <a ui-sref="listingSearch" ><div class="nav-item">Search</div></a>
       <a ui-sref="listingEdit" ng-if="(currentPage !== '/listingEdit') && (user.role === 'client')"><div class="nav-item">Edit Listing</div></a>
       <a ui-sref="login" ng-if="user === null"><div class="nav-item">Login</div></a>
       <a ui-sref="signup" ng-if="user === null"><div class="nav-item">Sign Up</div></a>
