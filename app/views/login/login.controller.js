@@ -28,6 +28,9 @@ app.controller('LoginController', function($scope, $state, dataService, userServ
             $state.go('listingCreate');
           }
         });
+      } else if (response.data[0].role === 'admin') {
+        userService.set(response.data[0]);
+        $state.go('facilitiesEdit')
       }
     });
   };
