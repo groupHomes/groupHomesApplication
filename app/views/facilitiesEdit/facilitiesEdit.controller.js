@@ -2,16 +2,8 @@ app.controller('FacilitiesEditController', function($scope, dataService) {
   console.log('facilitiesEdit');
 
   function getFacilities() {
-    var searchObj = {
-      address: 'Las Vegas',
-      facilitytype: "'AGC', 'HIC'",
-      roomtype: "'Shared', 'Private'",
-      gender: "'Female', 'Male'",
-      price: 9999,
-      medicaid: "Y"
-    }
-
-    dataService.search('facility', searchObj).then(function (response) {
+    dataService.get('facilitiesAdmin').then(function (response) {
+      console.log(response)
       $scope.facilities = response.data;
       $scope.originalList = angular.copy($scope.facilities)
     })
