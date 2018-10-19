@@ -4,18 +4,18 @@ app.controller('ListingViewController', function($scope, $uibModal, dataService,
 
 
   function getFacilityInfo() {
-    // $scope.facility=facilityService.get();
-    // getAllFacilityPhotos()
-    // getHospitals()
+    $scope.facility=facilityService.get();
+    getAllFacilityPhotos()
+    getHospitals()
     //TESTING
-    dataService.get('facility', {id: 4729}).then(function (response) {
-      console.log('facility', response.data[0]);
-      $scope.facility=response.data[0];
-      console.log($scope.facility);
-
-      getAllFacilityPhotos()
-      getHospitals()
-    });
+    // dataService.get('facility', {id: 4729}).then(function (response) {
+    //   console.log('facility', response.data[0]);
+    //   $scope.facility=response.data[0];
+    //   console.log($scope.facility);
+    //
+    //   getAllFacilityPhotos()
+    //   getHospitals()
+    // });
   }
 
   function getUserInfo() {
