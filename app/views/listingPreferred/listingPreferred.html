@@ -22,10 +22,10 @@
                 <p>{{facility.address}},<br> {{facility.city}}, {{facility.state}}, {{facility.zip}}</p>
                 <p>Pricing</p>
                 <div>
-                  <p class="no-margin" ng-if="facility.category1PrivateRange !== '0'"><span class="bold">Category 1 Private:</span> ${{facility.category1PrivateRange}}</p>
-                  <p class="no-margin" ng-if="facility.category1SharedRange !== '0'"><span class="bold">Category 1 Shared:</span> ${{facility.category1SharedRange}}</p>
-                  <p class="no-margin" ng-if="facility.category2PrivateRange !== '0'"><span class="bold">Category 2 Private:</span> ${{facility.category2PrivateRange}}</p>
-                  <p class="no-margin" ng-if="facility.category2SharedRange !== '0'"><span class="bold">Category 2 Shared:</span> ${{facility.category2SharedRange}}</p>
+                  <p class="no-margin" ng-if="(facility.category1PrivateMinRange !== 0) && (facility.category1PrivateMaxRange !== 0)"><span class="bold">Category 1 Private:</span> ${{facility.category1PrivateMinRange}} - ${{facility.category1PrivateMaxRange}}</p>
+                  <p class="no-margin" ng-if="(facility.category1SharedMinRange !== 0) && (facility.category1SharedMaxRange !== 0)"><span class="bold">Category 1 Shared:</span> ${{facility.category1SharedMinRange}} - ${{facility.category1SharedMaxRange}}</p>
+                  <p class="no-margin" ng-if="(facility.category2PrivateMinRange !== 0) && (facility.category2PrivateMaxRange !== 0)"><span class="bold">Category 2 Private:</span> ${{facility.category2PrivateMinRange}} - ${{facility.category2PrivateMaxRange}}</p>
+                  <p class="no-margin" ng-if="(facility.category2SharedMinRange !== 0) && (facility.category2SharedMaxRange !== 0)"><span class="bold">Category 2 Shared:</span> ${{facility.category2SharedMinRange}} - ${{facility.category2SharedMaxRange}}</p>
                 </div>
               </div>
             </div>
