@@ -1,0 +1,18 @@
+<div id="facilities-edit">
+  <div class="row" style="margin:0;padding:20px" ng-repeat="facility in facilities">
+    <form name="form" style="width:100%">
+      <md-card class="card" style="padding:20px;width:100%">
+        <h3 class="headline" style="">{{facility.name}}</h3>
+        <md-input-container class="md-block">
+          <label>Description of Facility</label>
+          <textarea ng-model="facility.specialHmFeature" md-select-on-focus ng-disabled="!edit"></textarea>
+        </md-input-container>
+        <div style="display:flex;justify-content:flex-end">
+          <md-button class="md-raised md-cornered" ng-hide="edit" ng-click="edit=!edit" style="width:20%;float:right">Edit</md-button>
+          <md-button class="md-raised md-cornered" ng-hide="!edit" ng-click="submit(facility); edit=!edit" style="width:20%;float:right">Save</md-button>
+          <md-button class="md-raised md-cornered" ng-hide="!edit" ng-click="edit=!edit; reset($index)" style="width:20%;float:right">Cancel</md-button>
+        </div>
+      </md-card>
+    </form>
+  </div>
+</div>
