@@ -22,8 +22,8 @@ app.controller('LandingPageController', function($scope, $state, dataService, se
       facilitytype: searchType,
       roomtype: "'Shared', 'Private'",
       gender: "'Female', 'Male'",
-      minprice: 0,
-      maxprice: 9999
+      minprice: 1000,
+      maxprice: 3000
     };
 
     //sending searchObj to api
