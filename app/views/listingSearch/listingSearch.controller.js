@@ -36,8 +36,8 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
         searchGenderFemale: true,
         searchRoomTypePrivate: true,
         searchRoomTypeShared: true,
-        searchMinPrice: 1000,
-        searchMaxPrice: 3000,
+        searchMinPrice: 0,
+        searchMaxPrice: 9999,
         searchMedicaid: false
       }
       $scope.initMap();
@@ -169,15 +169,15 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
     //   default:
     // }
     if (!$scope.searchFilterObj.searchMaxPrice) {
-      $scope.searchFilterObj.searchMaxPrice = 3000
-      searchMaxPrice = 3000
+      $scope.searchFilterObj.searchMaxPrice = 9999
+      searchMaxPrice = 9999
     } else {
       searchMaxPrice = $scope.searchFilterObj.searchMaxPrice
     }
 
     if (!$scope.searchFilterObj.searchMinPrice) {
-      $scope.searchFilterObj.searchMinPrice = 1000
-      searchMinPrice = 1000
+      $scope.searchFilterObj.searchMinPrice = 0
+      searchMinPrice = 0
     } else {
       searchMinPrice = $scope.searchFilterObj.searchMinPrice
     }
