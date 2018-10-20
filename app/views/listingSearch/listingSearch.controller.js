@@ -36,7 +36,8 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
         searchGenderFemale: true,
         searchRoomTypePrivate: true,
         searchRoomTypeShared: true,
-        searchPrice: 'Any Price',
+        searchMinPrice: 1000,
+        searchMaxPrice: 3000,
         searchMedicaid: false
       }
       $scope.initMap();
@@ -111,7 +112,8 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
     var searchGender;
     var searchRoomType;
     var searchFacilityType;
-    var searchPrice;
+    var searchMinPrice;
+    var searchMaxPrice;
     var searchMedicaid;
 
     //setting search gender
@@ -119,8 +121,10 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
       searchGender = "'Female', 'Male'"
     } else if($scope.searchFilterObj.searchGenderMale) {
       searchGender = "'Male'"
-    } else {
+    } else if ($scope.searchFilterObj.searchGenderFemale){
       searchGender = "'Female'"
+    } else {
+      searchGender = "'Female', 'Male'"
     }
 
     //setting room type
@@ -128,8 +132,10 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
       searchRoomType = "'Shared', 'Private'"
     } else if($scope.searchFilterObj.searchRoomTypeShared) {
       searchRoomType = "'Shared'"
-    } else {
+    } else if($scope.searchFilterObj.searchRoomTypePrivate) {
       searchRoomType = "'Private'"
+    } else {
+      searchRoomType = "'Shared', 'Private'"
     }
 
     //setting group home type
@@ -137,28 +143,43 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
       searchFacilityType = "'AGC', 'HIC'"
     } else if($scope.searchFilterObj.searchGroupHomeAGC) {
       searchFacilityType = "'AGC'"
-    } else {
+    } else if($scope.searchFilterObj.searchGroupHomeHIC){
       searchFacilityType = "'HIC'"
+    } else {
+      searchFacilityType = "'AGC', 'HIC'"
     }
 
     //setting price
-    switch ($scope.searchFilterObj.searchPrice) {
-      case '< $1000':
-        searchPrice = 1000;
-        break;
-      case '< $2000':
-        searchPrice = 2000;
-        break;
-      case '< $3000':
-        searchPrice = 3000;
-        break;
-      case '< $4000':
-        searchPrice = 4000;
-        break;
-      case 'Any Price':
-        searchPrice = 9999;
-        break;
-      default:
+    // switch ($scope.searchFilterObj.searchPrice) {
+    //   case '< $1000':
+    //     searchPrice = 1000;
+    //     break;
+    //   case '< $2000':
+    //     searchPrice = 2000;
+    //     break;
+    //   case '< $3000':
+    //     searchPrice = 3000;
+    //     break;
+    //   case '< $4000':
+    //     searchPrice = 4000;
+    //     break;
+    //   case 'Any Price':
+    //     searchPrice = 9999;
+    //     break;
+    //   default:
+    // }
+    if (!$scope.searchFilterObj.searchMaxPrice) {
+      $scope.searchFilterObj.searchMaxPrice = 3000
+      searchMaxPrice = 3000
+    } else {
+      searchMaxPrice = $scope.searchFilterObj.searchMaxPrice
+    }
+
+    if (!$scope.searchFilterObj.searchMinPrice) {
+      $scope.searchFilterObj.searchMinPrice = 1000
+      searchMinPrice = 1000
+    } else {
+      searchMinPrice = $scope.searchFilterObj.searchMinPrice
     }
 
     //setting medicaid
@@ -172,7 +193,8 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
       facilitytype: searchFacilityType,
       roomtype: searchRoomType,
       gender: searchGender,
-      price: searchPrice,
+      minprice: searchMinPrice,
+      maxprice: searchMaxPrice,
       medicaid: searchMedicaid
     }
 
@@ -482,16 +504,14 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
 
 
 
+  //toggle map markers
   $scope.toggleMapAll = function () {
     $scope.toggleShowAll = !$scope.toggleShowAll
-
     //clear all markers
     for (var i = 0; i < $scope.markerArr.length; i++) {
       $scope.markerArr[i].setMap(null);
     }
     $scope.markerArr.length=0;
-
-    //build markers
     buildMarkers()
   }
 

@@ -56,13 +56,16 @@
             </div>
             <!--price filter-->
             <div class="dropdown">
-              <button id="searchRoomPriceMenu" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{searchFilterObj.searchPrice}}</button>
-              <div class="dropdown-menu" aria-labelledby="searchRoomPriceMenu">
-                <a class="dropdown-item" ng-click="searchFilterObj.searchPrice = '< $1000'">< $1000</a>
+              <button id="searchRoomPriceMenu" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">${{searchFilterObj.searchMinPrice}} - ${{searchFilterObj.searchMaxPrice}} </button>
+              <div class="dropdown-menu" style="padding:20px" aria-labelledby="searchRoomPriceMenu">
+                <div style="display:flex;align-items: center">
+                  <input type="number" class="form-control" style="width: 100px;margin-right:10px" ng-model="searchFilterObj.searchMinPrice" onKeyPress="if(this.value.length===4) return false;" placeholder="$ Min"> to <input type="number" class="form-control" style="width: 100px;margin-left:10px" ng-model="searchFilterObj.searchMaxPrice" onKeyPress="if(this.value.length===4) return false;" placeholder="$ Max"></div>
+                <a style="cursor: pointer;float:right;margin-top:10px;color:#0f0f94" ng-click="submit(searchText)">Apply</a>
+                <!-- <a class="dropdown-item" ng-click="searchFilterObj.searchPrice = '< $1000'">< $1000</a>
                 <a class="dropdown-item" ng-click="searchFilterObj.searchPrice = '< $2000'">< $2000</a>
                 <a class="dropdown-item" ng-click="searchFilterObj.searchPrice = '< $3000'">< $3000</a>
                 <a class="dropdown-item" ng-click="searchFilterObj.searchPrice = '< $4000'">< $4000</a>
-                <a class="dropdown-item" ng-click="searchFilterObj.searchPrice = 'Any Price'">Any Price</a>
+                <a class="dropdown-item" ng-click="searchFilterObj.searchPrice = 'Any Price'">Any Price</a> -->
               </div>
             </div>
             <!--medicare-->

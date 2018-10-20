@@ -784,7 +784,7 @@ body {
   border-radius: .25em;
   height: 45px;
   border: 1px solid #ced4da;
-  width: 115px;
+  width: 130px;
   margin-left: 10px;
 }
 
@@ -819,6 +819,7 @@ body {
 }
 
 #listing-search .main-section-wrapper {
+  width: 100%;
   display: flex;
   flex-direction: column;
 }

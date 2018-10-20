@@ -9,7 +9,8 @@ app.constant('CONSTANTS', {
         getAll: 'getAllFacilities',
         edit: 'editFacility',
         // search: 'getAllFacilitiesByAddress',
-        search: 'getAllFacilitiesByAddressV2',
+        // search: 'getAllFacilitiesByAddressV2',
+        search: 'getAllFacilitiesByAddressV2Range',
       },
       facilityRooms: {
         get: 'getFacilityRooms',
