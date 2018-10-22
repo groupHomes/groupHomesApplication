@@ -273,7 +273,8 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
   $scope.initMap = function () {
     map = new google.maps.Map(document.getElementById('map'), {
         center: { lat: initLat, lng: initLng },
-        zoom: 11
+        // zoom: 11,
+        maxZoom: 13
     });
     buildInfowindow();
     buildMarkers();
