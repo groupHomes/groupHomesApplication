@@ -320,7 +320,7 @@ app.controller('ListingEditController', function($scope, $q, $location, $http, $
       payload.append('ADDEDBY', 'test');
       payload.append('TITLE', 'test');
       payload.append('NOTES', 'test');
-      payload.append('FILE', ...file);
+      payload.append('FILE', file);
 
       console.log('files to be uploaded', file);
       console.log('Payload: ', payload);
