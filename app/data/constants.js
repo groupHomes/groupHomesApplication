@@ -19,6 +19,7 @@ app.constant('CONSTANTS', {
       },
       facilityBed: {
         add: 'addFacilityBed',
+        delete: 'deleteFacilityBed',
         edit: 'editFacilityBed'
       },
       facilitiesAdmin: {
