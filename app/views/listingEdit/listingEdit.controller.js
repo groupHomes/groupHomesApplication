@@ -316,7 +316,7 @@ app.controller('ListingEditController', function($scope, $q, $location, $http, $
 
       var payload = new FormData();
 
-      payload.append('FACILLITYID', $scope.userFacility.id);
+      payload.append('facilityid', $scope.userFacility.id);
       payload.append('ADDEDBY', 'test');
       payload.append('TITLE', 'test');
       payload.append('NOTES', 'test');

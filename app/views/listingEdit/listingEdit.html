@@ -201,10 +201,22 @@
         <!--photos-->
         <md-card class="card">
           <h1 class="headline" style="">Photos</h1>
-          <!--multiple-->
+          <!--primary photo-->
+          <div layout="row" layout-align="space-between center">
+            <md-button style="margin-left: 0px" class="md-raised md-cornered" ngf-multiple="false" ngf-select=selectFiles(files) ng-model="files" name="files" ngf-pattern="'image/*'"
+            ngf-accept="'image/*'">Select Primary Photo</md-button>
+           </div>
+
+          <div style="display:flex;flex-wrap:wrap">
+            <div class="thumb" ng-repeat="file in thumbnailArr" style="margin-right:10px; margin-bottom:10px">
+              <img ng-src="{{file}}" style="max-height:50px;width:auto;">
+              <div class="thumb-text"><i class="fa fa-trash fa-2x" style="color:red;line-height:58px" ng-click="remove($index, file)"></i></div>
+            </div>
+          </div>
+          <!--multiple internal photos-->
           <div layout="row" layout-align="space-between center">
             <md-button style="margin-left: 0px" class="md-raised md-cornered" ngf-multiple="true" ngf-select=selectFiles(files) ng-model="files" name="files" ngf-pattern="'image/*'"
-            ngf-accept="'image/*'">Select Photos</md-button>
+            ngf-accept="'image/*'">Select All Other Photos</md-button>
            </div>
 
           <div style="display:flex;flex-wrap:wrap">
