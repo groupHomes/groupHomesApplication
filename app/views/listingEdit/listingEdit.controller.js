@@ -316,10 +316,8 @@ app.controller('ListingEditController', function($scope, $q, $location, $http, $
 
       var payload = new FormData();
 
-      payload.append('FACILLITYID', $scope.userFacility.id);
-      payload.append('ADDEDBY', 'test');
-      payload.append('TITLE', 'test');
-      payload.append('NOTES', 'test');
+      payload.append('facilityId', $scope.userFacility.id);
+      payload.append('primaryPhoto', 'Y');
       payload.append('FILE', file);
 
       console.log('files to be uploaded', file);
