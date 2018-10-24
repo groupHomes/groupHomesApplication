@@ -32,16 +32,17 @@ app.constant('CONSTANTS', {
         get: 'getFacilityRoomBed'
       },
       photo: {
-        get: 'getFacilityPhotos'
+        get: 'getFacilityPhotos',
+        add: 'addGroupHomePhoto'
       },
-      patientUpload: {
-        add: 'addPatientUpload',
-        delete: 'deletePatientUpload',
-        get: 'getPatientUpload'
-      },
-      patientUploadFile: {
-        get: 'getPatientUploadFile'
-      },
+      // patientUpload: {
+      //   add: 'addPatientUpload',
+      //   delete: 'deletePatientUpload',
+      //   get: 'getPatientUpload'
+      // },
+      // patientUploadFile: {
+      //   get: 'getPatientUploadFile'
+      // },
       preferredFacilities: {
         get: 'getAllPreferredFacilities',
         add: 'addPreferredFacility'

@@ -2,12 +2,12 @@ app.controller('ListingCreateController', function($scope, $q,  $http, $state, d
   console.log('listingCreate');
 
 
-  // $scope.userFacilityId=userService.get().facilityId;
+  $scope.userFacilityId=userService.get().facilityId;
   // $scope.userFacilityId=2864; adding didn't work
   // $scope.userFacilityId=4729;
   // $scope.userFacilityId=3750; adding didnt work
   // $scope.userFacilityId=4215;
-  $scope.userFacilityId=4749;
+  // $scope.userFacilityId=4749;
 
   $scope.todayDate = new Date();
   //

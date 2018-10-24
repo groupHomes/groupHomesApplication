@@ -22,6 +22,7 @@ app.controller('ListingEditController', function($scope, $q, $location, $http, $
         console.log(photo)
         var link = 'http://18.236.125.242/groupHomes/photos/' + $scope.userFacility.id + '/' + photo.smallPhoto;
         $scope.thumbnailArr.push(link);
+        console.log($scope.thumbnailArr)
         // $scope.selectedFilesArr.push(link);
       });
     });
@@ -268,6 +269,7 @@ app.controller('ListingEditController', function($scope, $q, $location, $http, $
   //adding photos
   $scope.selectFiles = function (selectedFiles) {
     console.log('selectedFiles', selectedFiles);
+    console.log($scope.selectedFilesArr)
     selectedFiles.forEach(function (file) {
       fileReader.readAsDataUrl(file, $scope).then(function (response) { //convert to base64
         // console.log(response);
@@ -324,7 +326,7 @@ app.controller('ListingEditController', function($scope, $q, $location, $http, $
       console.log('files to be uploaded', file);
       console.log('Payload: ', payload);
 
-      dataService.uploadFile('patientUpload', payload).then(function(response) {
+      dataService.uploadFile('photo', payload).then(function(response) {
         console.log(response);
         if (response.data.status !== "success") {
           alert("failed to upload image");
