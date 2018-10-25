@@ -33,7 +33,8 @@ app.constant('CONSTANTS', {
       },
       photo: {
         get: 'getFacilityPhotos',
-        add: 'addGroupHomePhoto'
+        add: 'addGroupHomePhoto',
+        delete: 'deleteFacilityPhoto'
       },
       // patientUpload: {
       //   add: 'addPatientUpload',

@@ -203,26 +203,30 @@
           <h1 class="headline" style="">Photos</h1>
           <!--primary photo-->
           <div layout="row" layout-align="space-between center">
-            <md-button style="margin-left: 0px" class="md-raised md-cornered" ngf-multiple="false" ngf-select=selectFiles(files) ng-model="files" name="files" ngf-pattern="'image/*'"
-            ngf-accept="'image/*'">Select Primary Photo</md-button>
+            <md-button style="margin-left: 0px" class="md-raised md-cornered" ngf-multiple="false" ngf-select=selectPrimaryPhoto(primaryPhoto) ng-model="primaryPhoto" name="primaryPhoto" ngf-pattern="'.jpg'"
+            ngf-accept="'.jpg'">Select Primary Photo</md-button>
            </div>
 
           <div style="display:flex;flex-wrap:wrap">
-            <div class="thumb" ng-repeat="file in thumbnailArr" style="margin-right:10px; margin-bottom:10px">
-              <img ng-src="{{file}}" style="max-height:50px;width:auto;">
-              <div class="thumb-text"><i class="fa fa-trash fa-2x" style="color:red;line-height:58px" ng-click="remove($index, file)"></i></div>
+            <div ng-repeat="photo in userFacilityPhotos" style="margin-right:10px; margin-bottom:10px">
+              <div class="thumb" ng-if="photo.primaryPhoto==='Y'">
+                <img ng-src="{{photo.photoLink}}" style="max-height:50px;width:auto;">
+                <div class="thumb-text"><i class="fa fa-trash fa-2x" style="color:red;line-height:58px" ng-click="removePhoto(photo)"></i></div>
+              </div>
             </div>
           </div>
           <!--multiple internal photos-->
           <div layout="row" layout-align="space-between center">
-            <md-button style="margin-left: 0px" class="md-raised md-cornered" ngf-multiple="true" ngf-select=selectFiles(files) ng-model="files" name="files" ngf-pattern="'image/*'"
-            ngf-accept="'image/*'">Select All Other Photos</md-button>
+            <md-button style="margin-left: 0px" class="md-raised md-cornered" ngf-multiple="true" ngf-select=selectInternalPhotos(internalPhoto) ng-model="internalPhoto" name="internalPhoto" ngf-pattern="'.jpg'"
+            ngf-accept="'.jpg'">Select All Other Photos</md-button>
            </div>
 
           <div style="display:flex;flex-wrap:wrap">
-            <div class="thumb" ng-repeat="file in thumbnailArr" style="margin-right:10px; margin-bottom:10px">
-              <img ng-src="{{file}}" style="max-height:50px;width:auto;">
-              <div class="thumb-text"><i class="fa fa-trash fa-2x" style="color:red;line-height:58px" ng-click="remove($index, file)"></i></div>
+            <div class="" ng-repeat="photo in userFacilityPhotos" style="margin-right:10px; margin-bottom:10px;position:relative">
+              <div class="thumb" ng-if="photo.primaryPhoto==='N'">
+                <img ng-src="{{photo.photoLink}}" style="max-height:50px;width:auto;">
+                <div class="thumb-text"><i class="fa fa-trash fa-2x" style="color:red;line-height:58px" ng-click="removePhoto(photo)"></i></div>
+              </div>
             </div>
           </div>
         </md-card>
