@@ -273,8 +273,8 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
   $scope.initMap = function () {
     map = new google.maps.Map(document.getElementById('map'), {
         center: { lat: initLat, lng: initLng },
-        // zoom: 11,
-        maxZoom: 13
+        zoom: 10
+        // maxZoom: 13
     });
     buildInfowindow();
     buildMarkers();
@@ -374,7 +374,7 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
       $scope.numMapMarkers = $scope.facilities.length
     }
 
-    var latlng = [];
+    // var latlng = [];
 
     //hover over markers on map to open infowindow
     for (i = 0; i < $scope.numMapMarkers; i++) {
@@ -388,8 +388,8 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
       $scope.markerArr.push(marker);
 
       //center map around markers
-      let facilityLatLng = new google.maps.LatLng($scope.facilities[i].lat, $scope.facilities[i].lng);
-      latlng.push(facilityLatLng);
+      // let facilityLatLng = new google.maps.LatLng($scope.facilities[i].lat, $scope.facilities[i].lng);
+      // latlng.push(facilityLatLng);
 
       //click on map markers to open infobox
       google.maps.event.addListener(marker, 'click', (function(marker, i) {
@@ -438,11 +438,11 @@ app.controller('ListingSearchController', function($scope, $transitions, $rootSc
     };
 
     //center map around markers
-    var latlngbounds = new google.maps.LatLngBounds();
-    for (var i = 0; i < latlng.length; i++) {
-      latlngbounds.extend(latlng[i]);
-    }
-    map.fitBounds(latlngbounds);
+    // var latlngbounds = new google.maps.LatLngBounds();
+    // for (var i = 0; i < latlng.length; i++) {
+    //   latlngbounds.extend(latlng[i]);
+    // }
+    // map.fitBounds(latlngbounds);
   }
 
   //set content of infowindow

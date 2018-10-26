@@ -261,10 +261,6 @@ body {
   margin: 0;
 }
 
-#listing-edit .main-wrapper {
-  padding-top: 20px;
-}
-
 #listing-edit .bold {
   font-weight: bold;
 }
@@ -276,12 +272,12 @@ body {
 #listing-edit .cards-wrapper {
   background-color: #FFF;
   width: 50%;
-  padding: 25px 0 0 50px;
+  padding: 93px 0 0 50px;
 }
 
 #listing-edit form .card {
   padding: 30px;
-  margin-top: 30px;
+  margin-bottom: 30px;
 }
 
 #listing-edit .thumb {
@@ -323,6 +319,7 @@ body {
   width: 50%;
   position: fixed;
   right: 0;
+  top: 158px;
   padding: 0 50px 0 30px;
 }
 

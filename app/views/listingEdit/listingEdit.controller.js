@@ -14,7 +14,7 @@ app.controller('ListingEditController', function($scope, $q, $location, $http, $
   dataService.get('facility', {id: $scope.userFacilityId}).then(function (response) {
     console.log('facility', response.data[0]);
     $scope.userFacility=response.data[0];
-    //get facility photos 
+    //get facility photos
     dataService.get('photo',{id: $scope.userFacilityId}).then(function (response) {
       console.log(response.data);
       $scope.userFacilityPhotos=response.data;
@@ -250,10 +250,6 @@ app.controller('ListingEditController', function($scope, $q, $location, $http, $
     console.log('room: ', roomnum);
     console.log('beds: ', beds);
 
-    // console.log(index);
-
-    // console.log($scope.roomIndexes);
-
     for (var i = 0; i < $scope.roomIndexes.length; i++) {
 
       if ($scope.roomIndexes[i].roomNumber === roomnum) {
@@ -273,24 +269,45 @@ app.controller('ListingEditController', function($scope, $q, $location, $http, $
   };
 
 
-  //adding photos
+  //add primary photo
   $scope.selectPrimaryPhoto = function (photo) {
-    console.log('photo', photo);
-    // console.log($scope.selectedFilesArr)
-    // selectedFiles.forEach(function (file) {
-    //   fileReader.readAsDataUrl(file, $scope).then(function (response) { //convert to base64
-    //     // console.log(response);
-    //     $scope.thumbnailArr.push(response); //add file to thumbnail array
-    //     console.log("adding thumbmail to $scope.thumbnailArr", $scope.thumbnailArr);
-    //   });
-    //   $scope.selectedFilesArr.push(file);
-    //   console.log("adding file to $scope.selectedFilesArr", $scope.selectedFilesArr); //add to files array to be uploaded
-      // submitPhotos()
+    var payload = new FormData();
+    payload.append('facilityId', $scope.userFacilityId);
+    payload.append('primaryPhoto', 'Y');
+    payload.append('FILE', photo);
 
-      // console.log(photo);
+    console.log('files to be uploaded', photo);
+    console.log('Payload: ', payload);
+
+    dataService.uploadFile('photo', payload).then(function(response) {
+      console.log(response);
+      if (response.data.status !== "success") {
+        alert("failed to upload image");
+      } else {
+        alert("upload primary photos success");
+        dataService.get('photo',{id: $scope.userFacilityId}).then(function (response) {
+          console.log(response.data);
+          $scope.userFacilityPhotos=response.data;
+          $scope.userFacilityPhotos.forEach(function (photo) {
+             if (photo.primaryPhoto === 'N') {
+               photo.photoLink = 'http://18.236.125.242/groupHomes/photos/' + $scope.userFacilityId + '/' + photo.smallPhoto;
+             } else {
+               photo.photoLink = 'http://18.236.125.242/groupHomes/photos/' + $scope.userFacilityId + '/' + photo.smallPhoto;
+             }
+          });
+        });
+      }
+    }, function(response) {
+      console.log(response);
+    });
+  };
+
+  //add internal photo
+  $scope.selectInternalPhotos = function (photos) {
+    photos.forEach(function (photo) {
       var payload = new FormData();
       payload.append('facilityId', $scope.userFacilityId);
-      payload.append('primaryPhoto', 'Y');
+      payload.append('primaryPhoto', 'N');
       payload.append('FILE', photo);
 
       console.log('files to be uploaded', photo);
@@ -301,103 +318,71 @@ app.controller('ListingEditController', function($scope, $q, $location, $http, $
         if (response.data.status !== "success") {
           alert("failed to upload image");
         } else {
-          alert("upload primary photos success");
-          $scope.userFacilityPhotos.push({photoLink: response, primaryPhoto: 'Y'}) //// FIXME: add photo id
-          console.log($scope.userFacilityPhotos)
+          alert("upload internal photos success");
+          console.log(photo)
+          dataService.get('photo',{id: $scope.userFacilityId}).then(function (response) {
+            console.log(response.data);
+            $scope.userFacilityPhotos=response.data;
+            $scope.userFacilityPhotos.forEach(function (photo) {
+               if (photo.primaryPhoto === 'N') {
+                 photo.photoLink = 'http://18.236.125.242/groupHomes/photos/' + $scope.userFacilityId + '/' + photo.smallPhoto;
+               } else {
+                 photo.photoLink = 'http://18.236.125.242/groupHomes/photos/' + $scope.userFacilityId + '/' + photo.smallPhoto;
+               }
+            });
+          });
         }
       }, function(response) {
         console.log(response);
       });
-    };
+    })
+  }
 
-
-    $scope.selectInternalPhotos = function (photos) {
-      console.log(photos)
-
-      photos.forEach(function (photo) {
-        var payload = new FormData();
-        payload.append('facilityId', $scope.userFacilityId);
-        payload.append('primaryPhoto', 'N');
-        payload.append('FILE', photo);
-
-        console.log('files to be uploaded', photo);
-        console.log('Payload: ', payload);
-
-        dataService.uploadFile('photo', payload).then(function(response) {
-          console.log(response);
-          if (response.data.status !== "success") {
-            alert("failed to upload image");
-          } else {
-            alert("upload internal photos success");
-            console.log(photo)
-            fileReader.readAsDataUrl(photo, $scope).then(function (response) { //convert to base64
-              console.log(response);
-              $scope.userFacilityPhotos.push({photoLink: response, primaryPhoto: 'N'}) //// FIXME: add photo id
-              console.log($scope.userFacilityPhotos)
-            });
-          }
-        }, function(response) {
-          console.log(response);
-        });
-      })
-    }
-
-  //remove file from thumbnail array and files array
+  //delete photo
   $scope.removePhoto=function (photo) { //remove file from files array
     console.log(photo)
-    //// FIXME:
-    // dataService.delete('photo', {id: photo.id}).then(function (response) {
-    //   console.log(response);
-    // })
+    dataService.delete('photo', {id: photo.photoid}).then(function (response) {
+      console.log(response);
+      dataService.get('photo',{id: $scope.userFacilityId}).then(function (response) {
+        console.log(response.data);
+        $scope.userFacilityPhotos=response.data;
+        $scope.userFacilityPhotos.forEach(function (photo) {
+           if (photo.primaryPhoto === 'N') {
+             photo.photoLink = 'http://18.236.125.242/groupHomes/photos/' + $scope.userFacilityId + '/' + photo.smallPhoto;
+           } else {
+             photo.photoLink = 'http://18.236.125.242/groupHomes/photos/' + $scope.userFacilityId + '/' + photo.smallPhoto;
+           }
+        });
+      });
+    })
   };
 
 
-  function submitPhotos() {
-    //upload multiple images
-    $scope.selectedFilesArr.forEach(function (file) {
-      console.log(file);
-
-
-      // fileReader.readAsDataUrl(file, $scope).then(function (response) { //convert to base64
-      //   console.log(response);
-      //   $scope.test = response
-      //   // $scope.thumbnailArr.push(response); //add file to thumbnail array
-      //   // console.log("adding thumbmail to $scope.thumbnailArr", $scope.thumbnailArr);
-      //   dataService.uploadFile('patientUpload', $scope.test).then(function(response) {
-      //     console.log(response);
-      //     if (response.data.status !== "success") {
-      //       alert("failed to upload image");
-      //     } else {
-      //       $state.go('listingView');
-      //     }
-      //   }, function(response) {
-      //     console.log(response);
-      //   });
-      // });
-
-      var payload = new FormData();
-
-
-      payload.append('facilityId', $scope.userFacility.id);
-      payload.append('primaryPhoto', 'Y');
-      payload.append('FILE', file);
-
-      console.log('files to be uploaded', file);
-      console.log('Payload: ', payload);
-
-      dataService.uploadFile('photo', payload).then(function(response) {
-        console.log(response);
-        if (response.data.status !== "success") {
-          alert("failed to upload image");
-        } else {
-          $state.go('listingView');
-        }
-      }, function(response) {
-        console.log(response);
-      });
-
-    });
-  }
+  // function submitPhotos() {
+  //   //upload multiple images
+  //   $scope.selectedFilesArr.forEach(function (file) {
+  //
+  //     var payload = new FormData();
+  //     payload.append('facilityId', $scope.userFacility.id);
+  //     payload.append('primaryPhoto', 'Y');
+  //     payload.append('FILE', file);
+  //
+  //     console.log('files to be uploaded', file);
+  //     console.log('Payload: ', payload);
+  //
+  //     dataService.uploadFile('photo', payload).then(function(response) {
+  //       console.log(response);
+  //       if (response.data.status !== "success") {
+  //         alert("failed to upload image");
+  //       } else {
+  //         $state.go('listingView');
+  //       }
+  //     }, function(response) {
+  //       console.log(response);
+  //     });
+  //
+  //   });
+  // }
 
   // function editBeds() {
   //   //edit bed info
@@ -426,7 +411,4 @@ app.controller('ListingEditController', function($scope, $q, $location, $http, $
   // }
 
   $scope.initRoomConfig();
-
-
-
 });

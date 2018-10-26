@@ -41,7 +41,7 @@ app.controller('ListingViewController', function($scope, $uibModal, dataService,
     dataService.get('photo', {id: $scope.facility.id}).then(function (response) {
       console.log(response.data);
       $scope.facilityPhotos=response.data;
-      $scope.facilityPhotos.splice(1, 0, {largePhoto: $scope.facility.mediumPhoto})
+      // $scope.facilityPhotos.splice(1, 0, {largePhoto: $scope.facility.mediumPhoto})
       console.log($scope.facilityPhotos)
 
       $scope.centerIndex = 1;

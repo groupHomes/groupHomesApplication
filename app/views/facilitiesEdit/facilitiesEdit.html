@@ -3,11 +3,11 @@
     <form name="form" style="width:100%">
       <md-card class="card" style="padding:20px;width:100%">
         <h3 class="headline" style="">{{facility.name}}</h3>
+        <h5 class="subhead" style="margin-top:0px;margin-bottom:25px">{{facility.address}}, {{facility.city}}, {{facility.state}}, {{facility.zip}}</h5>
         <md-input-container class="md-block">
           <label>Description of Facility</label>
           <textarea ng-model="facility.specialHmFeature" md-select-on-focus ng-disabled="!edit"></textarea>
         </md-input-container>
-
           <!--primary photo-->
           <div layout="row" layout-align="space-between center">
             <md-button style="margin-left: 0px" class="md-raised md-cornered" ngf-multiple="false" ngf-select=selectPrimaryPhoto(facility.primaryPhoto) ng-model="facility.primaryPhoto" name="primaryPhoto" ngf-pattern="'.jpg'"

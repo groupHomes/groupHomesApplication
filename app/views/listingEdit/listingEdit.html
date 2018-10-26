@@ -1,8 +1,14 @@
 <div id="listing-edit">
   <main class="main-wrapper" layout="row">
     <!-- edit facility cards-->
+
     <md-content class="cards-wrapper">
       <form name="userForm">
+        <div style="position:fixed;top:66px;left:0;height:70px;background-color:white;width:100%;z-index:10;display:flex;justify-content:flex-end;align-items:center;border-bottom:1px solid lightgrey;">
+          <md-button class="md-raised md-cornered" ng-click="submit()" style="height:50px">Save Changes</md-button>
+          <md-button md-no-ink class="md-primary" ng-click="preview()" style="height:50px">Preview Listing</md-button>
+        </div>
+
         <!--name of facility-->
         <md-card class="card">
           <h1 class="headline" style="">What is the name of your facility?</h1>
@@ -198,13 +204,16 @@
           <md-button class="md-raised md-cornered" ng-hide="!edit" ng-click="submitRoom(room, $index); edit=!edit" style="width:20%;float:right">Save</md-button>
           <md-button class="md-raised md-cornered" ng-hide="!edit" ng-click="edit=!edit; reset($index)" style="width:20%;float:right">Cancel</md-button>
         </md-card>
+
+
+
         <!--photos-->
         <md-card class="card">
           <h1 class="headline" style="">Photos</h1>
           <!--primary photo-->
           <div layout="row" layout-align="space-between center">
             <md-button style="margin-left: 0px" class="md-raised md-cornered" ngf-multiple="false" ngf-select=selectPrimaryPhoto(primaryPhoto) ng-model="primaryPhoto" name="primaryPhoto" ngf-pattern="'.jpg'"
-            ngf-accept="'.jpg'">Select Primary Photo</md-button>
+            ngf-accept="'.jpg'">Upload Primary Photo</md-button>
            </div>
 
           <div style="display:flex;flex-wrap:wrap">
@@ -218,7 +227,7 @@
           <!--multiple internal photos-->
           <div layout="row" layout-align="space-between center">
             <md-button style="margin-left: 0px" class="md-raised md-cornered" ngf-multiple="true" ngf-select=selectInternalPhotos(internalPhoto) ng-model="internalPhoto" name="internalPhoto" ngf-pattern="'.jpg'"
-            ngf-accept="'.jpg'">Select All Other Photos</md-button>
+            ngf-accept="'.jpg'">Upload All Other Photos</md-button>
            </div>
 
           <div style="display:flex;flex-wrap:wrap">
@@ -230,14 +239,13 @@
             </div>
           </div>
         </md-card>
-        <md-button class="md-raised md-cornered" ng-click="submit()" style="float:right">Update Listing</md-button>
       </form>
     </md-content>
     <!--occupancy chart-->
     <md-content class="occupancy-wrapper">
-      <div class="listing-btn" layout="row" layout-align="end">
+      <!-- <div class="listing-btn" layout="row" layout-align="end">
         <md-button md-no-ink class="md-primary" ng-click="preview()">Preview Listing</md-button>
-      </div>
+      </div> -->
       <md-card class="occupancy-card">
         <h1 class="headline">Current Occupancy Chart</h1>
         <h5 class="">Total Licensed Beds: {{userFacility.beds}}</h5>

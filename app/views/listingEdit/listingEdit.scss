@@ -8,9 +8,9 @@
   .no-margin {
     margin: 0;
   }
-  .main-wrapper {
-    padding-top: 20px;
-  }
+  // .main-wrapper {
+  //   padding-top: 20px;
+  // }
   .bold {
     font-weight: bold
   }
@@ -21,7 +21,7 @@
   .cards-wrapper {
     background-color: #FFF;
     width: 50%;
-    padding: 25px 0 0 50px;
+    padding: 93px 0 0 50px;
   }
   .listing-btn {
     // margin-bottom: 30px;
@@ -32,7 +32,7 @@
     // margin-left: 50px;
     .card {
       padding: 30px;
-      margin-top: 30px
+      margin-bottom: 30px
     }
   }
   .thumb {
@@ -71,6 +71,7 @@
     width: 50%;
     position: fixed;
     right: 0;
+    top: 158px;
     padding: 0 50px 0 30px
   }
   .occupancy-card {
