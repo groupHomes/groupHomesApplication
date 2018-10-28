@@ -2,8 +2,27 @@
   <div class="row" style="margin:0;padding:20px" ng-repeat="facility in facilities">
     <form name="form" style="width:100%">
       <md-card class="card" style="padding:20px;width:100%">
-        <h3 class="headline" style="">{{facility.name}}</h3>
-        <h5 class="subhead" style="margin-top:0px;margin-bottom:25px">{{facility.address}}, {{facility.city}}, {{facility.state}}, {{facility.zip}}</h5>
+        <md-input-container class="md-block">
+          <label>Facility Name</label>
+          <textarea ng-model="facility.name" md-select-on-focus ng-disabled="!edit"></textarea>
+        </md-input-container>
+        <div layout-gt-sm="row" style="display:flex;justify-content:space-between">
+          <md-input-container class="md-block" flex-gt-sm style="width:50%">
+            <label>City</label>
+            <input ng-model="facility.city" ng-disabled="true">
+          </md-input-container>
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>State</label>
+            <md-select ng-model="facility.state" ng-disabled="true">
+              <md-option ng-value="'NV'">NV</md-option>
+            </md-select>
+          </md-input-container>
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Zip Code</label>
+            <input name="zip" ng-model="facility.zip" placeholder="12345"
+                   required ng-pattern="/^[0-9]{5}$/" md-maxlength="5" ng-disabled="true">
+          </md-input-container>
+        </div>
         <md-input-container class="md-block">
           <label>Description of Facility</label>
           <textarea ng-model="facility.specialHmFeature" md-select-on-focus ng-disabled="!edit"></textarea>
@@ -12,12 +31,10 @@
           <div layout="row" layout-align="space-between center">
             <md-button style="margin-left: 0px" class="md-raised md-cornered" ngf-multiple="false" ngf-select=selectPrimaryPhoto(facility.primaryPhoto) ng-model="facility.primaryPhoto" name="primaryPhoto" ngf-pattern="'.jpg'"
             ngf-accept="'.jpg'" ng-disabled="!edit">Select Primary Photo</md-button>
-           </div>
-
+          </div>
           <div style="display:flex;flex-wrap:wrap">
             <div class="thumb" style="margin-right:10px; margin-bottom:10px"  ng-repeat="primaryPhoto in facility.photoPrimaryLink" >
               <img ng-src="{{primaryPhoto}}" style="max-height:50px;width:auto;">
-              <!-- <div class="thumb-text"><i class="fa fa-trash fa-2x" style="color:red;line-height:58px" ng-click="removePrimaryPhoto($index, file)"></i></div> -->
             </div>
           </div>
           <!--multiple internal photos-->
@@ -25,16 +42,11 @@
             <md-button style="margin-left: 0px" class="md-raised md-cornered" ngf-multiple="true" ngf-select=selectInternalPhotos(facility.internalPhotos) ng-model="facility.internalPhotos" name="internalPhotos" ngf-pattern="'.jpg'"
             ngf-accept="'.jpg'" ng-disabled="!edit">Select All Other Photos</md-button>
            </div>
-           <!-- <img nr-src="{{facility.files[0]}}"> -->
-
           <div style="display:flex;flex-wrap:wrap">
             <div class="thumb" ng-repeat="internalPhoto in facility.photoInternalLinks" style="margin-right:10px; margin-bottom:10px">
-              <!-- <img ng-src="{{photo}}" style="max-height:50px;width:auto;"> -->
               <img ng-src="{{internalPhoto}}" style="max-height:50px;width:auto;">
-              <!-- <div class="thumb-text"><i class="fa fa-trash fa-2x" style="color:red;line-height:58px" ng-click="removeInternalPhoto($index, file)"></i></div> -->
             </div>
           </div>
-
         <div style="display:flex;justify-content:flex-end">
           <md-button class="md-raised md-cornered" ng-hide="edit" ng-click="edit=!edit; setFacility(facility)" style="width:20%;float:right">Edit</md-button>
           <md-button class="md-raised md-cornered" ng-hide="!edit" ng-click="submit(facility); edit=!edit" style="width:20%;float:right">Save</md-button>

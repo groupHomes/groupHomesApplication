@@ -1,11 +1,9 @@
 <div id="listing-edit">
   <main class="main-wrapper" layout="row">
     <!-- edit facility cards-->
-
     <md-content class="cards-wrapper">
       <form name="userForm">
         <div style="position:fixed;top:66px;left:0;height:70px;background-color:white;width:100%;z-index:10;display:flex;justify-content:flex-end;align-items:center;border-bottom:1px solid lightgrey;">
-          <md-button class="md-raised md-cornered" ng-click="submit()" style="height:50px">Save Changes</md-button>
           <md-button md-no-ink class="md-primary" ng-click="preview()" style="height:50px">Preview Listing</md-button>
         </div>
 
@@ -14,8 +12,13 @@
           <h1 class="headline" style="">What is the name of your facility?</h1>
           <md-input-container class="md-block full-width">
             <label>Name</label>
-            <input ng-model="userFacility.name">
+            <input ng-model="userFacility.name" ng-disabled="!editName">
           </md-input-container>
+          <div style="display:flex;justify-content:flex-end">
+            <md-button class="md-raised md-cornered" ng-hide="editName" ng-click="editName=!editName" style="width:20%;float:right">Edit</md-button>
+            <md-button class="md-raised md-cornered" ng-hide="!editName" ng-click="submitFacility('name'); editName=!editName" style="width:20%;float:right">Save</md-button>
+            <md-button class="md-raised md-cornered" ng-hide="!editName" ng-click="editName=!editName; resetFacility('name')" style="width:20%;float:right">Cancel</md-button>
+          </div>
         </md-card>
 
         <!--location-->
@@ -23,18 +26,18 @@
           <h1 class="headline" style="">Where is your facility located?</h1>
           <md-input-container class="md-block full-width">
             <label>Address</label>
-            <input ng-model="userFacility.address">
+            <input ng-model="userFacility.address" ng-disabled="!editLocation">
           </md-input-container>
 
           <div layout-gt-sm="row">
             <md-input-container class="md-block" flex-gt-sm>
               <label>City</label>
-              <input ng-model="userFacility.city">
+              <input ng-model="userFacility.city" ng-disabled="!editLocation">
             </md-input-container>
 
             <md-input-container class="md-block" flex-gt-sm>
               <label>State</label>
-              <md-select ng-model="userFacility.state">
+              <md-select ng-model="userFacility.state" ng-disabled="!editLocation">
                 <md-option ng-value="'NV'">NV</md-option>
               </md-select>
             </md-input-container>
@@ -42,51 +45,101 @@
             <md-input-container class="md-block" flex-gt-sm>
               <label>Zip Code</label>
               <input name="zip" ng-model="userFacility.zip" placeholder="12345"
-                     required ng-pattern="/^[0-9]{5}$/" md-maxlength="5">
+                     required ng-pattern="/^[0-9]{5}$/" md-maxlength="5" ng-disabled="!editLocation">
             </md-input-container>
+          </div>
+          <div style="display:flex;justify-content:flex-end">
+            <md-button class="md-raised md-cornered" ng-hide="editLocation" ng-click="editLocation=!editLocation" style="width:20%;float:right">Edit</md-button>
+            <md-button class="md-raised md-cornered" ng-hide="!editLocation" ng-click="submitFacility('address', 'city', 'state', 'zip'); editLocation=!editLocation" style="width:20%;float:right">Save</md-button>
+            <md-button class="md-raised md-cornered" ng-hide="!editLocation" ng-click="editLocation=!editLocation; resetFacility('address', 'city', 'state', 'zip')" style="width:20%;float:right">Cancel</md-button>
           </div>
         </md-card>
         <!--pricing-->
         <md-card class="card">
           <h1 class="headline" style="">Price your facility</h1>
+          <h3 class="md-title" style="">Category 1 Private Rooms</h3>
           <div layout-gt-sm="row">
             <md-input-container class="md-block full-width">
-              <label>Level 1 Pricing</label>
-              <input ng-model="userFacility.level1Price">
+              <label>Category 1 Private Min Pricing</label>
+              <input type="number" ng-model="userFacility.category1PrivateMinRange" ng-disabled="!editPrice">
             </md-input-container>
             <md-input-container class="md-block full-width">
-              <label>Level 2 Pricing</label>
-              <input ng-model="userFacility.level2Price">
+              <label>Category 1 Private Max Pricing</label>
+              <input type="number" ng-model="userFacility.category1PrivateMaxRange" ng-disabled="!editPrice">
             </md-input-container>
           </div>
+          <h3 class="md-title" style="">Category 1 Shared Rooms</h3>
+          <div layout-gt-sm="row">
+            <md-input-container class="md-block full-width">
+              <label>Category 1 Shared Min Pricing</label>
+              <input type="number" ng-model="userFacility.category1SharedMinRange" ng-disabled="!editPrice">
+            </md-input-container>
+            <md-input-container class="md-block full-width">
+              <label>Category 1 Shared Max Pricing</label>
+              <input type="number" ng-model="userFacility.category1SharedMaxRange" ng-disabled="!editPrice">
+            </md-input-container>
+          </div>
+          <h3 class="md-title" style="">Category 2 Private Rooms</h3>
+          <div layout-gt-sm="row">
+            <md-input-container class="md-block full-width">
+              <label>Category 2 Private Min Pricing</label>
+              <input type="number" ng-model="userFacility.category2PrivateMinRange" ng-disabled="!editPrice">
+            </md-input-container>
+            <md-input-container class="md-block full-width">
+              <label>Category 2 Private Max Pricing</label>
+              <input type="number" ng-model="userFacility.category2PrivateMaxRange" ng-disabled="!editPrice">
+            </md-input-container>
+          </div>
+          <h3 class="md-title" style="">Category 2 Shared Rooms</h3>
+          <div layout-gt-sm="row">
+            <md-input-container class="md-block full-width">
+              <label>Category 2 Shared Min Pricing</label>
+              <input type="number" ng-model="userFacility.category2SharedMinRange" ng-disabled="!editPrice">
+            </md-input-container>
+            <md-input-container class="md-block full-width">
+              <label>Category 2 Shared Min Pricing</label>
+              <input type="number" ng-model="userFacility.category2SharedMaxRange" ng-disabled="!editPrice">
+            </md-input-container>
+          </div>
+          <h3 class="md-title" style="">Medicaid Private Rooms</h3>
+          <div layout-gt-sm="row">
+            <md-input-container class="md-block full-width">
+              <label>Medicaid Private Min Pricing</label>
+              <input type="number" ng-model="userFacility.medicaidPrivateMinRange" ng-disabled="!editPrice">
+            </md-input-container>
+            <md-input-container class="md-block full-width">
+              <label>Medicaid Private Max Pricing</label>
+              <input type="number" ng-model="userFacility.medicaidPrivateMaxRange" ng-disabled="!editPrice">
+            </md-input-container>
+          </div>
+          <h3 class="md-title" style="">Medicaid Shared Rooms</h3>
+          <div layout-gt-sm="row">
+            <md-input-container class="md-block full-width">
+              <label>Medicaid Shared Min Pricing</label>
+              <input type="number" ng-model="userFacility.medicaidSharedMinRange" ng-disabled="!editPrice">
+            </md-input-container>
+            <md-input-container class="md-block full-width">
+              <label>Medicaid Shared Max Pricing</label>
+              <input type="number" ng-model="userFacility.medicaidSharedMaxRange" ng-disabled="!editPrice">
+            </md-input-container>
+          </div>
+          <md-button class="md-raised md-cornered" ng-hide="editPrice" ng-click="editPrice=!editPrice" style="width:20%;float:right">Edit</md-button>
+          <md-button class="md-raised md-cornered" ng-hide="!editPrice" ng-click="submitPrice(); editPrice=!editPrice" style="width:20%;float:right">Save</md-button>
+          <md-button class="md-raised md-cornered" ng-hide="!editPrice" ng-click="editPrice=!editPrice; resetPrice()" style="width:20%;float:right">Cancel</md-button>
         </md-card>
         <!--description-->
         <md-card class="card">
           <h1 class="headline" style="">Description of your place</h1>
           <md-input-container class="md-block">
             <label>Describe your place</label>
-            <textarea ng-model="userFacility.specialHmFeature" md-select-on-focus></textarea>
+            <textarea ng-model="userFacility.specialHmFeature" md-select-on-focus ng-disabled="!editDescription"></textarea>
           </md-input-container>
+          <div style="display:flex;justify-content:flex-end">
+            <md-button class="md-raised md-cornered" ng-hide="editDescription" ng-click="editDescription=!editDescription" style="width:20%;float:right">Edit</md-button>
+            <md-button class="md-raised md-cornered" ng-hide="!editDescription" ng-click="submitFacility('specialHmFeature'); editDescription=!editDescription" style="width:20%;float:right">Save</md-button>
+            <md-button class="md-raised md-cornered" ng-hide="!editDescription" ng-click="editDescription=!editDescription; resetFacility('specialHmFeature')" style="width:20%;float:right">Cancel</md-button>
+          </div>
         </md-card>
-        <!--#of rooms-->
-        <!-- <md-card id="home" class="card" ng-if="buildRoomCard">
-          <h1 class="headline" style=""># of Rooms</h1>
-          <div layout="row" layout-align="space-between center">
-             <h5 class="md-title no-margin">How many rooms are there in the home?</h5>
-             <md-select ng-model="userFacility.roomCount" placeholder="# of rooms" class="md-no-underline" ng-change="addRoomConfig()">
-               <md-option ng-value="1">1</md-option>
-               <md-option ng-value="2">2</md-option>
-               <md-option ng-value="3">3</md-option>
-               <md-option ng-value="4">4</md-option>
-               <md-option ng-value="5">5</md-option>
-               <md-option ng-value="6">6</md-option>
-               <md-option ng-value="7">7</md-option>
-               <md-option ng-value="8">8</md-option>
-               <md-option ng-value="9">9</md-option>
-               <md-option ng-value="10">10</md-option>
-             </md-select>
-           </div>
-        </md-card> -->
 
         <!--room config-->
         <md-card id="room{{room.roomNumber}}" class="card" ng-repeat="room in roomIndexes track by $index">
@@ -118,12 +171,12 @@
             <h4 class="md-title">Select type of room</h4>
             <div style="display:inline-flex">
               <div style="width:110px">
-                <md-radio-group ng-model="room.roomType" layout="row" ng-change="changeRoomType(room)" ng-disabled="!edit">
+                <md-radio-group ng-model="room.roomType" layout="row" ng-change="changeRoomType(room)" ng-disabled="true">
                   <md-radio-button value="Shared">Shared</md-radio-button>
                 </md-radio-group>
               </div>
               <div style="width:110px">
-                <md-radio-group ng-model="room.roomType" layout="row" ng-change="changeRoomType(room)" ng-disabled="!edit">
+                <md-radio-group ng-model="room.roomType" layout="row" ng-change="changeRoomType(room)" ng-disabled="true">
                   <md-radio-button value="Private" class="md-primary">Private</md-radio-button>
                 </md-radio-group>
               </div>
@@ -132,7 +185,7 @@
           <!--if private room-->
           <div layout="row" layout-align="space-between center" ng-if="room.roomType==='Private'" Private="margin-bottom:20px">
             <h5 class="md-title" style="margin:0;margin-left:20px">How many beds are there in the room?</h5>
-            <md-select ng-model="room.roomBedCount" placeholder="# of beds" class="md-no-underline" ng-disabled="room.roomType==='Private'" ng-disabled="!edit">
+            <md-select ng-model="room.roomBedCount" placeholder="# of beds" class="md-no-underline" ng-disabled="true">
               <md-option ng-value="1">1</md-option>
               <md-option ng-value="2">2</md-option>
               <md-option ng-value="3">3</md-option>
@@ -148,7 +201,7 @@
           <!--if shared room-->
           <div layout="row" layout-align="space-between center" ng-if="room.roomType==='Shared'" Private="margin-bottom:20px">
             <h5 class="md-title" style="margin:0;margin-left:20px">How many beds are there in the room?</h5>
-            <md-select ng-model="room.roomBedCount" placeholder="# of beds" class="md-no-underline" ng-change="addRoomBedConfig(room.roomBedCount, room.roomNumber)" ng-disabled="!edit">
+            <md-select ng-model="room.roomBedCount" placeholder="# of beds" class="md-no-underline" ng-change="addRoomBedConfig(room.roomBedCount, room.roomNumber)" ng-disabled="true">
               <md-option ng-value="1">1</md-option>
               <md-option ng-value="2">2</md-option>
               <md-option ng-value="3">3</md-option>
@@ -178,34 +231,31 @@
                 </div>
               </div>
             </div>
-            <div layout="row" layout-align="space-between center">
-              <md-input-container >
+            <div layout="row" layout-align="end center">
+              <!-- <md-input-container >
                 <label>Bed Pricing</label>
                 <md-select ng-model="bed.bedlevel" placeholder="Bed Pricing" class="md-no-underline" ng-disabled="!edit">
                   <md-option ng-value="'Level 1'">Level 1</md-option>
                   <md-option ng-value="'Level 2'">Level 2</md-option>
                   <md-option ng-value="'Custom'">Custom</md-option>
                 </md-select>
-              </md-input-container>
+              </md-input-container> -->
               <md-input-container class="no-margin" ng-show="bed.availability==='Available'">
                 <label>Enter date</label>
                 <md-datepicker ng-model="bed.availabilitydate" ng-disabled="!edit"></md-datepicker>
               </md-input-container>
             </div>
-            <div layout="row" layout-align="space-between center" ng-show="bed.bedlevel==='Custom'">
+            <!-- <div layout="row" layout-align="space-between center" ng-show="bed.bedlevel==='Custom'">
               <md-input-container >
                 <label>Custom Pricing</label>
                 <input ng-model="bed.bedlevelcustom" ng-disabled="!edit">
               </md-input-container>
-            </div>
+            </div> -->
           </div>
-
           <md-button class="md-raised md-cornered" ng-hide="edit" ng-click="edit=!edit" style="width:20%;float:right">Edit</md-button>
           <md-button class="md-raised md-cornered" ng-hide="!edit" ng-click="submitRoom(room, $index); edit=!edit" style="width:20%;float:right">Save</md-button>
           <md-button class="md-raised md-cornered" ng-hide="!edit" ng-click="edit=!edit; reset($index)" style="width:20%;float:right">Cancel</md-button>
         </md-card>
-
-
 
         <!--photos-->
         <md-card class="card">
@@ -243,9 +293,6 @@
     </md-content>
     <!--occupancy chart-->
     <md-content class="occupancy-wrapper">
-      <!-- <div class="listing-btn" layout="row" layout-align="end">
-        <md-button md-no-ink class="md-primary" ng-click="preview()">Preview Listing</md-button>
-      </div> -->
       <md-card class="occupancy-card">
         <h1 class="headline">Current Occupancy Chart</h1>
         <h5 class="">Total Licensed Beds: {{userFacility.beds}}</h5>
@@ -271,13 +318,13 @@
                 Room {{room.roomNumber}}
               </div>
               <div class="" style="width:25%;line-height:35px;">
-                {{room.roomBedCount}}
+                {{::room.roomBedCount}}
               </div>
               <div class="" style="width:25%;line-height:35px;color:red;font-weight:bold" ng-class="{'not-available': room.bedsAvailable === '0'}">
-                {{room.bedsAvailable}}
+                {{::room.bedsAvailable}}
               </div>
               <div class="" style="width:25%;line-height:35px;">
-                {{room.roomGender}}
+                {{::room.roomGender}}
               </div>
             </div>
           </div>

@@ -1,36 +1,21 @@
 app.controller('ListingEditController', function($scope, $q, $location, $http, $state, dataService, fileReader, CONSTANTS, userService) {
-  console.log('listingEdit');
 
   $scope.userFacilityId=userService.get().facilityId;
-  // $scope.userFacilityId=4783
-
-  console.log($scope.userFacilityId)
-
-  console.log($location.path())
-  $scope.thumbnailArr=[];
-  $scope.selectedFilesArr=[];
 
   //get userFacility info
   dataService.get('facility', {id: $scope.userFacilityId}).then(function (response) {
-    console.log('facility', response.data[0]);
     $scope.userFacility=response.data[0];
+    $scope.originalUserFacility = angular.copy($scope.userFacility)
     //get facility photos
     dataService.get('photo',{id: $scope.userFacilityId}).then(function (response) {
       console.log(response.data);
       $scope.userFacilityPhotos=response.data;
       $scope.userFacilityPhotos.forEach(function (photo) {
-
-         if (photo.primaryPhoto === 'N') {
-           photo.photoLink = 'http://18.236.125.242/groupHomes/photos/' + $scope.userFacilityId + '/' + photo.smallPhoto;
-         } else {
-           photo.photoLink = 'http://18.236.125.242/groupHomes/photos/' + $scope.userFacilityId + '/' + photo.smallPhoto;
-         }
-        console.log(photo)
-        // var link = 'http://18.236.125.242/groupHomes/photos/' + $scope.userFacility.id + '/' + photo.smallPhoto;
-        // $scope.thumbnailArr.push(link);
-        // console.log($scope.thumbnailArr)
-        // $scope.selectedFilesArr.push(link);
-        console.log($scope.userFacilityPhotos)
+        if (photo.primaryPhoto === 'N') {
+          photo.photoLink = 'http://18.236.125.242/groupHomes/photos/' + $scope.userFacilityId + '/' + photo.smallPhoto;
+        } else {
+          photo.photoLink = 'http://18.236.125.242/groupHomes/photos/' + $scope.userFacilityId + '/' + photo.smallPhoto;
+        }
       });
     });
   });
@@ -41,28 +26,19 @@ app.controller('ListingEditController', function($scope, $q, $location, $http, $
     $scope.roomIndexes=[];
 
     dataService.get('facilityRooms', {id: $scope.userFacilityId}).then(function (response) {
-      console.log(response.data);
       $scope.rooms = response.data;
       for (let i = 0; i < $scope.rooms.length; i++) {
-        // $scope.rooms[i].buildBedCard=false;
         $scope.roomIndexes.push($scope.rooms[i]);
         $scope.totalRoomBedCount += $scope.rooms[i].roomBedCount;
         $scope.totalBedsAvailable += parseInt($scope.rooms[i].bedsAvailable);
-        // if ($scope.rooms[i].bedsAvailable === '1') {
-        //   $scope.rooms[i].roomGender = ''
-        // }
       }
 
       dataService.get('roomBed', {id: $scope.userFacilityId}).then(function (response) {
-        console.log('roomBed', response.data);
         $scope.roomBed = response.data;
-
         for (let i = 0; i < $scope.roomIndexes.length; i++) {
           $scope.roomIndexes[i].beds = [];
-
           for (let j = 0; j < $scope.roomBed.length; j++) {
             if ($scope.roomIndexes[i].roomNumber === $scope.roomBed[j].roomNumber) {
-              console.log(j, $scope.roomBed[j]);
               if ($scope.roomBed[j].availability === 'Occupied') {
                 var availabilitydate = null;
               } else {
@@ -77,10 +53,8 @@ app.controller('ListingEditController', function($scope, $q, $location, $http, $
                 availabilitydate: availabilitydate
               };
               $scope.roomIndexes[i].beds.push(bedObj);
-              console.log(i, $scope.roomIndexes);
               $scope.originalList = angular.copy($scope.roomIndexes)
             }
-            // console.log($scope.roomIndexes)
           }
         }
       });
@@ -90,117 +64,139 @@ app.controller('ListingEditController', function($scope, $q, $location, $http, $
   $scope.preview=function () {
     //got to view
     $state.go('listingPreview');
-    // $state.go('listingView');
   }
 
-  // $scope.submit = function () {
-  //   // var loopPromises = [];
-  //
-  //   console.log($scope.roomBed)
-  //   //update listing
-  //   var listing={
-  //     id: $scope.userFacilityId,
-  //     name: $scope.userFacility.name,
-  //     address: $scope.userFacility.address,
-  //     city: $scope.userFacility.city,
-  //     state: $scope.userFacility.state,
-  //     zip: $scope.userFacility.zip,
-  //     specialHmFeature: $scope.userFacility.specialHmFeature,
-  //     roomCount: $scope.userFacility.roomCount,
-  //     level1Price: $scope.userFacility.level1Price,
-  //     level2Price: $scope.userFacility.level2Price
-  //   };
-  //
-  //   //edit listing info
-  //   dataService.edit('facility', listing).then(function (response) {
-  //     console.log(response);
-  //     if (response.data.status === 'success') {
-  //       dataService.get('facility', {id: $scope.userFacilityId}).then(function (response) {
-  //         console.log('facility', response.data[0]);
-  //         $scope.userFacility=response.data[0];
-  //       });
-  //     } else {
-  //       alert('error updating')
-  //     }
-  //   })
-  //
-  //   console.log($scope.roomIndexes)
-  //
-  //   //edit bed info
-  //   $scope.roomIndexes.forEach(function (room) {
-  //
-  //     let roomToEdit = {
-  //       id: room.id,
-  //       facilityid: $scope.userFacilityId,
-  //       roomNumber: room.roomNumber,
-  //       roomGender: room.roomGender,
-  //       roomType: room.roomType,
-  //     }
-  //
-  //     dataService.edit('facilityRooms', roomToEdit).then(function (response) {
-  //       console.log('editRoomToEdit', response)
-  //     })
-  //
-  //     // var deferred = $q.defer();
-  //     room.beds.forEach(function (bed) {
-  //       let bedToEdit = {
-  //         // facilityid: $scope.userFacilityId,
-  //         // roomNumber: room.roomNumber,
-  //         // roomid: room.roomid,
-  //         bedlevel: bed.bedlevel,
-  //         availability: bed.availability,
-  //         availabilitydate: bed.availabilitydate,
-  //         // bedNumber: bed.bedNumber,
-  //         id: bed.bedid
-  //       }
-  //
-  //       console.log(bedToEdit)
-  //       dataService.edit('facilityBed', bedToEdit).then(function (response) {
-  //         console.log('editBedToEdit', response);
-  //       })
-  //
-  //     })
-  //   })
-  // }
+  $scope.submitFacility = function (item, item2, item3, item4) {
+    let obj = {
+      id: $scope.userFacility.id,
+    }
+    obj[item] = $scope.userFacility[item]
+
+    if (item2) {
+      obj[item2] = $scope.userFacility[item2]
+    }
+    if (item3) {
+      obj[item3] = $scope.userFacility[item3]
+    }
+    if (item4) {
+      obj[item4] = $scope.userFacility[item4]
+    }
+    dataService.edit('facility', obj).then(function (response) {
+      if (response.data.status === 'success') {
+        dataService.get('facility', {id: $scope.userFacilityId}).then(function (response) {
+          $scope.userFacility[item]=response.data[0][item];
+          if (item2) {
+            $scope.userFacility[item2] = response.data[0][item2]
+          }
+          if (item3) {
+            $scope.userFacility[item3] = response.data[0][item3]
+          }
+          if (item4) {
+            $scope.userFacility[item4] = response.data[0][item4]
+          }
+        });
+      } else {
+        alert('error updating')
+      }
+    })
+  }
+
+  $scope.submitPrice = function () {
+    let obj = {
+      id: $scope.userFacility.id,
+      category1PrivateMinRange: $scope.userFacility.category1PrivateMinRange,
+      category1PrivateMaxRange: $scope.userFacility.category1PrivateMaxRange,
+      category1SharedMinRange: $scope.userFacility.category1SharedMinRange,
+      category1SharedMaxRange: $scope.userFacility.category1SharedMaxRange,
+      category2PrivateMinRange: $scope.userFacility.category2PrivateMinRange,
+      category2PrivateMaxRange: $scope.userFacility.category2PrivateMaxRange,
+      category2SharedMinRange: $scope.userFacility.category2SharedMinRange,
+      category2SharedMaxRange: $scope.userFacility.category2SharedMaxRange,
+      medicaidSharedMinRange: $scope.userFacility.medicaidSharedMinRange,
+      medicaidSharedMaxRange: $scope.userFacility.medicaidSharedMaxRange,
+      medicaidPrivateMinRange: $scope.userFacility.medicaidPrivateMinRange,
+      medicaidPrivateMaxRange: $scope.userFacility.medicaidPrivateMaxRange,
+    }
+    dataService.edit('facility', obj).then(function (response) {
+      console.log(response);
+      if (response.data.status === 'success') {
+        dataService.get('facility', {id: $scope.userFacilityId}).then(function (response) {
+          $scope.userFacility.category1PrivateMinRange=response.data[0].category1PrivateMinRange;
+          $scope.userFacility.category1PrivateMaxRange=response.data[0].category1PrivateMaxRange;
+          $scope.userFacility.category1SharedMinRange=response.data[0].category1SharedMinRange;
+          $scope.userFacility.category1SharedMaxRange=response.data[0].category1SharedMaxRange;
+          $scope.userFacility.category2PrivateMinRange=response.data[0].category2PrivateMinRange;
+          $scope.userFacility.category2PrivateMaxRange=response.data[0].category2PrivateMaxRange;
+          $scope.userFacility.category2SharedMinRange=response.data[0].category2SharedMinRange;
+          $scope.userFacility.category2SharedMaxRange=response.data[0].category2SharedMaxRange;
+          $scope.userFacility.medicaidSharedMinRange=response.data[0].medicaidSharedMinRange;
+          $scope.userFacility.medicaidSharedMaxRange=response.data[0].medicaidSharedMaxRange;
+          $scope.userFacility.medicaidPrivateMinRange=response.data[0].medicaidPrivateMinRange;
+          $scope.userFacility.medicaidPrivateMaxRange=response.data[0].medicaidPrivateMaxRange;
+        });
+      } else {
+        alert('error updating')
+      }
+    })
+  }
+
+  $scope.resetFacility = function (item, item2, item3, item4) {
+    $scope.userFacility[item] = angular.copy($scope.originalUserFacility[item]);
+    if (item2) {
+      $scope.userFacility[item2] = angular.copy($scope.originalUserFacility[item2])
+    }
+    if (item3) {
+      $scope.userFacility[item3] = angular.copy($scope.originalUserFacility[item3])
+    }
+    if (item4) {
+      $scope.userFacility[item4] = angular.copy($scope.originalUserFacility[item4])
+    }
+  }
+
+  $scope.resetPrice = function () {
+    $scope.userFacility.category1PrivateMinRange=angular.copy($scope.originalUserFacility.category1PrivateMinRange);
+    $scope.userFacility.category1PrivateMaxRange=angular.copy($scope.originalUserFacility.category1PrivateMaxRange);
+    $scope.userFacility.category1SharedMinRange=angular.copy($scope.originalUserFacility.category1SharedMinRange);
+    $scope.userFacility.category1SharedMaxRange=angular.copy($scope.originalUserFacility.category1SharedMaxRange);
+    $scope.userFacility.category2PrivateMinRange=angular.copy($scope.originalUserFacility.category2PrivateMinRange);
+    $scope.userFacility.category2PrivateMaxRange=angular.copy($scope.originalUserFacility.category2PrivateMaxRange);
+    $scope.userFacility.category2SharedMinRange=angular.copy($scope.originalUserFacility.category2SharedMinRange);
+    $scope.userFacility.category2SharedMaxRange=angular.copy($scope.originalUserFacility.category2SharedMaxRange);
+    $scope.userFacility.medicaidSharedMinRange=angular.copy($scope.originalUserFacility.medicaidSharedMinRange);
+    $scope.userFacility.medicaidSharedMaxRange=angular.copy($scope.originalUserFacility.medicaidSharedMaxRange);
+    $scope.userFacility.medicaidPrivateMinRange=angular.copy($scope.originalUserFacility.medicaidPrivateMinRange);
+    $scope.userFacility.medicaidPrivateMaxRange=angular.copy($scope.originalUserFacility.medicaidPrivateMaxRange);
+  }
 
   $scope.submitRoom = function (room, index) {
-    console.log('submit room:', room, index)
-
-    //delete all original beds in room
-    $scope.originalList[index].beds.forEach(function (bed) {
-      console.log('deleting original bed:', bed)
-      dataService.delete('facilityBed', {id: bed.bedid}).then(function (response) {
-        console.log('delete bed:',response)
-      })
-    })
-
-    //adding beds
-    room.beds.forEach(function (bed) {
-      console.log(bed)
-      var bedToAdd = {
-        facilityid: $scope.userFacilityId,
-        roomNumber: room.roomNumber,
-        bedlevel: bed.bedlevel,
-        availability: bed.availability,
-        availabilitydate: bed.availabilitydate,
-        bedNumber: bed.bedNumber
-      }
-      console.log('bedToAdd,', bedToAdd)
-      dataService.add('facilityBed', bedToAdd).then(function (response) {
-        console.log(response);
-      })
-    })
-
     //edit room info
     let roomToEdit = {
-      id: room.id,
-      facilityid: $scope.userFacilityId,
-      roomNumber: room.roomNumber,
+      id: room.roomid,
       roomGender: room.roomGender,
-      roomType: room.roomType,
+      bedsAvailable: room.bedsAvailable
     }
+    console.log('roomToEdit', roomToEdit)
     dataService.edit('facilityRooms', roomToEdit).then(function (response) {
       console.log('editRoomToEdit', response)
+    })
+
+    //edit bed info
+    room.beds.forEach(function (bed) {
+      var bedToEdit = {
+        id: bed.bedid,
+        availability: bed.availability,
+        availabilitydate: bed.availabilitydate,
+      }
+      // if (bed.bedlevel === 'Custom') {
+      //   bedToEdit.bedlevelcustom = bed.bedlevelcustom
+      // } else {
+      //   bedToEdit.bedlevelcustom = null
+      // }
+      console.log('bedToEdit,', bedToEdit)
+      dataService.edit('facilityBed', bedToEdit).then(function (response) {
+        console.log('editBedToEdit', response);
+        $scope.initRoomConfig()
+      })
     })
   }
 
@@ -210,11 +206,10 @@ app.controller('ListingEditController', function($scope, $q, $location, $http, $
 
 
   $scope.changeAvail = function (bedAvail, bedNum, roomNum) {
-    console.log(bedAvail, bedNum, roomNum)
-    console.log($scope.roomIndexes)
     if (bedAvail === 'Available') {
       for (let i = 0; i < $scope.roomIndexes.length; i++) {
         if ($scope.roomIndexes[i].roomNumber === roomNum) {
+          $scope.roomIndexes[i].bedsAvailable += 1
           for (let j = 0; j < $scope.roomIndexes[i].beds.length; j++) {
             if ($scope.roomIndexes[i].beds[j].bedNumber == bedNum) {
               if ($scope.roomIndexes[i].beds[j].availabilitydate === null) {
@@ -224,50 +219,19 @@ app.controller('ListingEditController', function($scope, $q, $location, $http, $
           }
         }
       }
-    }
-    console.log($scope.roomIndexes)
-
-  }
-
-
-  //clear bedcount
-  $scope.changeRoomType = function (room) {
-    console.log(room)
-    if (room.roomType === 'Shared') {
-      // room.buildBedCard = true;
-      room.beds=[];
-      room.roomBedCount=0
     } else {
-      // room.buildBedCard = false;
-      room.roomBedCount=1
-      $scope.addRoomBedConfig(1, room.roomNumber)
-    }
-  }
-
-  //adding # of beds to each room
-  $scope.addRoomBedConfig=function (beds, roomnum) {
-
-    console.log('room: ', roomnum);
-    console.log('beds: ', beds);
-
-    for (var i = 0; i < $scope.roomIndexes.length; i++) {
-
-      if ($scope.roomIndexes[i].roomNumber === roomnum) {
-        console.log('roommate')
-        $scope.roomIndexes[i].beds = [];
-
-        //create selected amount of bedObjs
-        for (var j = 0; j < beds; j++) {
-          var bedObj={
-            bedNumber: (j+1),
+      for (let i = 0; i < $scope.roomIndexes.length; i++) {
+        if ($scope.roomIndexes[i].roomNumber === roomNum) {
+          $scope.roomIndexes[i].bedsAvailable -= 1
+          for (let j = 0; j < $scope.roomIndexes[i].beds.length; j++) {
+            if ($scope.roomIndexes[i].beds[j].bedNumber == bedNum) {
+              $scope.roomIndexes[i].beds[j].availabilitydate = null;
+            }
           }
-          $scope.roomIndexes[i].beds.push(bedObj);
         }
       }
     }
-    console.log('$scope.roomIndexes',$scope.roomIndexes);
-  };
-
+  }
 
   //add primary photo
   $scope.selectPrimaryPhoto = function (photo) {
@@ -275,18 +239,12 @@ app.controller('ListingEditController', function($scope, $q, $location, $http, $
     payload.append('facilityId', $scope.userFacilityId);
     payload.append('primaryPhoto', 'Y');
     payload.append('FILE', photo);
-
-    console.log('files to be uploaded', photo);
-    console.log('Payload: ', payload);
-
     dataService.uploadFile('photo', payload).then(function(response) {
-      console.log(response);
       if (response.data.status !== "success") {
         alert("failed to upload image");
       } else {
         alert("upload primary photos success");
         dataService.get('photo',{id: $scope.userFacilityId}).then(function (response) {
-          console.log(response.data);
           $scope.userFacilityPhotos=response.data;
           $scope.userFacilityPhotos.forEach(function (photo) {
              if (photo.primaryPhoto === 'N') {
@@ -310,18 +268,12 @@ app.controller('ListingEditController', function($scope, $q, $location, $http, $
       payload.append('primaryPhoto', 'N');
       payload.append('FILE', photo);
 
-      console.log('files to be uploaded', photo);
-      console.log('Payload: ', payload);
-
       dataService.uploadFile('photo', payload).then(function(response) {
-        console.log(response);
         if (response.data.status !== "success") {
           alert("failed to upload image");
         } else {
           alert("upload internal photos success");
-          console.log(photo)
           dataService.get('photo',{id: $scope.userFacilityId}).then(function (response) {
-            console.log(response.data);
             $scope.userFacilityPhotos=response.data;
             $scope.userFacilityPhotos.forEach(function (photo) {
                if (photo.primaryPhoto === 'N') {
@@ -339,12 +291,9 @@ app.controller('ListingEditController', function($scope, $q, $location, $http, $
   }
 
   //delete photo
-  $scope.removePhoto=function (photo) { //remove file from files array
-    console.log(photo)
+  $scope.removePhoto = function (photo) {
     dataService.delete('photo', {id: photo.photoid}).then(function (response) {
-      console.log(response);
       dataService.get('photo',{id: $scope.userFacilityId}).then(function (response) {
-        console.log(response.data);
         $scope.userFacilityPhotos=response.data;
         $scope.userFacilityPhotos.forEach(function (photo) {
            if (photo.primaryPhoto === 'N') {
@@ -356,59 +305,6 @@ app.controller('ListingEditController', function($scope, $q, $location, $http, $
       });
     })
   };
-
-
-  // function submitPhotos() {
-  //   //upload multiple images
-  //   $scope.selectedFilesArr.forEach(function (file) {
-  //
-  //     var payload = new FormData();
-  //     payload.append('facilityId', $scope.userFacility.id);
-  //     payload.append('primaryPhoto', 'Y');
-  //     payload.append('FILE', file);
-  //
-  //     console.log('files to be uploaded', file);
-  //     console.log('Payload: ', payload);
-  //
-  //     dataService.uploadFile('photo', payload).then(function(response) {
-  //       console.log(response);
-  //       if (response.data.status !== "success") {
-  //         alert("failed to upload image");
-  //       } else {
-  //         $state.go('listingView');
-  //       }
-  //     }, function(response) {
-  //       console.log(response);
-  //     });
-  //
-  //   });
-  // }
-
-  // function editBeds() {
-  //   //edit bed info
-  //   $scope.roomIndexes.forEach(function (room) {
-  //       // var deferred = $q.defer();
-  //     let bedToEdit = {
-  //       // facilityid: $scope.userFacilityId,
-  //       // roomNumber: room.roomNumber,
-  //       // roomid: room.roomid,
-  //       bedlevel: bed.bedlevel,
-  //       availability: bed.availability,
-  //       availabilitydate: availabilitydate,
-  //       // bedNumber: bed.bedNumber,
-  //       id: bed.bedid
-  //     }
-  //
-  //     console.log(bedToEdit)
-  //     dataService.edit('facilityBed', bedToEdit).then(function (response) {
-  //       console.log(response);
-  //       deferred.resolve();
-  //     })
-  //   })
-  //
-  //   $scope.initRoomConfig()
-  //
-  // }
 
   $scope.initRoomConfig();
 });
